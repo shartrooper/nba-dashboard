@@ -1566,7 +1566,7 @@ apollo-server-caching@^3.3.0:
 
 apollo-server-core@^3.7.0:
   version "3.7.0"
-  resolved "https://registry.npmjs.org/apollo-server-core/-/apollo-server-core-3.7.0.tgz"
+  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-3.7.0.tgz#7ec060d269d73d6761cd1eb3d419436e09fa6974"
   integrity sha512-xUCDjrBzPVbttbh/HenuQdivco/dcXE2oIDYwCU6FU2RBXqxWFmuCl2Xe7VPA/5Frw/4snJDLCyVte9PA5edww==
   dependencies:
     "@apollo/utils.logger" "^1.0.0"
