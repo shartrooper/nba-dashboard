@@ -2,10 +2,31 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""user"""
+type User {
+  id: ID!
+  username: String!
+  password: String!
+}
+
 type Query {
   logout: Boolean!
+  users: [User!]!
+  user(id: ID!): User!
 }
 
 type Mutation {
   login: String!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(id: String!, updateUserInput: UpdateUserInput!): User!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  username: String
+  password: String
 }

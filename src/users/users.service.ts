@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import { MockUserDataBase } from 'src/mockusers/mockusersinstance';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UsersService {
   create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+    return MockUserDataBase.addUser(createUserInput);
   }
 
   findAll() {
-    return `This action returns all users`;
+    return MockUserDataBase.getUsers();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string) {
+    const foundUser = MockUserDataBase.getOneUser(id);
+    if (!foundUser) throw new Error('User not found');
+    return foundUser;
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  update(id: string, updateUserInput: UpdateUserInput) {
+    const updatedUser = MockUserDataBase.updateUser(id, updateUserInput);
+    if (!updatedUser) throw new Error('User not found');
+    return updatedUser;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} user`;
   }
 }
