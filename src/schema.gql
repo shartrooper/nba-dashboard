@@ -3,30 +3,20 @@
 # ------------------------------------------------------
 
 """user"""
-type User {
+type UserCredential {
   id: ID!
   username: String!
-  password: String!
 }
 
 type Query {
-  logout: Boolean!
-  users: [User!]!
-  user(id: ID!): User!
+  signIn: String!
 }
 
 type Mutation {
-  login: String!
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(id: String!, updateUserInput: UpdateUserInput!): User!
+  signUp(createUserInput: CreateUserInput!): UserCredential!
 }
 
 input CreateUserInput {
   username: String!
   password: String!
-}
-
-input UpdateUserInput {
-  username: String
-  password: String
 }

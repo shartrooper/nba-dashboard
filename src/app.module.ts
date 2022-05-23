@@ -1,10 +1,11 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -14,8 +15,9 @@ import { UsersModule } from './users/users.module';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
+    ConfigModule.forRoot(),
     AuthModule,
-    UsersModule,
+    PrismaModule,
   ],
 })
 export class AppModule {}
