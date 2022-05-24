@@ -2,21 +2,27 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""user"""
-type UserCredential {
+"""token"""
+type AccessToken {
+  access_token: String!
+}
+
+"""my user"""
+type MyUserPayload {
   id: ID!
   username: String!
 }
 
 type Query {
-  signIn: String!
+  getMe: MyUserPayload!
 }
 
 type Mutation {
-  signUp(createUserInput: CreateUserInput!): UserCredential!
+  signUp(createUserInput: UserInput!): AccessToken!
+  signIn(userInput: UserInput!): AccessToken!
 }
 
-input CreateUserInput {
+input UserInput {
   username: String!
   password: String!
 }
