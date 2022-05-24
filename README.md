@@ -58,6 +58,16 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## Prisma Studio
+
+```bash
+# dev server prisma studio
+npx prisma studio
+
+# test server prisma studio
+npx dotenv -e .env.test -- prisma studio
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
