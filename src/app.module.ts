@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserResolver } from './user/user.resolver';
 import { UserModule } from './user/user.module';
+import { BalldontlieModule } from './balldontlie/balldontlie.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     PrismaModule,
     UserModule,
+    BalldontlieModule,
   ],
   providers: [UserResolver],
 })
