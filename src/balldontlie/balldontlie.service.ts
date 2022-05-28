@@ -1,9 +1,11 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { lastValueFrom, map } from 'rxjs';
-import { GetManyPayload, Player, Team } from './dtos';
+import { Game, GetManyPayload, Player, Team } from './dto';
 
-type ParamObject = { [key: string]: string | number };
+type ParamValue = string | number | number[];
+
+type ParamObject = { [key: string]: ParamValue };
 
 @Injectable()
 export class BalldontlieService {
@@ -14,20 +16,30 @@ export class BalldontlieService {
   private params: ParamObject | number | undefined;
 
   private setupReqParams(): string {
-    if (!this.params || !Object.keys(this.params).length) return '';
     if (typeof this.params === 'number') return `/${this.params}`;
+    if (!this.params || !Object.keys(this.params).length) return '';
 
     const paramEntries = Object.entries(this.params);
-    const len = paramEntries.length;
 
-    return paramEntries.reduce(
-      (acc: string, pair: [string, string | number], index) => {
+    return paramEntries
+      .reduce((acc: string, pair: [string, ParamValue]) => {
         const [key, value] = pair;
-        const chainingAmpersand = index < len - 1 ? '&' : '';
-        return acc + `${key}=${value}${chainingAmpersand}`;
-      },
-      '?',
-    );
+        const buildParamString = (key: string, value: string | number) => {
+          return `${key}=${value}&`;
+        };
+
+        if (typeof value !== 'object') {
+          return acc + buildParamString(key, value);
+        }
+
+        return (
+          acc +
+          value.reduce((acc, current) => {
+            return acc + buildParamString(key, current);
+          }, '')
+        );
+      }, '?')
+      .slice(0, -1);
   }
 
   private fetchFromApi(ep: string) {
@@ -59,16 +71,43 @@ export class BalldontlieService {
     }
   }
 
-  findOne(id: number) {
+  async findPlayer(id: number): Promise<Player> {
     this.params = id;
-    return `This action returns a #${id} balldontlie`;
+    try {
+      const player = await this.fetchFromApi('players');
+      return player;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  update(id: number) {
-    return `This action updates a #${id} balldontlie`;
+  async findTeam(id: number): Promise<Team> {
+    this.params = id;
+    try {
+      const team = await this.fetchFromApi('teams');
+      return team;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} balldontlie`;
+  async findGames(params?: ParamObject): Promise<GetManyPayload<Game>> {
+    this.params = params;
+    try {
+      const games = await this.fetchFromApi('games');
+      return games;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async findGame(id: number): Promise<Game> {
+    this.params = id;
+    try {
+      const games = await this.fetchFromApi('games');
+      return games;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

@@ -5,7 +5,7 @@ import { BalldontlieService } from './balldontlie.service';
 @Module({
   imports: [
     HttpModule.register({
-      timeout: 5000,
+      timeout: 8000,
     }),
   ],
   providers: [BalldontlieService],
