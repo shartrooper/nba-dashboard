@@ -103,7 +103,7 @@ describe('BalldontlieService', () => {
     });
     it('should return games from season 2021-2022 for team Lakers and Atlanta Hawks', async () => {
       const games = await service.findGames({
-        'seasons[]': 2021,
+        'seasons[]': [2021],
         'team_ids[]': [14, 1],
         per_page: 5,
       });
@@ -142,6 +142,42 @@ describe('BalldontlieService', () => {
         const axiosError = error as AxiosError;
         expect(axiosError.message).toMatch(/404/);
       }
+    });
+  });
+
+  describe('stats()', () => {
+    it('should return stats for Lebron James and Dewayne Dedmon season 2020-2021 and 2021-2022, 23 pages in total', async () => {
+      const stats = await service.stats({
+        'seasons[]': [2020, 2021],
+        'player_ids[]': [237, 120],
+        per_page: 10,
+      });
+      expect(stats.meta.total_pages).toBe(23);
+    });
+    it('should return an empty body for nonexistent player ids', async () => {
+      const stats = await service.stats({
+        'seasons[]': [2020, 2021],
+        'player_ids[]': 999999999,
+        per_page: 3,
+      });
+      expect(stats.data.length).toBe(0);
+    });
+    it('should return an empty body for nonexistent season', async () => {
+      const stats = await service.stats({
+        'seasons[]': [9999],
+        'player_ids[]': 237,
+        per_page: 3,
+      });
+      expect(stats.data.length).toBe(0);
+    });
+  });
+
+  describe('seasonAverages()', () => {
+    it('should return records of 2021 season average for Lebron and Dewayne', async () => {
+      const playerAvgs = await service.seasonAverages({
+        'player_ids[]': [120, 237],
+      });
+      expect(playerAvgs.data.length).toBe(2);
     });
   });
 });

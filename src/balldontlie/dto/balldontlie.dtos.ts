@@ -27,7 +27,7 @@ export class PayloadMetadata {
   total_count: number;
 }
 
-export class GetManyPayload<D extends Team | Player | Game> {
+export class GetManyPayload<D extends Team | Player | Game | PlayerStats> {
   data: D[];
   meta: PayloadMetadata;
 }
@@ -41,7 +41,7 @@ export class Game {
   postseason: boolean;
   season: number;
   status: string;
-  // Is an empty string that is returned when game has not started or is complete.
+  //NOTE: Is an empty string when game has not started or is complete.
   time: string;
   visitor_team: Team;
   visitor_team_score: number;
@@ -71,4 +71,13 @@ export class PlayerStats {
   stl: number;
   team: Team;
   turnover: number;
+}
+
+export type SeasonAverage = Omit<PlayerStats, 'game' | 'player' | 'team'> & {
+  games_played: number;
+  player_id: number;
+};
+
+export class SeasonAveragesPayload {
+  data: SeasonAverage[];
 }

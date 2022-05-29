@@ -1,7 +1,14 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { lastValueFrom, map } from 'rxjs';
-import { Game, GetManyPayload, Player, Team } from './dto';
+import {
+  Game,
+  GetManyPayload,
+  Player,
+  PlayerStats,
+  SeasonAveragesPayload,
+  Team,
+} from './dto';
 
 type ParamValue = string | number | number[];
 
@@ -21,25 +28,29 @@ export class BalldontlieService {
 
     const paramEntries = Object.entries(this.params);
 
-    return paramEntries
-      .reduce((acc: string, pair: [string, ParamValue]) => {
-        const [key, value] = pair;
-        const buildParamString = (key: string, value: string | number) => {
-          return `${key}=${value}&`;
-        };
+    return (
+      paramEntries
+        .reduce((acc: string, pair: [string, ParamValue]) => {
+          const [key, value] = pair;
+          const buildParamString = (key: string, value: string | number) => {
+            return `${key}=${value}&`;
+          };
 
-        if (typeof value !== 'object') {
-          return acc + buildParamString(key, value);
-        }
-
-        return (
-          acc +
-          value.reduce((acc, current) => {
-            return acc + buildParamString(key, current);
-          }, '')
-        );
-      }, '?')
-      .slice(0, -1);
+          if (typeof value !== 'object') {
+            return acc + buildParamString(key, value);
+          }
+          /*NOTE: If the value is an array, every value's item will join a string.
+          Following this pattern: "&key=item1&key=item2"...*/
+          return (
+            acc +
+            value.reduce((acc, current) => {
+              return acc + buildParamString(key, current);
+            }, '')
+          );
+        }, '?')
+        //NOTE: removes the trailing ampersand after chaining the parameters on string.
+        .slice(0, -1)
+    );
   }
 
   private fetchFromApi(ep: string) {
@@ -105,6 +116,26 @@ export class BalldontlieService {
     this.params = id;
     try {
       const games = await this.fetchFromApi('games');
+      return games;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async stats(params?: ParamObject): Promise<GetManyPayload<PlayerStats>> {
+    this.params = params;
+    try {
+      const games = await this.fetchFromApi('stats');
+      return games;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async seasonAverages(params?: ParamObject): Promise<SeasonAveragesPayload> {
+    this.params = params;
+    try {
+      const games = await this.fetchFromApi('season_averages');
       return games;
     } catch (error) {
       throw new Error(error);
