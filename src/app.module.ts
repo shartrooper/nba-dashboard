@@ -10,6 +10,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserResolver } from './user/user.resolver';
 import { UserModule } from './user/user.module';
 import { BalldontlieModule } from './balldontlie/balldontlie.module';
+import { PlayersModule } from './players/players.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { BalldontlieModule } from './balldontlie/balldontlie.module';
     PrismaModule,
     UserModule,
     BalldontlieModule,
+    PlayersModule,
   ],
   providers: [UserResolver],
 })

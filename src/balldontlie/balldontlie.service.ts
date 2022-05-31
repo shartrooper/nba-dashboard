@@ -22,6 +22,16 @@ export class BalldontlieService {
 
   private params: ParamObject | number | undefined;
 
+  private serializePlayerRecord = (player: Player): Player => {
+    const { height_feet, height_inches, weight_pounds } = player;
+    return {
+      ...player,
+      height:
+        height_feet && height_inches && `${height_feet}'${height_inches}".`,
+      weight: weight_pounds && `${weight_pounds}lb.`,
+    };
+  };
+
   private setupReqParams(): string {
     if (typeof this.params === 'number') return `/${this.params}`;
     if (!this.params || !Object.keys(this.params).length) return '';
@@ -65,8 +75,13 @@ export class BalldontlieService {
   async getAllPlayers(params?: ParamObject): Promise<GetManyPayload<Player>> {
     this.params = params;
     try {
-      const players = await this.fetchFromApi('players');
-      return players;
+      const players: GetManyPayload<Player> = await this.fetchFromApi(
+        'players',
+      );
+      return {
+        data: players.data.map(this.serializePlayerRecord),
+        meta: players.meta,
+      };
     } catch (error) {
       throw new Error(error);
     }
@@ -85,8 +100,8 @@ export class BalldontlieService {
   async findPlayer(id: number): Promise<Player> {
     this.params = id;
     try {
-      const player = await this.fetchFromApi('players');
-      return player;
+      const player: Player = await this.fetchFromApi('players');
+      return this.serializePlayerRecord(player);
     } catch (error) {
       throw new Error(error);
     }
@@ -125,8 +140,16 @@ export class BalldontlieService {
   async stats(params?: ParamObject): Promise<GetManyPayload<PlayerStats>> {
     this.params = params;
     try {
-      const games = await this.fetchFromApi('stats');
-      return games;
+      const stats: GetManyPayload<PlayerStats> = await this.fetchFromApi(
+        'stats',
+      );
+
+      const serializedPlayerInStats = stats.data.map((stat) => ({
+        ...stat,
+        player: this.serializePlayerRecord(stat.player),
+      }));
+
+      return { data: serializedPlayerInStats, meta: stats.meta };
     } catch (error) {
       throw new Error(error);
     }

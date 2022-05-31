@@ -11,12 +11,14 @@ export class Team {
 export class Player {
   id: number;
   first_name: string;
-  height_feet: number;
-  height_inches: number;
+  height_feet: number | null;
+  height_inches: number | null;
   last_name: string;
   position: string;
   team: Team;
-  weight_pounds: number;
+  weight_pounds: number | null;
+  height?: string | null;
+  weight?: string | null;
 }
 
 export class PayloadMetadata {
@@ -27,7 +29,7 @@ export class PayloadMetadata {
   total_count: number;
 }
 
-export class GetManyPayload<D extends Team | Player | Game | PlayerStats> {
+export class GetManyPayload<D> {
   data: D[];
   meta: PayloadMetadata;
 }

@@ -9,5 +9,6 @@ import { BalldontlieService } from './balldontlie.service';
     }),
   ],
   providers: [BalldontlieService],
+  exports: [BalldontlieService],
 })
 export class BalldontlieModule {}
