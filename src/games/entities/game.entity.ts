@@ -6,10 +6,10 @@ import { Team } from '../../teams/entities';
 export class Game {
   @Field(() => Int)
   id: number;
-  @Field()
+  @Field({ nullable: true })
   // Dates from BallDontLie api format: "2018-10-19 00:00:00 UTC"
   date: string;
-  @Field(() => Team)
+  @Field(() => Team, { nullable: true })
   home_team: Team;
   @Field(() => Int)
   home_team_score: number;
@@ -23,7 +23,7 @@ export class Game {
   status: string;
   @Field()
   time: string;
-  @Field(() => Team)
+  @Field(() => Team, { nullable: true })
   visitor_team: Team;
   @Field(() => Int)
   visitor_team_score: number;

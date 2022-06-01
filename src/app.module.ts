@@ -13,6 +13,7 @@ import { BalldontlieModule } from './balldontlie/balldontlie.module';
 import { PlayersModule } from './players/players.module';
 import { TeamsModule } from './teams/teams.module';
 import { GamesModule } from './games/games.module';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { GamesModule } from './games/games.module';
     PlayersModule,
     TeamsModule,
     GamesModule,
+    StatsModule,
   ],
   providers: [UserResolver],
 })

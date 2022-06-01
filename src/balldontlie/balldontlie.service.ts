@@ -175,8 +175,8 @@ export class BalldontlieService {
   async seasonAverages(args?: ParamObject): Promise<SeasonAveragesPayload> {
     this.params = this.checkArgs(args);
     try {
-      const games = await this.fetchFromApi('season_averages');
-      return games;
+      const seasons = await this.fetchFromApi('season_averages');
+      return seasons;
     } catch (error) {
       throw new Error(error);
     }

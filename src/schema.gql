@@ -14,11 +14,11 @@ type MyUserPayload {
 }
 
 type GQLPayloadMetadata {
-  total_pages: Int!
-  current_page: Int!
+  total_pages: Int
+  current_page: Int
   next_page: Int
-  per_page: Int!
-  total_count: Int!
+  per_page: Int
+  total_count: Int
 }
 
 type Team {
@@ -55,21 +55,81 @@ type PlayersPayload {
 
 type Game {
   id: Int!
-  date: String!
-  home_team: Team!
+  date: String
+  home_team: Team
   home_team_score: Int!
   period: Int!
   postseason: Boolean!
   season: Int!
   status: String!
   time: String!
-  visitor_team: Team!
+  visitor_team: Team
   visitor_team_score: Int!
 }
 
 type GamesPayload {
   meta: GQLPayloadMetadata
   records: [Game!]!
+}
+
+type PlayerStats {
+  id: Int!
+  ast: Float
+  blk: Float
+  dreb: Float
+  fg3_pct: Float
+  fg3a: Float
+  fg3m: Float
+  fg_pct: Float
+  fga: Float
+  fgm: Float
+  ft_pct: Float
+  fta: Float
+  ftm: Float
+  game: Game!
+  min: String
+  oreb: Float
+  pf: Float
+  player: Player!
+  pts: Float
+  reb: Float
+  stl: Float
+  team: Team!
+  turnover: Float
+}
+
+type SeasonAverages {
+  ast: Float
+  blk: Float
+  dreb: Float
+  fg3_pct: Float
+  fg3a: Float
+  fg3m: Float
+  fg_pct: Float
+  fga: Float
+  fgm: Float
+  ft_pct: Float
+  fta: Float
+  ftm: Float
+  min: String
+  oreb: Float
+  pf: Float
+  pts: Float
+  reb: Float
+  stl: Float
+  turnover: Float
+  games_played: Int!
+  player_id: Int!
+  season: Int!
+}
+
+type StatsPayload {
+  meta: GQLPayloadMetadata
+  records: [PlayerStats!]!
+}
+
+type SeasonsAvgPayload {
+  data: [SeasonAverages!]!
 }
 
 type Query {
@@ -80,6 +140,8 @@ type Query {
   team(id: Int!): Team!
   games(page: Int, per_page: Int, seasons: [Int!], team_ids: [Int!], postseason: Boolean, start_date: String, end_date: String): GamesPayload!
   game(id: Int!): Game!
+  playersStats(page: Int, per_page: Int, player_ids: [Int!], game_ids: [Int!], seasons: [Int!], postseason: Boolean, start_date: String, end_date: String): StatsPayload!
+  seasonAverages(season: Int!, player_ids: [Int!]): SeasonsAvgPayload!
 }
 
 type Mutation {

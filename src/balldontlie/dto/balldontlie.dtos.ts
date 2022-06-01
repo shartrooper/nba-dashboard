@@ -64,7 +64,7 @@ export class PlayerStats {
   fta: number;
   ftm: number;
   game: Game;
-  min: number;
+  min: string;
   oreb: number;
   pf: number;
   player: Player;
@@ -75,9 +75,13 @@ export class PlayerStats {
   turnover: number;
 }
 
-export type SeasonAverage = Omit<PlayerStats, 'game' | 'player' | 'team'> & {
+export type SeasonAverage = Omit<
+  PlayerStats,
+  'game' | 'player' | 'team' | 'id'
+> & {
   games_played: number;
   player_id: number;
+  season: number;
 };
 
 export class SeasonAveragesPayload {
