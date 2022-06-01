@@ -7,8 +7,12 @@ export class PlayersResolver {
   constructor(private readonly playersService: PlayersService) {}
 
   @Query(() => PlayersPayload, { name: 'players' })
-  async getPlayers() {
-    return this.playersService.findAll();
+  async getPlayers(
+    @Args('page', { type: () => Int, nullable: true }) page?: number,
+    @Args('per_page', { type: () => Int, nullable: true }) per_page?: number,
+    @Args('search', { type: () => String, nullable: true }) search?: string,
+  ) {
+    return this.playersService.findAll({ page, per_page, search });
   }
 
   @Query(() => Player, { name: 'player' })

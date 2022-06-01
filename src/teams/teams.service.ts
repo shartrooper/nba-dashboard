@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTeamInput } from './dto/create-team.input';
-import { UpdateTeamInput } from './dto/update-team.input';
+import { BalldontlieService } from '../balldontlie/balldontlie.service';
+import { Team, TeamsPayload } from './entities';
 
 @Injectable()
 export class TeamsService {
-  create(createTeamInput: CreateTeamInput) {
-    return 'This action adds a new team';
+  constructor(private ballDontLie: BalldontlieService) {}
+  async findAll(args: {
+    [key: string]: number | string;
+  }): Promise<TeamsPayload> {
+    try {
+      const teams = await this.ballDontLie.getTeams(args);
+      return { records: teams.data, meta: teams.meta };
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all teams`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
-  }
-
-  update(id: number, updateTeamInput: UpdateTeamInput) {
-    return `This action updates a #${id} team`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async findOne(id: number): Promise<Team> {
+    try {
+      const team = await this.ballDontLie.findTeam(id);
+      return team;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

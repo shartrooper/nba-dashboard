@@ -1,5 +1,5 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { GQLPayloadMetadata } from 'src/balldontlie/dto';
+import { ObjectType, Field, Int, PartialType } from '@nestjs/graphql';
+import { BasePayload } from 'src/balldontlie/dto';
 import { Team } from 'src/teams/entities';
 
 @ObjectType()
@@ -21,9 +21,7 @@ export class Player {
 }
 
 @ObjectType()
-export class PlayersPayload {
+export class PlayersPayload extends PartialType(BasePayload) {
   @Field(() => [Player])
   records: Player[];
-  @Field()
-  meta: GQLPayloadMetadata;
 }

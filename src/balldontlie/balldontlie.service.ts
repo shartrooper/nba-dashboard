@@ -10,7 +10,7 @@ import {
   Team,
 } from './dto';
 
-type ParamValue = string | number | number[];
+type ParamValue = string | number | number[] | boolean;
 
 type ParamObject = { [key: string]: ParamValue };
 
@@ -21,6 +21,21 @@ export class BalldontlieService {
   private baseUrl = 'https://www.balldontlie.io/api/v1/';
 
   private params: ParamObject | number | undefined;
+
+  private checkArgs(argsObject?: ParamObject): ParamObject {
+    return (
+      argsObject &&
+      Object.keys(argsObject).reduce((acc: ParamObject, key: string) => {
+        if (argsObject[key]) {
+          // Array key params should be in the format "key[]"
+          const formatKey =
+            typeof argsObject[key] === 'object' ? `${key}[]` : key;
+          return { ...acc, [formatKey]: argsObject[key] };
+        }
+        return acc;
+      }, {})
+    );
+  }
 
   private serializePlayerRecord = (player: Player): Player => {
     const { height_feet, height_inches, weight_pounds } = player;
@@ -37,12 +52,14 @@ export class BalldontlieService {
     if (!this.params || !Object.keys(this.params).length) return '';
 
     const paramEntries = Object.entries(this.params);
-
     return (
       paramEntries
         .reduce((acc: string, pair: [string, ParamValue]) => {
           const [key, value] = pair;
-          const buildParamString = (key: string, value: string | number) => {
+          const buildParamString = (
+            key: string,
+            value: string | number | boolean,
+          ) => {
             return `${key}=${value}&`;
           };
 
@@ -72,8 +89,8 @@ export class BalldontlieService {
     );
   }
 
-  async getAllPlayers(params?: ParamObject): Promise<GetManyPayload<Player>> {
-    this.params = params;
+  async getAllPlayers(args?: ParamObject): Promise<GetManyPayload<Player>> {
+    this.params = this.checkArgs(args);
     try {
       const players: GetManyPayload<Player> = await this.fetchFromApi(
         'players',
@@ -87,8 +104,8 @@ export class BalldontlieService {
     }
   }
 
-  async getTeams(params?: ParamObject): Promise<GetManyPayload<Team>> {
-    this.params = params;
+  async getTeams(args?: ParamObject): Promise<GetManyPayload<Team>> {
+    this.params = this.checkArgs(args);
     try {
       const teams = await this.fetchFromApi('teams');
       return teams;
@@ -117,8 +134,8 @@ export class BalldontlieService {
     }
   }
 
-  async findGames(params?: ParamObject): Promise<GetManyPayload<Game>> {
-    this.params = params;
+  async findGames(args?: ParamObject): Promise<GetManyPayload<Game>> {
+    this.params = this.checkArgs(args);
     try {
       const games = await this.fetchFromApi('games');
       return games;
@@ -137,8 +154,8 @@ export class BalldontlieService {
     }
   }
 
-  async stats(params?: ParamObject): Promise<GetManyPayload<PlayerStats>> {
-    this.params = params;
+  async stats(args?: ParamObject): Promise<GetManyPayload<PlayerStats>> {
+    this.params = this.checkArgs(args);
     try {
       const stats: GetManyPayload<PlayerStats> = await this.fetchFromApi(
         'stats',
@@ -155,8 +172,8 @@ export class BalldontlieService {
     }
   }
 
-  async seasonAverages(params?: ParamObject): Promise<SeasonAveragesPayload> {
-    this.params = params;
+  async seasonAverages(args?: ParamObject): Promise<SeasonAveragesPayload> {
+    this.params = this.checkArgs(args);
     try {
       const games = await this.fetchFromApi('season_averages');
       return games;

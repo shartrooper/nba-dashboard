@@ -1,4 +1,5 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, PartialType } from '@nestjs/graphql';
+import { BasePayload } from '../../balldontlie/dto';
 
 @ObjectType()
 export class Team {
@@ -16,4 +17,10 @@ export class Team {
   full_name: string;
   @Field()
   name: string;
+}
+
+@ObjectType()
+export class TeamsPayload extends PartialType(BasePayload) {
+  @Field(() => [Team])
+  records: Team[];
 }

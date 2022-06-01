@@ -1,25 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { BalldontlieService } from 'src/balldontlie/balldontlie.service';
-import { Player, PlayersPayload } from './entities';
+import { Game, GamesPayload } from './entities';
 
 @Injectable()
-export class PlayersService {
+export class GamesService {
   constructor(private ballDontLie: BalldontlieService) {}
 
   async findAll(args: {
-    [key: string]: number | string;
-  }): Promise<PlayersPayload> {
+    [key: string]: number | string | number[] | boolean;
+  }): Promise<GamesPayload> {
     try {
-      const players = await this.ballDontLie.getAllPlayers(args);
+      const players = await this.ballDontLie.findGames(args);
       return { records: players.data, meta: players.meta };
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async findOne(id: number): Promise<Player> {
+  async findOne(id: number): Promise<Game> {
     try {
-      const player = await this.ballDontLie.findPlayer(id);
+      const player = await this.ballDontLie.findGame(id);
       return player;
     } catch (error) {
       throw new Error(error);

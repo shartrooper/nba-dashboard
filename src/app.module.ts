@@ -11,6 +11,8 @@ import { UserResolver } from './user/user.resolver';
 import { UserModule } from './user/user.module';
 import { BalldontlieModule } from './balldontlie/balldontlie.module';
 import { PlayersModule } from './players/players.module';
+import { TeamsModule } from './teams/teams.module';
+import { GamesModule } from './games/games.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { PlayersModule } from './players/players.module';
     UserModule,
     BalldontlieModule,
     PlayersModule,
+    TeamsModule,
+    GamesModule,
   ],
   providers: [UserResolver],
 })

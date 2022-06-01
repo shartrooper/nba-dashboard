@@ -16,7 +16,7 @@ type MyUserPayload {
 type GQLPayloadMetadata {
   total_pages: Int!
   current_page: Int!
-  next_page: Int!
+  next_page: Int
   per_page: Int!
   total_count: Int!
 }
@@ -32,6 +32,11 @@ type Team {
   name: String!
 }
 
+type TeamsPayload {
+  meta: GQLPayloadMetadata
+  records: [Team!]!
+}
+
 type Player {
   """Id num for registered player"""
   id: Int!
@@ -44,14 +49,37 @@ type Player {
 }
 
 type PlayersPayload {
+  meta: GQLPayloadMetadata
   records: [Player!]!
-  meta: GQLPayloadMetadata!
+}
+
+type Game {
+  id: Int!
+  date: String!
+  home_team: Team!
+  home_team_score: Int!
+  period: Int!
+  postseason: Boolean!
+  season: Int!
+  status: String!
+  time: String!
+  visitor_team: Team!
+  visitor_team_score: Int!
+}
+
+type GamesPayload {
+  meta: GQLPayloadMetadata
+  records: [Game!]!
 }
 
 type Query {
   getMe: MyUserPayload!
-  players: PlayersPayload!
+  players(page: Int, per_page: Int, search: String): PlayersPayload!
   player(id: Int!): Player!
+  teams(page: Int, per_page: Int): TeamsPayload!
+  team(id: Int!): Team!
+  games(page: Int, per_page: Int, seasons: [Int!], team_ids: [Int!], postseason: Boolean, start_date: String, end_date: String): GamesPayload!
+  game(id: Int!): Game!
 }
 
 type Mutation {
