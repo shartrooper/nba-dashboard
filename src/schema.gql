@@ -1,0 +1,155 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""token"""
+type AccessToken {
+  access_token: String!
+}
+
+"""my user"""
+type MyUserPayload {
+  id: ID!
+  username: String!
+}
+
+type GQLPayloadMetadata {
+  total_pages: Int
+  current_page: Int
+  next_page: Int
+  per_page: Int
+  total_count: Int
+}
+
+type Team {
+  """Id number of team"""
+  id: Int!
+  abbreviation: String!
+  city: String!
+  conference: String!
+  division: String!
+  full_name: String!
+  name: String!
+}
+
+type TeamsPayload {
+  meta: GQLPayloadMetadata
+  records: [Team!]!
+}
+
+type Player {
+  """Id num for registered player"""
+  id: Int!
+  first_name: String!
+  height: String
+  weight: String
+  last_name: String!
+  position: String!
+  team: Team!
+}
+
+type PlayersPayload {
+  meta: GQLPayloadMetadata
+  records: [Player!]!
+}
+
+type Game {
+  id: Int!
+  date: String
+  home_team: Team
+  home_team_score: Int!
+  period: Int!
+  postseason: Boolean!
+  season: Int!
+  status: String!
+  time: String!
+  visitor_team: Team
+  visitor_team_score: Int!
+}
+
+type GamesPayload {
+  meta: GQLPayloadMetadata
+  records: [Game!]!
+}
+
+type PlayerStats {
+  id: Int!
+  ast: Float
+  blk: Float
+  dreb: Float
+  fg3_pct: Float
+  fg3a: Float
+  fg3m: Float
+  fg_pct: Float
+  fga: Float
+  fgm: Float
+  ft_pct: Float
+  fta: Float
+  ftm: Float
+  game: Game!
+  min: String
+  oreb: Float
+  pf: Float
+  player: Player!
+  pts: Float
+  reb: Float
+  stl: Float
+  team: Team!
+  turnover: Float
+}
+
+type SeasonAverages {
+  ast: Float
+  blk: Float
+  dreb: Float
+  fg3_pct: Float
+  fg3a: Float
+  fg3m: Float
+  fg_pct: Float
+  fga: Float
+  fgm: Float
+  ft_pct: Float
+  fta: Float
+  ftm: Float
+  min: String
+  oreb: Float
+  pf: Float
+  pts: Float
+  reb: Float
+  stl: Float
+  turnover: Float
+  games_played: Int!
+  player_id: Int!
+  season: Int!
+}
+
+type StatsPayload {
+  meta: GQLPayloadMetadata
+  records: [PlayerStats!]!
+}
+
+type SeasonsAvgPayload {
+  data: [SeasonAverages!]!
+}
+
+type Query {
+  getMe: MyUserPayload!
+  players(page: Int, per_page: Int, search: String): PlayersPayload!
+  player(id: Int!): Player!
+  teams(page: Int, per_page: Int): TeamsPayload!
+  team(id: Int!): Team!
+  games(page: Int, per_page: Int, seasons: [Int!], team_ids: [Int!], postseason: Boolean, start_date: String, end_date: String): GamesPayload!
+  game(id: Int!): Game!
+  playersStats(page: Int, per_page: Int, player_ids: [Int!], game_ids: [Int!], seasons: [Int!], postseason: Boolean, start_date: String, end_date: String): StatsPayload!
+  seasonAverages(season: Int!, player_ids: [Int!]): SeasonsAvgPayload!
+}
+
+type Mutation {
+  signUp(createUserInput: UserInput!): AccessToken!
+  signIn(userInput: UserInput!): AccessToken!
+}
+
+input UserInput {
+  username: String!
+  password: String!
+}
