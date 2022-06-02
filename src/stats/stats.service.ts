@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BalldontlieService } from 'src/balldontlie/balldontlie.service';
+import { BalldontlieService } from '../balldontlie/balldontlie.service';
 import { SeasonsAvgPayload, StatsPayload } from './entities';
 
 @Injectable()

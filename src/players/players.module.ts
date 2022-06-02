@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { PlayersResolver } from './players.resolver';
-import { BalldontlieModule } from 'src/balldontlie/balldontlie.module';
+import { BalldontlieModule } from '../balldontlie/balldontlie.module';
 
 @Module({
   imports: [BalldontlieModule],

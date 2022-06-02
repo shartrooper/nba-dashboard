@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType, PartialType } from '@nestjs/graphql';
-import { BasePayload } from 'src/balldontlie/dto';
+import { BasePayload } from '../../balldontlie/dto';
 import { Team } from '../../teams/entities';
 
 @ObjectType()

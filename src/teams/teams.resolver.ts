@@ -1,7 +1,9 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { TeamsService } from './teams.service';
 import { Team, TeamsPayload } from './entities/team.entity';
-
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../auth/guard';
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Team)
 export class TeamsResolver {
   constructor(private readonly teamsService: TeamsService) {}

@@ -1,7 +1,9 @@
+import { UseGuards } from '@nestjs/common';
 import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { GqlAuthGuard } from '../auth/guard';
 import { Game, GamesPayload } from './entities';
 import { GamesService } from './games.service';
-
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Game)
 export class GamesResolver {
   constructor(private readonly gamesService: GamesService) {}

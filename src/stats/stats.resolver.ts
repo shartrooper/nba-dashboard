@@ -1,8 +1,10 @@
+import { UseGuards } from '@nestjs/common';
 import { Args, Int, Query, Resolver } from '@nestjs/graphql';
-import { PlayerStats } from 'src/balldontlie/dto';
+import { GqlAuthGuard } from '../auth/guard';
+import { PlayerStats } from '../balldontlie/dto';
 import { SeasonsAvgPayload, StatsPayload } from './entities';
 import { StatsService } from './stats.service';
-
+@UseGuards(GqlAuthGuard)
 @Resolver(() => PlayerStats)
 export class StatsResolver {
   constructor(private readonly statsService: StatsService) {}

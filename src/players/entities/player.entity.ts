@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int, PartialType } from '@nestjs/graphql';
-import { BasePayload } from 'src/balldontlie/dto';
-import { Team } from 'src/teams/entities';
+import { BasePayload } from '../../balldontlie/dto';
+import { Team } from '../../teams/entities';
 
 @ObjectType()
 export class Player {

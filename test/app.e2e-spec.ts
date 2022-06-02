@@ -4,6 +4,10 @@ import { PrismaService } from '../src/prisma/prisma.service';
 import { AppModule } from '../src/app.module';
 import * as pactum from 'pactum';
 import { authSpecs, userSpecs } from './e2e';
+import { playerSpecs } from './e2e/players.e2e';
+import { teamsSpecs } from './e2e/teams.e2e';
+import { nbaGameSpecs } from './e2e/games.e2e';
+import { statSpecs } from './e2e/stats.e2e';
 
 describe('App (e2e)', () => {
   let app: INestApplication;
@@ -30,4 +34,12 @@ describe('App (e2e)', () => {
   authSpecs();
   // For User Module
   userSpecs();
+  // For Players Module
+  playerSpecs();
+  // For Teams Module
+  teamsSpecs();
+  // For Games Module
+  nbaGameSpecs();
+  // For SeasonAverages Module
+  statSpecs();
 });
