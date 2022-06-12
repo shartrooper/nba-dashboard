@@ -1,14 +1,14 @@
 // import { useNavigate } from 'react-router-dom';
 import { ContentLayout } from '@/components/Layout';
 import { Landing } from '@/features/misc';
+import { LoginForm } from '../components/LoginForm';
 
 export const Login = () => {
-  // const navigate = useNavigate();
+  //const navigate = useNavigate();
   return (
     <Landing>
       <ContentLayout title="Log in to your account">
-        LOG IN COMPONENT
-        {/*<LoginForm onSuccess={() => navigate('/app')} />*/}
+        <LoginForm onSuccess={() => null} />
       </ContentLayout>
     </Landing>
   );
