@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import * as z from 'zod';
 import {Form, InputField} from '@/components/Form'
 import { Button } from '@/components/Elements/Button'
+import { signInGQLQuery } from '../api';
 
 const schema = z.object({
   username: z.string().min(1, 'Required'),
@@ -18,6 +19,7 @@ type LoginFormProps = {
 };
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
+  console.log(signInGQLQuery);
   return (
     <div>
       <Form<LoginValues, typeof schema>

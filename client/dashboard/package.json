@@ -25,9 +25,9 @@
     "zod": "^3.17.3"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "dotenv -e ../../.env craco start",
+    "build": "dotenv -e ../../.env craco build",
+    "test": "dotenv -e ../../.env.test craco test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\""
   },
