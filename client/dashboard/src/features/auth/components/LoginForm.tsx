@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import * as z from 'zod';
 import {Form, InputField} from '@/components/Form'
 import { Button } from '@/components/Elements/Button'
@@ -43,21 +42,14 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
               error={formState.errors['password']}
               registration={register('password')}
             />
-            <div>
-              <Button isLoading={false} type="submit" className="w-full">
+            <div className="flex justify-center center-items">
+              <Button isLoading={false} type="submit">
                 Log in
               </Button>
             </div>
           </>
         )}
       </Form>
-      <div className="mt-2 flex items-center justify-end">
-        <div className="text-sm">
-          <Link to="../register" className="font-medium text-blue-600 hover:text-blue-500">
-            Register
-          </Link>
-        </div>
-      </div>
     </div>
   );
 };

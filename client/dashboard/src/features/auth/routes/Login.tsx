@@ -6,10 +6,10 @@ import { LoginForm } from '../components/LoginForm';
 export const Login = () => {
   //const navigate = useNavigate();
   return (
-    <Landing>
-      <ContentLayout title="Log in to your account">
+    <ContentLayout>
+      <Landing>
         <LoginForm onSuccess={() => null} />
-      </ContentLayout>
-    </Landing>
+      </Landing>
+    </ContentLayout>
   );
 };
