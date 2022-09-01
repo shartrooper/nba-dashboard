@@ -5,13 +5,19 @@ export type UserInput = {
 
 // Type annotations for graphql queries
 export enum AuthMutations {
-    SignIn = 'signIn'
+    SignIn = 'signIn',
+    SignUp = 'signUp'
 }
 
 export enum AuthQueryFields {
-    AccessToken ='access_token'
+    AccessToken = 'access_token'
 }
 
 export const authBodyParams = {
-    [AuthMutations.SignIn]: ['$userInput: UserInput!']
+    [AuthMutations.SignIn]: ['$userInput: UserInput!'],
+    [AuthMutations.SignUp]: ['$createUserInput: UserInput!']
+}
+
+export type AuthQueriesResponse = {
+    [key: string]: { [AuthQueryFields.AccessToken]: string}
 }

@@ -1,6 +1,7 @@
 import '../src/index.css'
 import { ContentLayout } from '../src/components/Layout'
-
+import { ApolloProvider } from '@apollo/client';
+import {client} from '@/lib/apollo';
 
 const BREAKPOINTS_INT = {
   xs: 375,
@@ -34,13 +35,15 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  viewport: {viewports: customViewports}
+  viewport: { viewports: customViewports }
 }
 
 export const decorators = [
   (Story) => (
-    <ContentLayout >
-      <Story />
-    </ContentLayout>
+    <ApolloProvider client={client}>
+      <ContentLayout >
+        <Story />
+      </ContentLayout>
+    </ApolloProvider>
   ),
 ];

@@ -1,11 +1,13 @@
 import * as z from 'zod';
-import {Form, InputField} from '@/components/Form'
+import { Form, InputField } from '@/components/Form'
 import { Button } from '@/components/Elements/Button'
-import { signInGQLQuery } from '../api';
+import { useEffect } from 'react';
+import storage from '@/utils/storage';
+import useAuth from '../hooks/useAuth';
 
 const schema = z.object({
-  username: z.string().min(1, 'Required'),
-  password: z.string().min(1, 'Required'),
+  username: z.string().min(4, 'Required'),
+  password: z.string().min(4, 'Required'),
 });
 
 type LoginValues = {
@@ -18,14 +20,19 @@ type LoginFormProps = {
 };
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
-  console.log(signInGQLQuery);
+  const { mutationFn: login } = useAuth('signIn')
+
+  useEffect(() => {
+    if (storage.getToken()) {
+      console.log(storage.getToken());
+      //onSuccess();
+    }
+  });
+
   return (
     <div>
       <Form<LoginValues, typeof schema>
-        onSubmit={async (values) => {
-          // await login(values);
-          onSuccess();
-        }}
+        onSubmit={(dto) => login({ variables: { userInput: { ...dto } } })}
         schema={schema}
       >
         {({ register, formState }) => (
