@@ -1,13 +1,11 @@
 import * as z from 'zod';
 import { Form, InputField } from '@/components/Form'
 import { Button } from '@/components/Elements/Button'
-import { useEffect } from 'react';
-import storage from '@/utils/storage';
 import useAuth from '../hooks/useAuth';
 
 const schema = z.object({
   username: z.string().min(4, 'Required'),
-  password: z.string().min(4, 'Required'),
+  password: z.string().min(8, 'Required'),
 });
 
 type LoginValues = {
@@ -21,13 +19,6 @@ type LoginFormProps = {
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const { mutationFn: login } = useAuth('signIn')
-
-  useEffect(() => {
-    if (storage.getToken()) {
-      console.log(storage.getToken());
-      //onSuccess();
-    }
-  });
 
   return (
     <div>

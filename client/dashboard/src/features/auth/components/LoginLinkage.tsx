@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 
-export const ToRegistrationPage = () => {
-    return (<div className="mt-2 flex items-center justify-end">
-        <div className="text-sm">
-            <Link to="../" className="font-medium text-blue-600 hover:text-blue-500">
+export const ToLoginPage = () => {
+    return (<div className="mt-4 text-center">
+        <div className="text-sm tracking-wide">
+            Already have an account?
+            <Link to="../" className="ml-2 font-medium">
                 Login
             </Link>
         </div>

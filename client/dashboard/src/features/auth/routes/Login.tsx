@@ -4,11 +4,10 @@ import { LoginForm } from '../components/LoginForm';
 import { ToRegistrationPage } from '../components/RegistrationLinkage';
 
 export const Login = () => {
-  //const navigate = useNavigate();
   return (
-      <Landing>
-        <LoginForm onSuccess={() => null} />
-        <ToRegistrationPage />
-      </Landing>
+    <Landing>
+      <LoginForm onSuccess={() => null} />
+      <ToRegistrationPage />
+    </Landing>
   );
 };

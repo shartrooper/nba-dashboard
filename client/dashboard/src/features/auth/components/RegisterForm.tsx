@@ -1,13 +1,11 @@
 import * as z from 'zod';
 import { Form, InputField } from '@/components/Form'
 import { Button } from '@/components/Elements/Button'
-import { useEffect } from 'react';
-import storage from '@/utils/storage';
 import useAuth from '../hooks/useAuth';
 
 const schema = z.object({
     username: z.string().min(4, 'Required'),
-    password: z.string().min(4, 'Required'),
+    password: z.string().min(8, 'Required').max(8),
     confirm: z.string().min(4, 'Required')
 }).refine(data => data.confirm === data.password, {
     message: 'Submitted passwords don\'t match',
@@ -27,17 +25,13 @@ type LoginFormProps = {
 export const RegisterForm = ({ onSuccess }: LoginFormProps) => {
     const { mutationFn: register } = useAuth('signUp')
 
-    useEffect(() => {
-        if (storage.getToken()) {
-            console.log(storage.getToken());
-            //onSuccess();
-        }
-    });
-
     return (
         <div>
             <Form<RegistrationValues, typeof schema>
-                onSubmit={(dto) => register({ variables: { userInput: { ...dto } } })}
+                onSubmit={(dto) => {
+                    const { username, password } = dto;
+                    register({ variables: { createUserInput: { username, password } } })
+                }}
                 schema={schema}
             >
                 {({ register, formState }) => (
