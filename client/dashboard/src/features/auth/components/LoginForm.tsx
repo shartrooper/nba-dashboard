@@ -4,8 +4,8 @@ import { Button } from '@/components/Elements/Button'
 import useAuth from '../hooks/useAuth';
 
 const schema = z.object({
-  username: z.string().min(4, 'Required'),
-  password: z.string().min(8, 'Required'),
+  username: z.string().min(4, 'Required username equal or longer than 4 characters'),
+  password: z.string().max(8, 'Required password equal or shorter than 8 characters'),
 });
 
 type LoginValues = {
@@ -18,7 +18,7 @@ type LoginFormProps = {
 };
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
-  const { mutationFn: login } = useAuth('signIn')
+  const { mutationFn: login, loading } = useAuth('signIn')
 
   return (
     <div>
@@ -41,7 +41,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
               registration={register('password')}
             />
             <div className="flex justify-center center-items">
-              <Button isLoading={false} type="submit">
+              <Button isLoading={loading} type="submit">
                 Log in
               </Button>
             </div>

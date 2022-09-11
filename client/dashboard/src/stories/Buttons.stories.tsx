@@ -1,8 +1,11 @@
+import { Meta, Story } from '@storybook/react';
 import { Button, ButtonProps } from '@/components/Elements/Button'
 
-export default {
+const meta: Meta = {
     title: "Button",
     component: Button
 }
 
-export const Template = (args: ButtonProps) => <div className="flex items-center justify-center"><Button {...args}>TEST</Button></div>
+export default meta;
+
+export const Template: Story<ButtonProps>= (args) => <div className="flex items-center justify-center"><Button {...args}>TEST</Button></div>
