@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import { LinkWrapper } from './LinkWrapper';
 
 export const ToRegistrationPage = () => {
-	return (<div className="mt-4 text-center">
-		<div className="text-sm tracking-wide">
+	return (
+		<LinkWrapper>
 			Do you want to signup?
 			<Link to="../signup" className="ml-2 font-medium">
 				Register
 			</Link>
-		</div>
-	</div>)
+		</LinkWrapper>
+	);
 }

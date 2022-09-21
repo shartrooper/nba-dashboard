@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import { LinkWrapper } from './LinkWrapper';
 
 export const ToLoginPage = () => {
-    return (<div className="mt-4 text-center">
-        <div className="text-sm tracking-wide">
+    return (
+        <LinkWrapper>
             Already have an account?
             <Link to="../" className="ml-2 font-medium">
                 Login
             </Link>
-        </div>
-    </div>)
+        </LinkWrapper>
+    )
 }

@@ -10,9 +10,11 @@ export const AppRoutes = () => {
 
   const elem = useRoutes([...routes]);
   return (
-    <ContentLayout>
-      {elem}
+    <>
+      <ContentLayout>
+        {elem}
+      </ContentLayout>
       <Notifications />
-    </ContentLayout>
+    </>
   );
 };
