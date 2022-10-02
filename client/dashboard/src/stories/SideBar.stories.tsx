@@ -27,7 +27,7 @@ export const CloseableSidebar: Story<SidebarProps> = () => {
     const [isOpened, toggle] = React.useState(true)
 
     return (<div className='flex h-full'>
-        <SideBarContainer sidebarOpened={isOpened} toggleSidebar={() => toggle(false)} />
+        <SideBarContainer sidebarOpened={isOpened} toggleSidebar={toggle} />
         <div className='flex-1'></div>
     </div>)
 };

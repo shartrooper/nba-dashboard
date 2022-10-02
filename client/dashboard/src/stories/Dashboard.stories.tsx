@@ -3,10 +3,10 @@ import { SideBarContainer, TopBarContainer } from '@/features/misc/dashboard'
 import React from 'react';
 
 const DashboardMock = () => {
-  const [isOpened, toggle] = React.useState(true)
+  const [isOpened, toggle] = React.useState(false)
 
   return (<div className='flex'>
-    <SideBarContainer sidebarOpened={isOpened} toggleSidebar={() => toggle(false)} />
+    <SideBarContainer sidebarOpened={isOpened} toggleSidebar={toggle} />
     <TopBarContainer handleClick={() => toggle(true)} />
   </div>)
 };

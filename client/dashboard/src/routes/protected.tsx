@@ -1,6 +1,8 @@
+import { Dashboard } from "@/features/misc";
+
 export const privateRoutes = [
   {
     path: '/*',
-    element:  <div>PLACEHOLDER</div>,
+    element:  <Dashboard />,
   },
 ];
