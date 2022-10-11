@@ -1,12 +1,13 @@
 import { Menu, Transition } from '@headlessui/react';
 import Avatar from '@/assets/avataricon.png'
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
+import storage from '@/utils/storage';
 
 export type TopBarProps = {
     handleClick: () => void;
 }
 
-export const TopBarContainer = ({ handleClick }: TopBarProps) => {
+export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<TopBarProps>) => {
     return <div className="flex flex-auto md:justify-end justify-between py-3 px-3 md:px-6 space-x-3 md:space-x-6">
         <div className="md:hidden hover:cursor-pointer pt-4" onClick={handleClick}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -28,18 +29,11 @@ export const TopBarContainer = ({ handleClick }: TopBarProps) => {
                 leave-to-class="opacity-0 scale-90"
             >
                 <Menu.Items className="overflow-hidden absolute right-0 mt-2 w-48 rounded-md border border-chalkboard shadow-lg origin-top-right focus:outline-none">
-                    <Menu.Item>
-                        {({ active }) => (
-                            <div
-                                className={`${active && 'bg-basketball'} py-2 px-4 text-sm cursor-pointer`}
-                            >
-                                Account Settings
-                            </div>
-                        )}
-                    </Menu.Item>
+                    {children}
                     <Menu.Item >
                         {({ active }) => (
                             <div
+                                onClick={() => null}
                                 className={`${active && 'bg-basketball'} py-2 px-4 text-sm cursor-pointer`}
                             >
                                 Log Out

@@ -23,7 +23,7 @@ type LoginFormProps = {
 };
 
 export const RegisterForm = ({ onSuccess }: LoginFormProps) => {
-    const { mutationFn: register } = useAuth('signUp')
+    const { mutationFn: register, loading } = useAuth('signUp')
 
     return (
         <div>
@@ -55,7 +55,7 @@ export const RegisterForm = ({ onSuccess }: LoginFormProps) => {
                             registration={register('confirm')}
                         />
                         <div className="flex justify-center center-items">
-                            <Button isLoading={false} type="submit">
+                            <Button isLoading={loading} type="submit">
                                 Register
                             </Button>
                         </div>
