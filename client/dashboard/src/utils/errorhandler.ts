@@ -5,10 +5,14 @@ type ErrorResponse = {
     statusCode: number
 }
 
-export const handleError = (error: ApolloError): ErrorResponse[] => {
+export const handleError = (error: ApolloError) => {
     const gqlErrors = error.graphQLErrors;
     return gqlErrors.map(errorItem => {
-        const { statusCode, message } = errorItem.extensions.response as ErrorResponse;
-        return { statusCode, message }
+        const errorContent = errorItem.extensions;
+        if (errorContent.response) {
+            const { statusCode, message } = errorItem.extensions.response as ErrorResponse;
+            return { statusCode, message }
+        }
+        return { statusCode: errorContent.code, message: 'Please contact the dev team.' }
     })
 }
