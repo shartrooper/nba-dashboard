@@ -1,13 +1,14 @@
 import { Menu, Transition } from '@headlessui/react';
 import Avatar from '@/assets/avataricon.png'
-import React, { PropsWithChildren } from 'react';
-import storage from '@/utils/storage';
+import { PropsWithChildren } from 'react';
+import { useSessionTokenStore } from '@/store/usersession';
 
 export type TopBarProps = {
     handleClick: () => void;
 }
 
 export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<TopBarProps>) => {
+    const { removeToken } = useSessionTokenStore();
     return <div className="flex flex-auto md:justify-end justify-between py-3 px-3 md:px-6 space-x-3 md:space-x-6">
         <div className="md:hidden hover:cursor-pointer pt-4" onClick={handleClick}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -33,7 +34,7 @@ export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<Top
                     <Menu.Item >
                         {({ active }) => (
                             <div
-                                onClick={() => null}
+                                onClick={removeToken}
                                 className={`${active && 'bg-basketball'} py-2 px-4 text-sm cursor-pointer`}
                             >
                                 Log Out

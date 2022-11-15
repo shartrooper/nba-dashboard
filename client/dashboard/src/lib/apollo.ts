@@ -1,10 +1,14 @@
-import storage from '@/utils/storage';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core'
 import { setContext } from '@apollo/client/link/context'
 
+let token = '';
+
+export const setAuthToken= (newToken: string) => {
+  token = newToken;
+}
+
 
 const authLink = setContext((_, { headers }) => {
-  const token = storage.getToken();
   return {
     headers: {
       ...headers,
