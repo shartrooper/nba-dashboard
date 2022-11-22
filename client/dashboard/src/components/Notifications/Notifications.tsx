@@ -6,13 +6,15 @@ export const Notifications = () => {
   const { notifications, dismissNotification } = useNotificationStore();
 
   useEffect(() => {
-    const timedNotification = setTimeout(() =>
-      notifications.forEach(notification => {
-        dismissNotification(notification.id);
-      })
-      , 5000);
+    const timedNotification = setTimeout(
+      () =>
+        notifications.forEach((notification) => {
+          dismissNotification(notification.id);
+        }),
+      5000
+    );
     return () => clearTimeout(timedNotification);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notifications]);
 
   return (

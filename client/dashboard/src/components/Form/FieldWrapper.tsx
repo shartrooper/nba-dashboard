@@ -26,5 +26,5 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
         </div>
       )}
     </div>
-    );
+  );
 };

@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { Spinner, SpinnerProps } from '@/components/Elements/Spinner'
+import { Spinner, SpinnerProps } from '@/components/Elements/Spinner';
 
 const meta: Meta = {
   title: 'Components/Spinners',
@@ -19,13 +19,13 @@ TinyLoader.args = {
 };
 export const Loader = Template.bind({});
 Loader.args = {
-  size: 'md'
+  size: 'md',
 };
 export const LargeLoader = Template.bind({});
 LargeLoader.args = {
-  size: 'lg'
-}
+  size: 'lg',
+};
 export const ExtraLargeLoader = Template.bind({});
 ExtraLargeLoader.args = {
-  size: 'xl'
-}
+  size: 'xl',
+};

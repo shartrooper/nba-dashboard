@@ -1,6 +1,6 @@
 import * as z from 'zod';
-import { Form, InputField } from '@/components/Form'
-import { Button } from '@/components/Elements/Button'
+import { Form, InputField } from '@/components/Form';
+import { Button } from '@/components/Elements/Button';
 import useAuth from '../hooks/useAuth';
 
 const schema = z.object({
@@ -18,7 +18,7 @@ type LoginFormProps = {
 };
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
-  const { mutationFn: login, loading } = useAuth('signIn')
+  const { mutationFn: login, loading } = useAuth('signIn');
 
   return (
     <div>

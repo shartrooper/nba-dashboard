@@ -5,6 +5,6 @@ const { Dashboard } = lazyImport(() => import('@/features/misc'), 'Dashboard');
 export const privateRoutes = [
   {
     path: '/*',
-    element:  <Dashboard />,
+    element: <Dashboard />,
   },
 ];
