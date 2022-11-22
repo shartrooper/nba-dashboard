@@ -1,8 +1,19 @@
 import { useNotificationStore } from '@/store/notifications';
+import { useEffect } from 'react';
 import { Notification } from './Notification';
 
 export const Notifications = () => {
   const { notifications, dismissNotification } = useNotificationStore();
+
+  useEffect(() => {
+    const timedNotification = setTimeout(() =>
+      notifications.forEach(notification => {
+        dismissNotification(notification.id);
+      })
+      , 5000);
+    return () => clearTimeout(timedNotification);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notifications]);
 
   return (
     <div

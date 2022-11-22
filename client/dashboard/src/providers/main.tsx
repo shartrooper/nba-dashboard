@@ -1,6 +1,7 @@
 import { ReactNode, Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Spinner } from '@/components/Elements/Spinner'
+import { ContentLayout } from '@/components/Layout';
 
 type AppProviderProps = {
   children: ReactNode;
@@ -9,7 +10,11 @@ type AppProviderProps = {
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <Suspense
-      fallback={<Spinner size='lg' className="flex items-center justify-center w-screen h-screen" />}
+      fallback={
+        <ContentLayout>
+          <Spinner size='lg' />
+        </ContentLayout>
+      }
     >
       <Router>{children}</Router>
     </Suspense>
