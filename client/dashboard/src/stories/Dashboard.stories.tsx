@@ -1,8 +1,7 @@
 import { Meta } from '@storybook/react';
 import { SideBarContainer, TopBarContainer, SideBarContent } from '@/features/misc/dashboard';
 import React from 'react';
-import { MockNavItemComponent } from './SideBar.stories';
-import { MockTopBarItemsComponent } from './TopBar.stories';
+import { MockNavItemComponent, MockTopBarItemsComponent } from './components';
 
 const DashboardMock = () => {
   const [isOpened, toggle] = React.useState(false);

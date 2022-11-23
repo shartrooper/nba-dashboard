@@ -2,13 +2,29 @@ import { Menu, Transition } from '@headlessui/react';
 import Avatar from '@/assets/avataricon.png';
 import { PropsWithChildren } from 'react';
 import { useSessionTokenStore } from '@/store/usersession';
+import { useNotificationStore } from '@/store';
+import { NotificationMsg } from '@/components/Notifications';
 
 export type TopBarProps = {
   handleClick: () => void;
 };
 
+const logoutMsg: NotificationMsg = {
+  title: 'Logged out.',
+  message: 'Succesfully logged out of your dashboard session.',
+  type: 'success',
+}
+
 export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<TopBarProps>) => {
   const { removeToken } = useSessionTokenStore();
+  const { addNotification } = useNotificationStore();
+
+  const handleLogout = () => {
+    removeToken();
+    addNotification(logoutMsg);
+  }
+
+
   return (
     <div className="flex flex-auto md:justify-end justify-between py-3 px-3 md:px-6 space-x-3 md:space-x-6">
       <div className="md:hidden hover:cursor-pointer pt-4" onClick={handleClick}>
@@ -46,7 +62,7 @@ export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<Top
             <Menu.Item>
               {({ active }) => (
                 <div
-                  onClick={removeToken}
+                  onClick={handleLogout}
                   className={`${active && 'bg-basketball'} py-2 px-4 text-sm cursor-pointer`}
                 >
                   Log Out

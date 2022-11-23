@@ -20,4 +20,7 @@ code {
   a {
     @apply text-basketball hover:text-basketball-dim;
   }
+  a.nav-link{
+    @apply text-chalkboard
+  }
 }

@@ -41,7 +41,7 @@ export const SideBarContainer = ({
         <Dialog
           as="div"
           onClose={closeModal}
-          className="fixed text-chalkboard top-4 left-2 z-40 md:hidden w-full"
+          className="fixed text-chalkboard inset-0 z-40 md:hidden w-full"
         >
           {/* The backdrop*/}
           <div className="fixed inset-0 bg-white/30" aria-hidden="true" />
@@ -67,7 +67,7 @@ export const SideBarContainer = ({
           </Dialog.Panel>
         </Dialog>
       </Transition>
-      <div className="hidden md:block flex flex-col w-48 h-screen border-r border-chalkboard">
+      <div className="hidden md:flex flex-col w-48 h-screen border-r border-chalkboard">
         {children}
       </div>
     </>
