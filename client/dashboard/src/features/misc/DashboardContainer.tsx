@@ -8,6 +8,7 @@ import {
 import { Menu } from '@headlessui/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useFetchUsername from './hooks/useFetchUsername';
 
 const menuRoutes: Links = [{ name: 'Account Settings', route: './' }];
 const sideBarRoutes: Links = [{ name: 'dashboard', route: './' }];
@@ -64,6 +65,8 @@ const renderSideBarNavItem = (key: string, route: string, name: string) => {
 
 export const Dashboard = () => {
   const [isOpened, toggle] = useState(true);
+  const { data } = useFetchUsername();
+  const currentUser= data?.getMe.username ?? ''; 
 
   return (
     <div className="flex">
@@ -72,7 +75,7 @@ export const Dashboard = () => {
           <NavigationItems renderNavItem={renderSideBarNavItem} links={sideBarRoutes} />
         </SideBarContent>
       </SideBarContainer>
-      <TopBarContainer handleClick={() => toggle(true)}>
+      <TopBarContainer handleClick={() => toggle(true)} userName={currentUser}>
         <NavigationItems renderNavItem={renderMenuItem} links={menuRoutes} />
       </TopBarContainer>
     </div>

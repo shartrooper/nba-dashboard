@@ -7,6 +7,7 @@ import { NotificationMsg } from '@/components/Notifications';
 
 export type TopBarProps = {
   handleClick: () => void;
+  userName: string;
 };
 
 const logoutMsg: NotificationMsg = {
@@ -15,7 +16,7 @@ const logoutMsg: NotificationMsg = {
   type: 'success',
 }
 
-export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<TopBarProps>) => {
+export const TopBarContainer = ({ handleClick, userName, children }: PropsWithChildren<TopBarProps>) => {
   const { removeToken } = useSessionTokenStore();
   const { addNotification } = useNotificationStore();
 
@@ -23,7 +24,6 @@ export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<Top
     removeToken();
     addNotification(logoutMsg);
   }
-
 
   return (
     <div className="flex flex-auto md:justify-end justify-between py-3 px-3 md:px-6 space-x-3 md:space-x-6">
@@ -46,7 +46,7 @@ export const TopBarContainer = ({ handleClick, children }: PropsWithChildren<Top
 
       <Menu as="div" className="relative">
         <Menu.Button className="rounded-full inline-flex justify-center items-center hover:bg-basketball p-2">
-          Placeholder
+          {userName}
           <img className="ml-1 inline w-10 h-10 rounded-full" src={Avatar} alt="avatar img"></img>
         </Menu.Button>
         <Transition

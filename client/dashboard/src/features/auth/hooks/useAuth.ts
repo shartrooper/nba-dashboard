@@ -24,7 +24,7 @@ const useAuth = (operation: 'signIn' | 'signUp') => {
 
   const selectedQuery = query[operation];
   const [mutationFn, { data, loading }] = useMutation(selectedQuery, {
-    onError: (error) => {
+    onError: error => {
       const errorResponses = handleError(error);
       errorResponses.forEach((item) => {
         addNotification({

@@ -13,7 +13,7 @@ const DashboardMock = () => {
           <MockNavItemComponent />
         </SideBarContent>
       </SideBarContainer>
-      <TopBarContainer handleClick={() => toggle(true)}>
+      <TopBarContainer userName='mockUser' handleClick={() => toggle(true)}>
         <MockTopBarItemsComponent />
       </TopBarContainer>
     </div>
