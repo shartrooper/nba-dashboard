@@ -1,7 +1,7 @@
 import { SIGN_IN, SIGN_UP } from '../api';
 import { useMutation } from '@apollo/client';
 import { useEffect } from 'react';
-import { AuthQueriesResponse } from '../types';
+import { AuthQueriesResponse, hasTokenPayload } from '../types';
 import { useNotificationStore } from '@/store/notifications';
 import { handleError } from '@/utils';
 import { useSessionTokenStore } from '@/store';
@@ -24,7 +24,7 @@ const useAuth = (operation: 'signIn' | 'signUp') => {
 
   const selectedQuery = query[operation];
   const [mutationFn, { data, loading }] = useMutation(selectedQuery, {
-    onError: error => {
+    onError: (error) => {
       const errorResponses = handleError(error);
       errorResponses.forEach((item) => {
         addNotification({
@@ -38,14 +38,13 @@ const useAuth = (operation: 'signIn' | 'signUp') => {
       addNotification(notificationMsg[operation]);
     },
   });
-
+  const response = hasTokenPayload(data);
   const setAccessToken = (data: AuthQueriesResponse): void => {
     setToken(data[operation].access_token);
   };
-
   useEffect(() => {
-    if (data) {
-      setAccessToken(data);
+    if (response) {
+      setAccessToken(response);
     }
   });
 

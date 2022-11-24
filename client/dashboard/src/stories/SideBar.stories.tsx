@@ -12,7 +12,6 @@ export default meta;
 
 const mockNavItems = ['Mock Item 1', 'Mock Item 2', 'Mock Item 3'];
 
-
 const Template: Story<SidebarProps> = (props) => {
   return (
     <div className="flex h-full">

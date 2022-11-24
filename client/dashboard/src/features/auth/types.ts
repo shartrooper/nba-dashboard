@@ -21,3 +21,10 @@ export const authBodyParams = {
 export type AuthQueriesResponse = {
   [key: string]: { [AuthQueryFields.AccessToken]: string };
 };
+
+export const hasTokenPayload = (data: unknown): AuthQueriesResponse | false => {
+  if (typeof data !== 'object') {
+    return false;
+  }
+  return data as AuthQueriesResponse;
+};

@@ -1,4 +1,4 @@
-import { Menu } from "@headlessui/react";
+import { Menu } from '@headlessui/react';
 
 export const MockNavItem = ({ name }: { name: string }) => {
   return (
@@ -46,9 +46,8 @@ export const MockMenuItem = ({ name }: { name: string }) => {
 
 export const MockTopBarItemsComponent = () => (
   <>
-    {['Menu Item 1','menu Item 2','Menu Item 3'].map((navItem, index) => (
+    {['Menu Item 1', 'menu Item 2', 'Menu Item 3'].map((navItem, index) => (
       <MockMenuItem key={index} name={navItem} />
     ))}
   </>
 );
-

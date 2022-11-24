@@ -14,16 +14,20 @@ const logoutMsg: NotificationMsg = {
   title: 'Logged out.',
   message: 'Succesfully logged out of your dashboard session.',
   type: 'success',
-}
+};
 
-export const TopBarContainer = ({ handleClick, userName, children }: PropsWithChildren<TopBarProps>) => {
+export const TopBarContainer = ({
+  handleClick,
+  userName,
+  children,
+}: PropsWithChildren<TopBarProps>) => {
   const { removeToken } = useSessionTokenStore();
   const { addNotification } = useNotificationStore();
 
   const handleLogout = () => {
     removeToken();
     addNotification(logoutMsg);
-  }
+  };
 
   return (
     <div className="flex flex-auto md:justify-end justify-between py-3 px-3 md:px-6 space-x-3 md:space-x-6">

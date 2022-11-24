@@ -80,7 +80,6 @@ export type NotificationProps = {
 
 export type NotificationMsg = Omit<NotificationProps['notification'], 'id'>;
 
-
 export const Notification = ({
   notification: { id, type, title, message },
   onDismiss,
