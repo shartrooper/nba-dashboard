@@ -145,6 +145,8 @@ type Query {
 }
 
 type Mutation {
+  changePassword(id: ID!, password: String!, newPassword: String!): MyUserPayload!
+  deleteUser(id: ID!): MyUserPayload!
   signUp(createUserInput: UserInput!): AccessToken!
   signIn(userInput: UserInput!): AccessToken!
 }

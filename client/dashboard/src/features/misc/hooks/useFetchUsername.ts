@@ -3,21 +3,20 @@ import { handleError } from '@/utils';
 import { useQuery } from '@apollo/client';
 import { GET_USERNAME } from '../api';
 
-type ResponseUserNamePayload =
-  | {
-      getMe: {
-        username: string;
-      };
-    }
-  | undefined;
+type ResponseUserNamePayload = {
+  getMe: {
+    username: string;
+    id: string;
+  };
+};
 
-const getUserName = (data: unknown): string => {
+const getUserInfo = (data: unknown): ResponseUserNamePayload['getMe'] => {
   const response = data as ResponseUserNamePayload;
   if (!response?.getMe) {
-    return '';
+    return { username: '', id: '' }
   }
-  const { username } = response.getMe;
-  return username;
+  const { username, id } = response.getMe;
+  return { username, id };
 };
 
 const useFetchUsername = () => {
@@ -43,7 +42,7 @@ const useFetchUsername = () => {
       });
     },
   });
-  return getUserName(data);
+  return getUserInfo(data);
 };
 
 export default useFetchUsername;

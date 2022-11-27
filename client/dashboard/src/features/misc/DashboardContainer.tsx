@@ -58,7 +58,7 @@ const renderSideBarNavItem = (key: string, route: string, name: string) => {
 
 export const Dashboard = () => {
   const [isOpened, toggle] = useState(true);
-  const username = useFetchUsername();
+  const { username } = useFetchUsername();
 
   return (
     <div className="flex">
