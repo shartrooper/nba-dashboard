@@ -1,28 +1,45 @@
 import { useNotificationStore, useSessionTokenStore } from '@/store';
-import { handleError } from '@/utils';
+import { handleError, NoOptionals } from '@/utils';
 import { useQuery } from '@apollo/client';
-import { GET_USERNAME } from '../api';
+import { GET_USERNAME, GET_ALL, GET_ID } from '../api';
 
 type ResponseUserNamePayload = {
   getMe: {
-    username: string;
-    id: string;
+    readonly username?: string;
+    readonly id?: string;
   };
 };
 
-const getUserInfo = (data: unknown): ResponseUserNamePayload['getMe'] => {
+const operationQuery = {
+  'username': GET_USERNAME,
+  'id': GET_ID,
+  'all': GET_ALL
+}
+
+type OperationQueryKeys = keyof typeof operationQuery;
+
+type MappedUserInfo = NoOptionals<ResponseUserNamePayload['getMe']>
+
+
+const getUserInfo = <R extends MappedUserInfo | string>(data: unknown, key: OperationQueryKeys): R | undefined => {
   const response = data as ResponseUserNamePayload;
   if (!response?.getMe) {
-    return { username: '', id: '' }
+    return;
   }
-  const { username, id } = response.getMe;
-  return { username, id };
+
+  switch (key) {
+    case 'all':
+      return response.getMe as R;
+    default:
+      return response.getMe[key] as R;
+  }
+
 };
 
-const useFetchUsername = () => {
+const useFetchUsername = <O extends OperationQueryKeys>(operation: O) => {
   const { addNotification } = useNotificationStore();
   const { removeToken } = useSessionTokenStore();
-  const { data } = useQuery(GET_USERNAME, {
+  const { data } = useQuery(operationQuery[operation], {
     onError: (error) => {
       removeToken();
       const errorResponses = handleError(error);
@@ -42,7 +59,10 @@ const useFetchUsername = () => {
       });
     },
   });
-  return getUserInfo(data);
+
+  type TypeUserInfo = O extends 'all' ? MappedUserInfo : string;
+
+  return getUserInfo<TypeUserInfo>(data, operation);
 };
 
 export default useFetchUsername;
