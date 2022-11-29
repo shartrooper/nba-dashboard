@@ -30,7 +30,7 @@ export const TopBarContainer = ({
   };
 
   return (
-    <div className="flex flex-auto md:justify-end justify-between py-3 px-3 md:px-6 space-x-3 md:space-x-6">
+    <div className='flex md:justify-end justify-between'>
       <div className="md:hidden hover:cursor-pointer pt-4" onClick={handleClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
