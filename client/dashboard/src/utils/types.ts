@@ -2,3 +2,8 @@
 export type NoOptionals<Type> = {
   [Property in keyof Type]-?: Type[Property];
 };
+
+export type UserCredentialsPayload = {
+  readonly id?: string;
+  readonly username?:string;
+}

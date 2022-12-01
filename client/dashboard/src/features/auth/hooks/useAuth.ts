@@ -6,16 +6,13 @@ import { useNotificationStore } from '@/store/notifications';
 import { handleError } from '@/utils';
 import { useSessionTokenStore } from '@/store';
 import { NotificationMsg } from '@/components/Notifications';
+import { getSuccessMsg, getErrorMsg } from '@/utils/helpers';
 
 const query = { signIn: SIGN_IN, signUp: SIGN_UP };
 
 const notificationMsg: { [Property in keyof typeof query]: NotificationMsg } = {
-  signIn: { title: 'Logged in', message: 'Successfully logged in!', type: 'success' },
-  signUp: {
-    title: 'Registration complete',
-    message: 'Succesfully registered and logged in!.',
-    type: 'success',
-  },
+  signIn: getSuccessMsg('Logged In', 'Succesfully logged in!'),
+  signUp: getSuccessMsg('Registration complete', 'Succesfully registered and logged in.')
 };
 
 const useAuth = (operation: 'signIn' | 'signUp') => {
@@ -27,11 +24,7 @@ const useAuth = (operation: 'signIn' | 'signUp') => {
     onError: (error) => {
       const errorResponses = handleError(error);
       errorResponses.forEach((item) => {
-        addNotification({
-          type: 'error',
-          title: `Error status ${item.statusCode}`,
-          message: item.message,
-        });
+        addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
       });
     },
     onCompleted: () => {

@@ -1,13 +1,11 @@
 import { useNotificationStore, useSessionTokenStore } from '@/store';
-import { handleError, NoOptionals } from '@/utils';
+import { handleError, NoOptionals, UserCredentialsPayload } from '@/utils';
+import { getErrorMsg, getInfoMsg } from '@/utils/helpers';
 import { useQuery } from '@apollo/client';
 import { GET_USERNAME, GET_ALL, GET_ID } from '../api';
 
 type ResponseUserNamePayload = {
-  getMe: {
-    readonly username?: string;
-    readonly id?: string;
-  };
+  getMe: UserCredentialsPayload;
 };
 
 const operationQuery = {
@@ -36,7 +34,7 @@ const getUserInfo = <R extends MappedUserInfo | string>(data: unknown, key: Oper
 
 };
 
-const useFetchUsername = <O extends OperationQueryKeys>(operation: O) => {
+const useFetchUserInfo = <O extends OperationQueryKeys>(operation: O) => {
   const { addNotification } = useNotificationStore();
   const { removeToken } = useSessionTokenStore();
   const { data } = useQuery(operationQuery[operation], {
@@ -44,18 +42,10 @@ const useFetchUsername = <O extends OperationQueryKeys>(operation: O) => {
       removeToken();
       const errorResponses = handleError(error);
       if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
-        addNotification({
-          type: 'info',
-          title: 'Expired Token',
-          message: 'Please login again.',
-        });
+        addNotification(getInfoMsg('Expired Token', 'Please login again.'));
       }
       errorResponses.forEach((item) => {
-        addNotification({
-          type: 'error',
-          title: `Error status ${item.statusCode}`,
-          message: item.message,
-        });
+        addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
       });
     },
   });
@@ -65,4 +55,4 @@ const useFetchUsername = <O extends OperationQueryKeys>(operation: O) => {
   return getUserInfo<TypeUserInfo>(data, operation);
 };
 
-export default useFetchUsername;
+export default useFetchUserInfo;
