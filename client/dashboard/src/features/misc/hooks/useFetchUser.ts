@@ -43,6 +43,7 @@ const useFetchUserInfo = <O extends OperationQueryKeys>(operation: O) => {
       const errorResponses = handleError(error);
       if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
         addNotification(getInfoMsg('Expired Token', 'Please login again.'));
+        return;
       }
       errorResponses.forEach((item) => {
         addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));

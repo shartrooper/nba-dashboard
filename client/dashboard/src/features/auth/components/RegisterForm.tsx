@@ -7,7 +7,7 @@ const schema = z
   .object({
     username: z.string().min(4, 'Required'),
     password: z.string().min(8, 'Required').max(8),
-    confirm: z.string().min(4, 'Required'),
+    confirm: z.string().min(8, 'Required').max(8),
   })
   .refine((data) => data.confirm === data.password, {
     message: "Submitted passwords don't match",

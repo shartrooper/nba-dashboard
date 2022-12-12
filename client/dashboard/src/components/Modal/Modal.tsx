@@ -9,7 +9,7 @@ export type SidebarProps = {
   Body: React.FunctionComponent<{ onClose: () => void }>;
 };
 
-export default function ModalWrapper({ isOpen, header, toggle, Body }: SidebarProps) {
+export function ModalWrapper({ isOpen, header, toggle, Body }: SidebarProps) {
   function closeModal() {
     toggle(false)
   }

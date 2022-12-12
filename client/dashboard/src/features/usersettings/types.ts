@@ -4,13 +4,17 @@ export enum SettingMutations {
 }
 
 export const userSettingsBodyParams = {
-  [SettingMutations.DeleteUser]: ['$deleteUserId: ID!'],
-  [SettingMutations.ChangePassword]: ['$changePasswordId: ID!', '$password: String!', '$newPassword: String!']
+  [SettingMutations.DeleteUser]: ['$id: ID!'],
+  [SettingMutations.ChangePassword]: ['$id: ID!', '$password: String!', '$newPassword: String!']
 }
 
-export const hasIdPayload = (data: unknown): boolean => {
+export const hasIdPayload = (data: unknown, operation: SettingMutations): boolean => {
   if (typeof data !== 'object') {
     return false;
   }
-  return true;
+  const parsedResponde = data as {
+    [key: string]: { id?: string }
+  }
+
+  return !!parsedResponde[operation]?.id;
 };

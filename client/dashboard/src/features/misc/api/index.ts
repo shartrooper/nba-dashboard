@@ -7,11 +7,11 @@ const getAll = gqlQueryBuilder('getMe', ['username', 'id']);
 
 
 export const GET_ID = gql`
-  ${queryArranger([getUserQuery])}
+  ${queryArranger([getIdQuery])}
 `;
 
 export const GET_USERNAME = gql`
-  ${queryArranger([getIdQuery])}
+  ${queryArranger([getUserQuery])}
 `;
 
 export const GET_ALL = gql`

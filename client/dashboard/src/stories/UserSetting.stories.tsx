@@ -2,14 +2,14 @@ import { Meta, Story } from '@storybook/react';
 import { InputField, InputFieldProps } from '@/components/Form';
 import { Button } from '@/components/Elements/Button';
 import React from 'react';
-import ModalWrapper from '@/components/Modal/Modal';
+import { ModalWrapper } from '@/components/Modal';
 
 const meta: Meta = {
   title: 'User Settings',
 };
 
 const ModalContent = ({ onClose }: { onClose: () => void }) => {
-  return(<div className='flex justify-evenly mt-6'>
+  return (<div className='flex justify-evenly mt-6'>
     <Button onClick={onClose} variant='danger'>Yes</Button>
     <Button onClick={onClose} variant='primary'>No</Button>
   </div>)

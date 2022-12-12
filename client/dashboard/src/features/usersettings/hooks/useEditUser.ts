@@ -18,7 +18,7 @@ type OperationQueryKeys = keyof typeof operationQuery;
 
 const notificationMsg: { [Property in OperationQueryKeys]: NotificationMsg } = {
   [DeleteUser]: getSuccessMsg('Account removed', 'User account successfully deleted.'),
-  [ChangePassword]: getSuccessMsg('Password Update complete', 'Succesfully changed password.')
+  [ChangePassword]: getSuccessMsg('Password Update complete', 'Succesfully changed password. Please login again.')
 };
 
 const useEditUser = (operation: OperationQueryKeys) => {
@@ -35,7 +35,7 @@ const useEditUser = (operation: OperationQueryKeys) => {
     },
   });
 
-  const hasId = hasIdPayload(data);
+  const hasId = hasIdPayload(data, operation);
 
   useEffect(() => {
     if (hasId) {

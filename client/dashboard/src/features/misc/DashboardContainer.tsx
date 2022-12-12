@@ -9,9 +9,10 @@ import { Menu } from '@headlessui/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useFetchUserInfo from './hooks/useFetchUser';
+import { DashboardRoutes } from './routes';
 
-const menuRoutes: Links = [{ name: 'Account Settings', route: './' }];
-const sideBarRoutes: Links = [{ name: 'dashboard', route: './' }];
+const menuRoutes: Links = [{ name: 'Account Settings', route: '../settings' }];
+const sideBarRoutes: Links = [{ name: 'dashboard', route: '../' }];
 
 const renderMenuItem = (key: string, route: string, name: string) => {
   return (
@@ -71,6 +72,7 @@ export const Dashboard = () => {
         <TopBarContainer handleClick={() => toggle(true)} userName={username}>
           <NavigationItems renderNavItem={renderMenuItem} links={menuRoutes} />
         </TopBarContainer>
+        <DashboardRoutes />
       </div>
     </div>
   );
