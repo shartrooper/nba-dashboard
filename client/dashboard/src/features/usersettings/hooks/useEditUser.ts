@@ -1,7 +1,7 @@
 import { NotificationMsg } from '@/components/Notifications';
-import { useNotificationStore, useSessionTokenStore } from '@/store';
+import { useNotificationStore } from '@/store';
 import { handleError } from '@/utils';
-import { getSuccessMsg, getErrorMsg } from '@/utils/helpers';
+import { getSuccessMsg, getErrorMsg, useRedirectionToRoot } from '@/utils/helpers';
 import { useMutation } from '@apollo/client';
 import { useEffect } from 'react';
 import { CHANGE_PASSWORD, DELETE_USER } from '../api';
@@ -23,7 +23,7 @@ const notificationMsg: { [Property in OperationQueryKeys]: NotificationMsg } = {
 
 const useEditUser = (operation: OperationQueryKeys) => {
   const { addNotification } = useNotificationStore();
-  const { removeToken } = useSessionTokenStore();
+  const clearSession = useRedirectionToRoot();
 
   const [mutationFn, { data, loading }] = useMutation(operationQuery[operation], {
     onError: (error) => {
@@ -38,9 +38,7 @@ const useEditUser = (operation: OperationQueryKeys) => {
   const hasId = hasIdPayload(data, operation);
 
   useEffect(() => {
-    if (hasId) {
-      removeToken();
-    }
+    if (hasId) clearSession();
   });
 
   return { mutationFn, loading };

@@ -1,6 +1,6 @@
-import { useNotificationStore, useSessionTokenStore } from '@/store';
+import { useNotificationStore } from '@/store';
 import { handleError, NoOptionals, UserCredentialsPayload } from '@/utils';
-import { getErrorMsg, getInfoMsg } from '@/utils/helpers';
+import { getErrorMsg, getInfoMsg, useRedirectionToRoot } from '@/utils/helpers';
 import { useQuery } from '@apollo/client';
 import { GET_USERNAME, GET_ALL, GET_ID } from '../api';
 
@@ -36,10 +36,10 @@ const getUserInfo = <R extends MappedUserInfo | string>(data: unknown, key: Oper
 
 const useFetchUserInfo = <O extends OperationQueryKeys>(operation: O) => {
   const { addNotification } = useNotificationStore();
-  const { removeToken } = useSessionTokenStore();
+  const clearSession = useRedirectionToRoot();
   const { data } = useQuery(operationQuery[operation], {
     onError: (error) => {
-      removeToken();
+      clearSession();
       const errorResponses = handleError(error);
       if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
         addNotification(getInfoMsg('Expired Token', 'Please login again.'));

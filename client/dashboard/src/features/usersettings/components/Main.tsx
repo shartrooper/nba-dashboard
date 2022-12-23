@@ -70,14 +70,13 @@ const SettingsContainer = () => {
               registration={register('confirmNewPassword')}
             />
             <div className="flex justify-center center-items">
-              <Button isLoading={loading} type="submit">
+              <Button isLoading={loading} size="sm" type="submit">
                 Submit New Password
               </Button>
             </div>
           </>
         )}
       </Form>
-      <Button variant="primary" size="sm" >Change Password</Button>
       <p className="my-3"> Delete Account? <span className="text-red-500">(This action is irreversible!)</span></p>
       <Button onClick={() => toggle(true)} variant="danger" size="sm" >Delete Account</Button>
       <ModalWrapper header='Are you sure you want to delete your Account?' isOpen={isOpen} toggle={toggle} Body={ModalContent} />

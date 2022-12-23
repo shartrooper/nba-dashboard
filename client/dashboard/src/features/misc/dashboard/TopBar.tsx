@@ -1,9 +1,9 @@
 import { Menu, Transition } from '@headlessui/react';
 import Avatar from '@/assets/avataricon.png';
 import { PropsWithChildren } from 'react';
-import { useSessionTokenStore } from '@/store/usersession';
 import { useNotificationStore } from '@/store';
 import { NotificationMsg } from '@/components/Notifications';
+import { useRedirectionToRoot } from '@/utils';
 
 export type TopBarProps = {
   handleClick: () => void;
@@ -21,11 +21,11 @@ export const TopBarContainer = ({
   userName,
   children,
 }: PropsWithChildren<TopBarProps>) => {
-  const { removeToken } = useSessionTokenStore();
   const { addNotification } = useNotificationStore();
+  const clearSession = useRedirectionToRoot();
 
   const handleLogout = () => {
-    removeToken();
+    clearSession();
     addNotification(logoutMsg);
   };
 
