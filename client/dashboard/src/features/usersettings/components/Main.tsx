@@ -20,13 +20,6 @@ const schema = z
   });
 
 
-const ModalContent = ({ onClose }: { onClose: () => void }) => {
-  return (<div className='flex justify-evenly mt-6'>
-    <Button onClick={onClose} variant='danger'>Yes</Button>
-    <Button onClick={onClose} variant='primary'>No</Button>
-  </div>)
-}
-
 type PasswordChangeDTOValues = {
   password: string;
   newPassword: string;
@@ -38,6 +31,20 @@ const SettingsContainer = () => {
   const [isOpen, toggle] = useState(false);
   const { mutationFn: updatePassword, loading } = useEditUser(SettingMutations.ChangePassword);
   const id = useFetchUserInfo('id');
+
+  const ModalContent = ({ onClose }: { onClose: () => void }) => {
+    const { mutationFn: deleteUser } = useEditUser(SettingMutations.DeleteUser);
+
+    function handleDeleteUser() {
+      deleteUser({ variables: { id } });
+      onClose();
+    }
+
+    return (<div className='flex justify-evenly mt-6'>
+      <Button onClick={handleDeleteUser} variant='danger'>Yes</Button>
+      <Button onClick={onClose} variant='primary'>No</Button>
+    </div>)
+  }
 
   return (
     <div className="flex-col items-center">
