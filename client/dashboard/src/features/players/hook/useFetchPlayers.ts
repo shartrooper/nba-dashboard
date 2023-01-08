@@ -1,0 +1,50 @@
+import { useNotificationStore } from '@/store';
+import { handleError } from '@/utils';
+import { getErrorMsg, getInfoMsg } from '@/utils/helpers';
+import { useQuery } from '@apollo/client';
+import { GET_PLAYERS } from '../api';
+import { GetPlayersPayload, ParsedPlayer, ParsedPlayersResponse } from '../types';
+
+export type RequestParams = {
+	search?: number,
+	page?: string,
+	per_page?: number
+}
+
+const parsedPlayersData = (data: unknown): ParsedPlayersResponse | undefined => {
+	const response = data as GetPlayersPayload;
+	if (!response?.players) {
+		return;
+	}
+	const playersPayload: ParsedPlayer[] = response.players.records.map((record) => ({ ...record, firstName: record.first_name, lastName: record.last_name }));
+	const metaPayload = response.players.meta;
+	return {
+		players: playersPayload,
+		meta: {
+			nextPage: metaPayload.next_page,
+			currentPage: metaPayload.current_page,
+			perPage: metaPayload.per_page
+		}
+	}
+};
+
+const useFetchPlayers = (params: RequestParams = { per_page: 100 }) => {
+	const { addNotification } = useNotificationStore();
+	const { data, loading, fetchMore } = useQuery(GET_PLAYERS, {
+		variables: { ...params },
+		onError: (error) => {
+			const errorResponses = handleError(error);
+			if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
+				addNotification(getInfoMsg('Expired Token', 'Please login again.'));
+				return;
+			}
+			errorResponses.forEach((item) => {
+				addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
+			});
+		},
+	});
+
+	return { data: parsedPlayersData(data), fetchMore, loading };
+};
+
+export default useFetchPlayers;
