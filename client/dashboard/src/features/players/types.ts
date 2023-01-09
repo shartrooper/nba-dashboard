@@ -8,7 +8,7 @@ export const playersQueryBody = [
 ];
 
 export const playersQueryParams = [
-	'$search: String', '$page: Int', '$per_page: Int'
+	'$search: String', '$offset: Int', '$limit: Int'
 ];
 
 export type PlayerRecord = {

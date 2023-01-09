@@ -134,7 +134,7 @@ type SeasonsAvgPayload {
 
 type Query {
   getMe: MyUserPayload!
-  players(page: Int, per_page: Int, search: String): PlayersPayload!
+  players(offset: Int, limit: Int, search: String): PlayersPayload!
   player(id: Int!): Player!
   teams(page: Int, per_page: Int): TeamsPayload!
   team(id: Int!): Team!

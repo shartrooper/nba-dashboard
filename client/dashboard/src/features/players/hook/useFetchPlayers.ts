@@ -6,9 +6,9 @@ import { GET_PLAYERS } from '../api';
 import { GetPlayersPayload, ParsedPlayer, ParsedPlayersResponse } from '../types';
 
 export type RequestParams = {
-	search?: number,
-	page?: string,
-	per_page?: number
+	search?: string,
+	offset?: number,
+	limit?: number
 }
 
 const parsedPlayersData = (data: unknown): ParsedPlayersResponse | undefined => {
@@ -28,7 +28,7 @@ const parsedPlayersData = (data: unknown): ParsedPlayersResponse | undefined => 
 	}
 };
 
-const useFetchPlayers = (params: RequestParams = { per_page: 100 }) => {
+const useFetchPlayers = (params: RequestParams = { limit: 100 }) => {
 	const { addNotification } = useNotificationStore();
 	const { data, loading, fetchMore } = useQuery(GET_PLAYERS, {
 		variables: { ...params },
@@ -43,7 +43,6 @@ const useFetchPlayers = (params: RequestParams = { per_page: 100 }) => {
 			});
 		},
 	});
-
 	return { data: parsedPlayersData(data), fetchMore, loading };
 };
 

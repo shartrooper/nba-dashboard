@@ -1,7 +1,7 @@
 import { Spinner } from "@/components/Elements/Spinner";
-import { useEffect, useRef } from "react";
 import useFetchPlayers from "../hook/useFetchPlayers"
 import { ParsedPlayer } from "../types";
+import { InView } from "react-intersection-observer";
 
 type Player = ParsedPlayer;
 
@@ -10,27 +10,14 @@ const FeedCard = (player: Player) => <div>
 </div>
 
 export const PlayersFeed = () => {
-	const { data, fetchMore, loading } = useFetchPlayers({});
-	const bottomBoundaryRef = useRef(null);
-
-	const scrollObserver = (node: Element) => {
-		new IntersectionObserver(entries => {
-			entries.forEach(en => {
-				if (en.intersectionRatio > 0) {
-					console.log('boundary reached');
-					if (!data) return;
-					const { meta } = data;
-					const { nextPage, perPage } = meta;
-					fetchMore({ variables: { page: nextPage, per_page: perPage } });
-				}
-			});
-		}).observe(node)
+	const { data, fetchMore, loading } = useFetchPlayers();
+	const loadMore = () => {
+		if (!data) return;
+		const { meta } = data;
+		const { nextPage } = meta;
+		fetchMore({ variables: { offset: nextPage, limit: 25 } });
 	};
 
-	useEffect(() => {
-		if (bottomBoundaryRef.current) scrollObserver(bottomBoundaryRef.current);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [bottomBoundaryRef]);
 
 	if (loading) {
 		return <Spinner size='lg' />
@@ -39,6 +26,10 @@ export const PlayersFeed = () => {
 	return <div className="overflow-auto h-[92vh]">
 		<p>NBA Players Feed</p>
 		{data?.players.map(player => <FeedCard {...player}></FeedCard>)}
-		{data?.players && <div id='page-bottom-boundary' ref={bottomBoundaryRef} />}
+		{data?.players && (
+        <InView
+          onChange={async (inView) => inView && loadMore()}
+        />
+      )}
 	</div>
 }
