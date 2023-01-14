@@ -1,13 +1,7 @@
 import { Spinner } from "@/components/Elements/Spinner";
 import useFetchPlayers from "../hook/useFetchPlayers"
-import { ParsedPlayer } from "../types";
 import { InView } from "react-intersection-observer";
-
-type Player = ParsedPlayer;
-
-const FeedCard = (player: Player) => <div>
-	<p>{`${player.firstName} - ${player.lastName} Team:"${player.team.name}"`}</p>
-</div>
+import FeedCard from "./feedCard";
 
 export const PlayersFeed = () => {
 	const { data, fetchMore, loading } = useFetchPlayers();
@@ -25,11 +19,12 @@ export const PlayersFeed = () => {
 
 	return <div className="overflow-auto h-[92vh]">
 		<p>NBA Players Feed</p>
-		{data?.players.map(player => <FeedCard {...player}></FeedCard>)}
+		{data?.players.map((player, index) => <FeedCard key={`${player.firstName}-${player.lastName}-${index}`} player={player}></FeedCard>)}
 		{data?.players && (
-        <InView
-          onChange={async (inView) => inView && loadMore()}
-        />
-      )}
+			<InView
+				rootMargin="300px 0px"
+				onChange={async (inView) => inView && loadMore()}
+			/>
+		)}
 	</div>
 }

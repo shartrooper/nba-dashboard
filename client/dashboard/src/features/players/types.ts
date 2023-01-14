@@ -3,7 +3,7 @@ import { Metadata } from "@/types";
 export const getPlayers = 'players';
 
 export const playersQueryBody = [
-	'records { id first_name last_name team { name } }',
+	'records { id first_name last_name position team { name } }',
 	'meta { next_page current_page per_page }'
 ];
 
@@ -15,6 +15,7 @@ export type PlayerRecord = {
 	id: number,
 	first_name: string,
 	last_name: string,
+	position: string,
 	team: { name: string }
 };
 

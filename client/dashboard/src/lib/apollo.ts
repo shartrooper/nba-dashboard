@@ -20,7 +20,7 @@ const authLink = setContext((_, { headers }) => {
 
 const httpLink = new HttpLink({ uri: process.env.REACT_APP_BASE_URL });
 
-function offsetLimitPagination(
+function mergePagination(
   keyArgs: false | KeySpecifier | KeyArgsFunction | undefined = false,
 ): FieldPolicy<GetPlayersPayload['players'] | undefined> {
   return {
@@ -44,7 +44,7 @@ export const client = new ApolloClient({
       typePolicies: {
         Query: {
           fields: {
-            players: offsetLimitPagination(["search"])
+            players: mergePagination(["search"])
           }
         }
       }
