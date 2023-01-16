@@ -1,11 +1,16 @@
 import { Metadata } from "@/types";
 
 export const getPlayers = 'players';
+export const getPlayer = 'player';
+
+const playerQueryBody = '{ id first_name last_name position team { name } }';
 
 export const playersQueryBody = [
-	'records { id first_name last_name position team { name } }',
+	`records ${playerQueryBody}`,
 	'meta { next_page current_page per_page }'
 ];
+
+export const playerQueryId = '$id: Int';
 
 export const playersQueryParams = [
 	'$search: String', '$offset: Int', '$limit: Int'
@@ -18,6 +23,10 @@ export type PlayerRecord = {
 	position: string,
 	team: { name: string }
 };
+
+export type GetPlayerPayload = {
+	player: PlayerRecord
+}
 
 export type GetPlayersPayload = {
 	players: {
@@ -33,7 +42,7 @@ export type ParsedPlayer = Omit<PlayerRecord, 'first_name' | 'last_name'> &
 }
 
 type ParsedMetaData = {
-	nextPage: number,
+	nextPage: number | null,
 	currentPage: number,
 	perPage: number
 }

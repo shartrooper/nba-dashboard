@@ -2,16 +2,21 @@ import { Spinner } from "@/components/Elements/Spinner";
 import useFetchPlayers from "../hook/useFetchPlayers"
 import { InView } from "react-intersection-observer";
 import FeedCard from "./feedCard";
+import SearchInput from "@/components/search/searchInput";
+
 
 export const PlayersFeed = () => {
-	const { data, fetchMore, loading } = useFetchPlayers();
+	const { data, fetchMore, loading, refetch } = useFetchPlayers();
 	const loadMore = () => {
 		if (!data) return;
 		const { meta } = data;
 		const { nextPage } = meta;
-		fetchMore({ variables: { offset: nextPage, limit: 25 } });
+		nextPage && fetchMore({ variables: { offset: nextPage, limit: 25 } });
 	};
 
+	const searchPlayer = (searchTerm?: string) => {
+		refetch({ search: searchTerm });
+	};
 
 	if (loading) {
 		return <Spinner size='lg' />
@@ -19,6 +24,7 @@ export const PlayersFeed = () => {
 
 	return <div className="overflow-auto h-[92vh]">
 		<p>NBA Players Feed</p>
+		<SearchInput cb={searchPlayer} placeholder="Input name to search player..."/>
 		{data?.players.map((player, index) => <FeedCard key={`${player.firstName}-${player.lastName}-${index}`} player={player}></FeedCard>)}
 		{data?.players && (
 			<InView

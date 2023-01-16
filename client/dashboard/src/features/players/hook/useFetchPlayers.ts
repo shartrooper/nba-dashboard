@@ -30,7 +30,7 @@ const parsedPlayersData = (data: unknown): ParsedPlayersResponse | undefined => 
 
 const useFetchPlayers = (params: RequestParams = { limit: 100 }) => {
 	const { addNotification } = useNotificationStore();
-	const { data, loading, fetchMore } = useQuery(GET_PLAYERS, {
+	const { data, loading, fetchMore, refetch } = useQuery(GET_PLAYERS, {
 		variables: { ...params },
 		onError: (error) => {
 			const errorResponses = handleError(error);
@@ -42,8 +42,11 @@ const useFetchPlayers = (params: RequestParams = { limit: 100 }) => {
 				addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
 			});
 		},
+		onCompleted: () =>{
+			console.log("fetched!");
+		}
 	});
-	return { data: parsedPlayersData(data), fetchMore, loading };
+	return { data: parsedPlayersData(data), fetchMore, refetch, loading };
 };
 
 export default useFetchPlayers;
