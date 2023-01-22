@@ -2,6 +2,7 @@ import { useNotificationStore } from '@/store';
 import { handleError } from '@/utils';
 import { getErrorMsg, getInfoMsg } from '@/utils/helpers';
 import { useQuery } from '@apollo/client';
+import { useState } from 'react';
 import { GET_PLAYERS } from '../api';
 import { GetPlayersPayload, ParsedPlayer, ParsedPlayersResponse } from '../types';
 
@@ -30,6 +31,7 @@ const parsedPlayersData = (data: unknown): ParsedPlayersResponse | undefined => 
 
 const useFetchPlayers = (params: RequestParams = { limit: 100 }) => {
 	const { addNotification } = useNotificationStore();
+	const [state, toggle] = useState(false);
 	const { data, loading, fetchMore, refetch } = useQuery(GET_PLAYERS, {
 		variables: { ...params },
 		onError: (error) => {
@@ -42,11 +44,11 @@ const useFetchPlayers = (params: RequestParams = { limit: 100 }) => {
 				addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
 			});
 		},
-		onCompleted: () =>{
-			console.log("fetched!");
+		onCompleted: () => {
+			toggle(false);
 		}
 	});
-	return { data: parsedPlayersData(data), fetchMore, refetch, loading };
+	return { data: parsedPlayersData(data), fetchMore, refetch, loading, loadingMore: { state, toggle } };
 };
 
 export default useFetchPlayers;
