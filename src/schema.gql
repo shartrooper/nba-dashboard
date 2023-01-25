@@ -72,6 +72,16 @@ type GamesPayload {
   records: [Game!]!
 }
 
+type GameStats {
+  id: Int!
+  date: String
+  home_team_score: Int!
+  season: Int!
+  visitor_team_score: Int!
+  home_team_id: String!
+  visitor_team_id: String!
+}
+
 type PlayerStats {
   id: Int!
   ast: Float
@@ -86,7 +96,7 @@ type PlayerStats {
   ft_pct: Float
   fta: Float
   ftm: Float
-  game: Game!
+  game: GameStats!
   min: String
   oreb: Float
   pf: Float

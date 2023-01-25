@@ -8,6 +8,7 @@ import {
   PlayerStats,
   SeasonAveragesPayload,
   Team,
+  teams,
 } from './dto';
 
 type ParamValue = string | number | number[] | boolean;
@@ -163,9 +164,13 @@ export class BalldontlieService {
 
       const serializedPlayerInStats = stats.data.map((stat) => ({
         ...stat,
+        game: {
+          ...stat.game,
+          home_team_id: teams[stat.game.home_team_id],
+          visitor_team_id: teams[stat.game.visitor_team_id],
+        },
         player: this.serializePlayerRecord(stat.player),
       }));
-
       return { data: serializedPlayerInStats, meta: stats.meta };
     } catch (error) {
       throw new Error(error);
