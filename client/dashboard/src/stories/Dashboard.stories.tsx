@@ -28,6 +28,4 @@ const meta: Meta = {
   component: DashboardMock,
 };
 
-export default meta;
-
-export const Template = () => <DashboardMock />;
+const Template = () => <DashboardMock />;
