@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Input from "../Input/generic";
 
 const SearchInput = ({ cb, placeholder = "Search Input" }: { cb: (searchTerm?: string) => void, placeholder?: string }) => {
 	const [searchTerm, setSearchTerm] = useState<string>();
@@ -15,11 +16,7 @@ const SearchInput = ({ cb, placeholder = "Search Input" }: { cb: (searchTerm?: s
 		setSearchTerm(value);
 	}
 
-	return <input
-		className="text-midnight w-full rounded border-2 focus:outline-none focus:ring focus:ring-basketball px-2 sm:w-56 lg:w-72"
-		placeholder={placeholder}
-		onChange={handleChange}
-	/>
+	return <Input onChange={handleChange} placeholder={placeholder} />
 }
 
 export default SearchInput;
