@@ -13,11 +13,19 @@ export const getSuccessMsg = (title: string, message: string) => buildMsgObject(
 export const getInfoMsg = (title: string, message: string) => buildMsgObject(title, message, 'info');
 export const getWarningMsg = (title: string, message: string) => buildMsgObject(title, message, 'warning');
 
-export const useRedirectionToRoot = () =>{
+
+export const arrayRange = (start: number, stop: number, step: number) =>
+  Array.from(
+    { length: (stop - start) / step + 1 },
+    (_value, index) => start + index * step
+  );
+
+
+export const useRedirectionToRoot = () => {
   const { removeToken } = useSessionTokenStore();
   const navigate = useNavigate();
 
-  const clearSession = () =>{
+  const clearSession = () => {
     removeToken();
     navigate('/');
   }
