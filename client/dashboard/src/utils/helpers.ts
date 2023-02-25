@@ -1,7 +1,7 @@
 import { useSessionTokenStore } from '@/store';
 import { Notification } from '@/store/notifications'
 import { useNavigate } from 'react-router-dom';
-
+import { useState, useEffect } from "react";
 const buildMsgObject = (title: string, message: string, type: Notification['type']) => ({
   type,
   title,
@@ -31,4 +31,26 @@ export const useRedirectionToRoot = () => {
   }
 
   return clearSession;
+}
+
+
+interface Size {
+  width?: number | undefined;
+  height?: number | undefined;
+}
+
+export function useWindowSize(): Size {
+  const [windowSize, setWindowSize] = useState<Size>({});
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return windowSize;
 }

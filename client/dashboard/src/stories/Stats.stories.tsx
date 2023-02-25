@@ -9,6 +9,8 @@ import {
 	Tooltip,
 	Legend
 } from "recharts";
+import { useMemo, useState } from 'react';
+import { useWindowSize } from '@/utils';
 
 const meta: Meta = {
 	title: 'Player Stat',
@@ -60,15 +62,33 @@ const dataKeys = {
 
 const SampleTeamPlayerName = "Cavaliers";
 
-type PlayerStatsProps = {
-	len?: number
+const CursorNav = ({ arrow, nextIndex, handleClick }: { arrow: 'left' | 'right', nextIndex: Boolean, handleClick: (n: number) => void }) => {
+	enum Arrow {
+		left = 'left',
+		right = 'right'
+	}
+
+	const step = {
+		[Arrow.left]: -1,
+		[Arrow.right]: 1
+	}
+
+	const icon = {
+		[Arrow.left]: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+		</svg>,
+		[Arrow.right]: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+		</svg>
+	}
+
+	return <div className={`${!nextIndex && "invisible"}`} onClick={() => handleClick(step[arrow])}>{icon[arrow]}</div>
 }
 
-const PlayerAreaChart = ({ valueKey, dataset }: { valueKey: keyof typeof dataKeys, dataset: { [key: string]: string | number }[] }) => {
-	const graphWidth = dataset.length * 82;
+const PlayerAreaChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof typeof dataKeys, dataset: { [key: string]: string | number }[], graphWidth: number }) => {
 	return <div className='bg-zinc-50 overflow-auto'>
 		<AreaChart width={graphWidth} height={320} data={dataset}
-			margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+			margin={{ top: 5, right: 30, bottom: 5 }}>
 			<CartesianGrid strokeDasharray="4 3" />
 			<XAxis dataKey="label" />
 			<YAxis />
@@ -81,31 +101,45 @@ const PlayerAreaChart = ({ valueKey, dataset }: { valueKey: keyof typeof dataKey
 	</div>
 }
 
-const Template: Story<PlayerStatsProps> = ({ len = 0 }) => {
-	const sizedSample = sample.slice(0, len);
-	const selectedSample = sizedSample.map(stat => {
+const Template: Story = () => {
+	const { width } = useWindowSize();
+	const maxItems = 10;
+	const [navigateChart, setNavigateChart] = useState({ prev: 0, section: 0, next: maxItems });
+	const sizedSample = sample.slice(navigateChart.prev, navigateChart.next);
+	const selectedSample = useMemo(() => sizedSample.map(stat => {
 		const opponent = stat['game.home_team_id'] === SampleTeamPlayerName ? stat['game.visitor_team_id'] : stat['game.home_team_id'];
 		const date = new Date(stat["game.date"]).toISOString().split('T')[0];
 		return {
 			...stat,
 			label: `vs.${opponent}(${date})`
 		}
-	});
+	}), [sizedSample]);
+	const updateChart = (n: number) => {
+		const i = n + navigateChart.section;
+		setNavigateChart({
+			prev: i * maxItems,
+			section: i,
+			next: (i + 1) * maxItems
+		});
+	}
 
+	if (!width) {
+		return <></>;
+	}
 	return (
 		<div className='m-4 flex flex-col'>
+			<div className='flex justify-between'>
+				<CursorNav arrow='left' nextIndex={!!navigateChart.prev} handleClick={updateChart} />
+				<CursorNav arrow='right' nextIndex={!!sample[navigateChart.next]} handleClick={updateChart} />
+			</div>
 			{Object.keys(dataKeys).map((value: string, index) =>
-				<>
+				<div key={index} >
 					<p>{value.charAt(0).toLocaleUpperCase() + value.slice(1)}</p>
-					<PlayerAreaChart key={index} dataset={selectedSample} valueKey={value as keyof typeof dataKeys} />
-				</>
+					<PlayerAreaChart dataset={selectedSample} graphWidth={(width * (0.7 + width / 10000))} valueKey={value as keyof typeof dataKeys} />
+				</div>
 			)}
 		</div>
 	)
 };
 
 export const Main = Template.bind({});
-
-Main.args = ({
-	len: 2
-});
