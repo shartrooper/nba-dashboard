@@ -1,4 +1,4 @@
-import { Metadata } from "@/types";
+import { Metadata, ParsedMetaData, ResponsePayload } from "@/types";
 
 export const getPlayers = 'players';
 export const getPlayer = 'player';
@@ -29,22 +29,13 @@ export type GetPlayerPayload = {
 }
 
 export type GetPlayersPayload = {
-	players: {
-		records: PlayerRecord[],
-		meta: Omit<Metadata, 'total_count'>
-	}
+	players: ResponsePayload<PlayerRecord, Omit<Metadata, 'total_count'>>
 };
 
 export type ParsedPlayer = Omit<PlayerRecord, 'first_name' | 'last_name'> &
 {
 	firstName: string;
 	lastName: string;
-}
-
-type ParsedMetaData = {
-	nextPage: number | null,
-	currentPage: number,
-	perPage: number
 }
 
 export type ParsedPlayersResponse = {

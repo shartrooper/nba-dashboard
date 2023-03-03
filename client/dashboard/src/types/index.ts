@@ -53,3 +53,13 @@ export type PlayerStats = {
 	turnover: number;
 }
 
+export type ResponsePayload<P, M> = {
+	records: P[],
+	meta: M
+}
+
+export type ParsedMetaData = {
+	nextPage: number | null,
+	currentPage: number,
+	perPage: number
+}
