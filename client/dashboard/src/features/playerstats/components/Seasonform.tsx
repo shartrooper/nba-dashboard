@@ -1,7 +1,9 @@
 import { Button } from "@/components/Elements/Button";
 import { Form, InputField, InputFieldProps } from "@/components/Form";
+import { ParsedPlayer } from "@/features/players/types";
+import { useChartDataStore } from "@/store";
 import { arrayRange } from "@/utils";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { z } from "zod";
 import useFetchPlayerStats from "../hook/useFetchPlayerStats";
 
@@ -30,7 +32,13 @@ const schema = z
   }).refine(dateValidation, {
     message: "End date shouldnt be earlier than starting date",
     path: ['end_date'],
-  }).refine(
+  })
+  .refine(dto => !dto.start_date || new Date(dto.start_date).getFullYear() === parseInt(dto.season),
+    {
+      message: 'Pick a starting date within the selected season year',
+      path: ['start_date']
+    })
+  .refine(
     dto => !dto.start_date || isAValidSeason(dto.start_date, dto.season), {
     message: errorMsg,
     path: ['start_date']
@@ -54,7 +62,7 @@ const seasons = arrayRange(1979, new Date().getFullYear() - 1, 1).reverse();
 function SelectorComponent({ registration, label }: SelectorComponentProps) {
   return (
     <div>
-      <label className={'block text-sm font-medium text-chalkboard mb-1'}>
+      <label className='block text-sm font-medium text-chalkboard mb-1'>
         {label}
       </label>
       <select className="text-midnight px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" {...registration} >
@@ -66,11 +74,16 @@ function SelectorComponent({ registration, label }: SelectorComponentProps) {
   )
 }
 
-export const DateSeasonForm = () => {
-  const { playerId } = useParams();
-  const setPlayerId = { playerIds: [playerId ?? ''] };
+export const DateSeasonForm = ({ player }: { player: ParsedPlayer }) => {
+  const setPlayerId = { playerIds: [player.id.toLocaleString()] };
   const { data, refetch } = useFetchPlayerStats(setPlayerId);
-  console.log(data);
+  const { addChunk } = useChartDataStore();
+
+  useEffect(() => {
+    data && addChunk(data, player.team.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data])
+
   return (
     <div className="flex-col items-center">
       <p className="my-3"> Submit seasons's period</p>
