@@ -1,7 +1,8 @@
+import { DropdownWrapper, Props } from "@/components/Disclosure";
 import { Button } from "@/components/Elements/Button";
 import { Form, InputField, InputFieldProps } from "@/components/Form";
 import { arrayRange } from "@/utils";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { z } from "zod";
 
 const meta: Meta = {
@@ -74,7 +75,7 @@ function SelectorComponent({ registration, label }: SelectorComponentProps) {
 }
 
 
-export const Template = () => {
+const MockDateForm = () => {
   return (
     <div className="flex-col items-center">
       <p className="my-3"> Submit seasons's period</p>
@@ -110,3 +111,16 @@ export const Template = () => {
     </div>
   )
 };
+
+
+const DropdownForm: Story<Props> = (props) =>
+  <DropdownWrapper {...props}>
+    <MockDateForm />
+  </DropdownWrapper>;
+
+export const Template = () => <MockDateForm />;
+
+export const DropdownFormSample = DropdownForm.bind({});
+
+DropdownFormSample.args = {description: "Season Form"}
+

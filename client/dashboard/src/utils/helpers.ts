@@ -35,8 +35,8 @@ export const useRedirectionToRoot = () => {
 
 
 interface Size {
-  width?: number | undefined;
-  height?: number | undefined;
+  width?: number;
+  height?: number;
 }
 
 export function useWindowSize(): Size {

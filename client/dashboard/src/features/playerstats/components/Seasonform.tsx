@@ -1,11 +1,7 @@
 import { Button } from "@/components/Elements/Button";
 import { Form, InputField, InputFieldProps } from "@/components/Form";
-import { ParsedPlayer } from "@/features/players/types";
-import { useChartDataStore } from "@/store";
 import { arrayRange } from "@/utils";
-import { useEffect } from "react";
 import { z } from "zod";
-import useFetchPlayerStats from "../hook/useFetchPlayerStats";
 
 const dateValidation = (dto: DatePickerDTOValues): boolean => {
   const { start_date, end_date } = dto;
@@ -22,7 +18,6 @@ const isAValidSeason = (date: string, season: string) => {
 }
 
 const errorMsg = "Only dates later than the selected season are admitted."
-
 
 const schema = z
   .object({
@@ -47,7 +42,6 @@ const schema = z
     message: errorMsg,
     path: ['end_date']
   });
-
 
 type DatePickerDTOValues = {
   start_date?: string;
@@ -74,27 +68,21 @@ function SelectorComponent({ registration, label }: SelectorComponentProps) {
   )
 }
 
-export const DateSeasonForm = ({ player }: { player: ParsedPlayer }) => {
-  const setPlayerId = { playerIds: [player.id.toLocaleString()] };
-  const { data, refetch } = useFetchPlayerStats(setPlayerId);
-  const { addChunk } = useChartDataStore();
+type SubmitDTOValues = DatePickerDTOValues & { seasons?: number[] }
 
-  useEffect(() => {
-    data && addChunk(data, player.team.name);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
+export const DateSeasonForm = ({ playerIds, fetch }: { playerIds: string[], fetch: (dto: SubmitDTOValues) => void }) => {
 
   return (
     <div className="flex-col items-center">
       <p className="my-3"> Submit seasons's period</p>
       <Form<DatePickerDTOValues, typeof schema>
         onSubmit={dto => {
-          const parsedDto: DatePickerDTOValues & { seasons?: number[] } = { ...dto }
+          const parsedDto: SubmitDTOValues = { ...dto }
           const season = dto.season;
           if (season) {
             parsedDto.seasons = [parseInt(season)];
           }
-          refetch({ ...setPlayerId, ...parsedDto })
+          fetch({ ...playerIds, ...parsedDto })
         }}
         schema={schema}
       >
