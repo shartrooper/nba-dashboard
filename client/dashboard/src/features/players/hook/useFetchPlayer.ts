@@ -6,7 +6,7 @@ import { GET_PLAYER } from '../api';
 import { GetPlayerPayload, ParsedPlayer } from '../types';
 
 
-const parsedPlayerData = (data: unknown): ParsedPlayer | undefined => {
+export const parsedPlayerData = (data: unknown): ParsedPlayer | undefined => {
 	const response = data as GetPlayerPayload;
 	if (!response?.player) {
 		return;
@@ -19,7 +19,7 @@ const parsedPlayerData = (data: unknown): ParsedPlayer | undefined => {
 	}
 };
 
-const useFetchPlayers = (id: string) => {
+const useFetchPlayers = (id: number) => {
 	const { addNotification } = useNotificationStore();
 	const { data, loading } = useQuery(GET_PLAYER, {
 		variables: { id },

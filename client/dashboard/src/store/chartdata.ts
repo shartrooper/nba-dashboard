@@ -5,7 +5,7 @@ export type ChartData = StatsRecord & { label: string }
 
 type ChartDataStore = {
 	dataset: { stats: ChartData[] } & Partial<Pick<ParsedPlayerStatsResponse, 'meta'>>;
-	addChunk: (chunk: ParsedPlayerStatsResponse, teamPlayerName: string) => void;
+	addChunk: (chunk: Omit<ParsedPlayerStatsResponse, 'player'>, teamPlayerName: string) => void;
 };
 
 export const useChartDataStore = create<ChartDataStore>((set) => ({

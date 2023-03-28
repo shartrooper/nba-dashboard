@@ -1,26 +1,33 @@
+import { parsedPlayerData } from '@/features/players/hook/useFetchPlayer';
+import { GetPlayerPayload, ParsedPlayer } from '@/features/players/types';
 import { useNotificationStore } from '@/store';
 import { handleError } from '@/utils';
 import { getErrorMsg, getInfoMsg } from '@/utils/helpers';
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
-import { GET_PLAYER_STATS } from '../api';
+import { GET_PLAYER_PROFILE_STATS } from '../api';
 import { ParsedPlayerStatsResponse, PlayerStatsPayload } from '../types';
 
 export type RequestParams = {
-	playerIds: string[],
+	id: number,
 	start_date?: string,
 	end_date?: string,
 	seasons?: number[]
 }
 
-const parsedPlayerStatData = (data: unknown): ParsedPlayerStatsResponse | undefined => {
-	const response = data as PlayerStatsPayload;
-	if (!response?.playersStats) {
+export const parsedPlayerStatData = (data: unknown): ParsedPlayerStatsResponse | undefined => {
+	const response = data as PlayerStatsPayload & GetPlayerPayload;
+
+	if (!response) {
 		return;
 	}
-	const metaPayload = response.playersStats.meta ;
+
+	const { player, playersStats } = response;
+	const metaPayload = playersStats.meta;
+
 	return {
-		stats: response.playersStats.records,
+		player: parsedPlayerData({ player }) as ParsedPlayer,
+		stats: playersStats.records,
 		meta: {
 			nextPage: metaPayload.next_page,
 			currentPage: metaPayload.current_page,
@@ -29,11 +36,11 @@ const parsedPlayerStatData = (data: unknown): ParsedPlayerStatsResponse | undefi
 	}
 };
 
-const useFetchPlayerStats = (params: RequestParams) => {
+const useFetchPlayerStats = (params: RequestParams, cb: (data?: ParsedPlayerStatsResponse) => void) => {
 	const { addNotification } = useNotificationStore();
 	const [state, toggle] = useState(false);
-	const { data, loading, fetchMore, refetch } = useQuery(GET_PLAYER_STATS, {
-		variables: { ...params },
+	const { data, loading, fetchMore, refetch } = useQuery(GET_PLAYER_PROFILE_STATS, {
+		variables: { ...params, playerIds: [params.id] },
 		onError: (error) => {
 			const errorResponses = handleError(error);
 			if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
@@ -44,8 +51,9 @@ const useFetchPlayerStats = (params: RequestParams) => {
 				addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
 			});
 		},
-		onCompleted: () => {
+		onCompleted: data => {
 			toggle(false);
+			cb(parsedPlayerStatData(data));
 		}
 	});
 	return { data: parsedPlayerStatData(data), fetchMore, refetch, loading, loadingMore: { state, toggle } };
