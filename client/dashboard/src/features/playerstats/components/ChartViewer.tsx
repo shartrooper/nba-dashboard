@@ -1,6 +1,6 @@
 import {
-	AreaChart,
-	Area,
+	LineChart,
+	Line,
 	XAxis,
 	YAxis,
 	CartesianGrid,
@@ -74,19 +74,19 @@ const CursorNav = ({ arrow, nextIndex, handleClick }: { arrow: 'left' | 'right',
 	return <div className={`${!nextIndex && "invisible"}`} onClick={() => handleClick(step[arrow])}>{icon[arrow]}</div>
 }
 
-const PlayerAreaChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof typeof dataKeys, dataset: ChartData[], graphWidth: number }) => {
+const PlayerLineChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof typeof dataKeys, dataset: ChartData[], graphWidth: number }) => {
 	return <div className='bg-zinc-50 overflow-auto'>
-		<AreaChart width={graphWidth} height={320} data={dataset}
+		<LineChart width={graphWidth} height={320} data={dataset}
 			margin={{ top: 5, right: 30, bottom: 5 }}>
 			<CartesianGrid strokeDasharray="4 3" />
 			<XAxis dataKey="label" />
 			<YAxis />
 			<Tooltip labelClassName='text-midnight' />
 			<Legend align='left' />
-			{dataKeys[valueKey].map((dataKey, index) => {
-				return <Area key={`line-${index}`} stackId="1" type="monotone" dataKey={dataKey} stroke={scheme[index]} fill={scheme[index]} />
+			{dataKeys[valueKey].map((key, index) => {
+				return <Line key={`line-${index}`} type="monotone" dataKey={key} stroke={scheme[index]} />
 			})}
-		</AreaChart>
+		</LineChart>
 	</div>
 }
 
@@ -118,7 +118,7 @@ const ChartViewer = () => {
 			{Object.keys(dataKeys).map((value: string, index) =>
 				<div key={index} >
 					<p>{value.charAt(0).toLocaleUpperCase() + value.slice(1)}</p>
-					<PlayerAreaChart dataset={sizedSample} graphWidth={(width * (0.7 + width / 10000))} valueKey={value as keyof typeof dataKeys} />
+					<PlayerLineChart dataset={sizedSample} graphWidth={(width * (0.7 + width / 10000))} valueKey={value as keyof typeof dataKeys} />
 				</div>
 			)}
 		</div>

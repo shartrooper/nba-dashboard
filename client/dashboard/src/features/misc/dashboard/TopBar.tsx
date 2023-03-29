@@ -61,7 +61,11 @@ export const TopBarContainer = ({
           leave-from-class="opacity-100 scale-100"
           leave-to-class="opacity-0 scale-90"
         >
-          <Menu.Items className="overflow-hidden absolute right-0 mt-2 w-48 rounded-md border border-chalkboard shadow-lg origin-top-right focus:outline-none">
+          <Menu.Items className="overflow-hidden absolute 
+            right-0 bg-midnight
+            mt-2 w-48 rounded-md border 
+            border-chalkboard shadow-lg 
+            origin-top-right focus:outline-none">
             {children}
             <Menu.Item>
               {({ active }) => (

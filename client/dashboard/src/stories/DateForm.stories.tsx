@@ -47,7 +47,6 @@ const schema = z
     path: ['end_date']
   });
 
-
 type DatePickerDTOValues = {
   start_date: string;
   season: string;
@@ -57,7 +56,6 @@ type DatePickerDTOValues = {
 type SelectorComponentProps = Pick<InputFieldProps, 'registration'> & { label: string }
 
 const seasons = arrayRange(1979, new Date().getFullYear() - 1, 1).reverse();
-
 
 function SelectorComponent({ registration, label }: SelectorComponentProps) {
   return (
@@ -73,7 +71,6 @@ function SelectorComponent({ registration, label }: SelectorComponentProps) {
     </div>
   )
 }
-
 
 const MockDateForm = () => {
   return (

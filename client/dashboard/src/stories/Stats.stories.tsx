@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/react';
 import sample from '@/assets/stats-sample.json';
 import {
-	AreaChart,
-	Area,
 	XAxis,
 	YAxis,
 	CartesianGrid,
 	Tooltip,
-	Legend
+	Legend,
+	Line,
+	LineChart
 } from "recharts";
 import { useMemo, useState } from 'react';
 import { useWindowSize } from '@/utils';
@@ -87,7 +87,7 @@ const CursorNav = ({ arrow, nextIndex, handleClick }: { arrow: 'left' | 'right',
 
 const PlayerAreaChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof typeof dataKeys, dataset: { [key: string]: string | number }[], graphWidth: number }) => {
 	return <div className='bg-zinc-50 overflow-auto'>
-		<AreaChart width={graphWidth} height={320} data={dataset}
+		<LineChart width={graphWidth} height={320} data={dataset}
 			margin={{ top: 5, right: 30, bottom: 5 }}>
 			<CartesianGrid strokeDasharray="4 3" />
 			<XAxis dataKey="label" />
@@ -95,9 +95,9 @@ const PlayerAreaChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof ty
 			<Tooltip labelClassName='text-midnight' />
 			<Legend align='left' />
 			{dataKeys[valueKey].map((dataKey, index) => {
-				return <Area key={`line-${index}`} stackId="1" type="monotone" dataKey={dataKey} stroke={scheme[index]} fill={scheme[index]} />
+				return <Line key={`line-${index}`} type="monotone" dataKey={dataKey} stroke={scheme[index]} />
 			})}
-		</AreaChart>
+		</LineChart>
 	</div>
 }
 
