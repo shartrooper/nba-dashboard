@@ -1,4 +1,4 @@
-import { Menu } from '@headlessui/react';
+import { Menu } from "@headlessui/react";
 
 export const MockNavItem = ({ name }: { name: string }) => {
   return (
@@ -51,3 +51,7 @@ export const MockTopBarItemsComponent = () => (
     ))}
   </>
 );
+
+export const PlaceholderMain = (props: { className?: string }) => <div className={`bg-basketball text-center overflow-auto ${props.className}`}>
+  {'PLACEHOLDER '.repeat(100).split(' ').map(str => <div>{str}</div>)}
+</div>

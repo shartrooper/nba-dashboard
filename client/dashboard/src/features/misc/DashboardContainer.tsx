@@ -68,7 +68,7 @@ export const Dashboard = () => {
           <NavigationItems renderNavItem={renderSideBarNavItem} links={sideBarRoutes} />
         </SideBarContent>
       </SideBarContainer>
-      <div className="flex-col flex-auto py-3 px-3 md:px-6 space-x-3 md:space-x-6">
+      <div className="relative flex-col flex-auto min-h-screen py-3 px-3 md:px-6 space-x-3 md:space-x-6 md:ml-48">
         <TopBarContainer handleClick={() => toggle(true)} userName={username}>
           <NavigationItems renderNavItem={renderMenuItem} links={menuRoutes} />
         </TopBarContainer>

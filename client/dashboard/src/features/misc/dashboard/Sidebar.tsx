@@ -67,7 +67,7 @@ export const SideBarContainer = ({
           </Dialog.Panel>
         </Dialog>
       </Transition>
-      <div className="hidden md:flex flex-col w-48 h-screen border-r border-chalkboard">
+      <div className="fixed hidden md:flex flex-col w-48 h-screen border-r border-chalkboard">
         {children}
       </div>
     </>

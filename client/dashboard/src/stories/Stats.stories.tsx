@@ -7,9 +7,10 @@ import {
 	Tooltip,
 	Legend,
 	Line,
-	LineChart
+	LineChart,
+	ResponsiveContainer
 } from "recharts";
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useWindowSize } from '@/utils';
 
 const meta: Meta = {
@@ -87,17 +88,19 @@ const CursorNav = ({ arrow, nextIndex, handleClick }: { arrow: 'left' | 'right',
 
 const PlayerAreaChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof typeof dataKeys, dataset: { [key: string]: string | number }[], graphWidth: number }) => {
 	return <div className='bg-zinc-50 overflow-auto'>
-		<LineChart width={graphWidth} height={320} data={dataset}
-			margin={{ top: 5, right: 30, bottom: 5 }}>
-			<CartesianGrid strokeDasharray="4 3" />
-			<XAxis dataKey="label" />
-			<YAxis />
-			<Tooltip labelClassName='text-midnight' />
-			<Legend align='left' />
-			{dataKeys[valueKey].map((dataKey, index) => {
-				return <Line key={`line-${index}`} type="monotone" dataKey={dataKey} stroke={scheme[index]} />
-			})}
-		</LineChart>
+		<ResponsiveContainer height={300} width={graphWidth}>
+			<LineChart data={dataset}
+				margin={{ top: 5, right: 30, bottom: 5 }}>
+				<CartesianGrid strokeDasharray="4 3" />
+				<XAxis dataKey="label" />
+				<YAxis />
+				<Tooltip labelClassName='text-midnight' />
+				<Legend align='left' />
+				{dataKeys[valueKey].map((dataKey, index) => {
+					return <Line key={`line-${index}`} type="monotone" dataKey={dataKey} stroke={scheme[index]} />
+				})}
+			</LineChart>
+		</ResponsiveContainer>
 	</div>
 }
 
@@ -135,7 +138,7 @@ const Template: Story = () => {
 			{Object.keys(dataKeys).map((value: string, index) =>
 				<div key={index} >
 					<p>{value.charAt(0).toLocaleUpperCase() + value.slice(1)}</p>
-					<PlayerAreaChart dataset={selectedSample} graphWidth={(width * (0.7 + width / 10000))} valueKey={value as keyof typeof dataKeys} />
+					<PlayerAreaChart dataset={selectedSample} graphWidth={width} valueKey={value as keyof typeof dataKeys} />
 				</div>
 			)}
 		</div>

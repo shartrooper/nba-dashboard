@@ -5,10 +5,10 @@ import {
 	YAxis,
 	CartesianGrid,
 	Tooltip,
-	Legend
+	Legend,
+	ResponsiveContainer
 } from "recharts";
 import { useState } from 'react';
-import { useWindowSize } from '@/utils';
 import { ChartData, useChartDataStore } from "@/store";
 
 const scheme = [
@@ -75,9 +75,11 @@ const CursorNav = ({ arrow, nextIndex, handleClick }: { arrow: 'left' | 'right',
 }
 
 const PlayerLineChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof typeof dataKeys, dataset: ChartData[], graphWidth: number }) => {
-	return <div className='bg-zinc-50 overflow-auto'>
-		<LineChart width={graphWidth} height={320} data={dataset}
-			margin={{ top: 5, right: 30, bottom: 5 }}>
+	return <ResponsiveContainer
+		height={400}
+		width={`${graphWidth}%`} >
+		<LineChart data={dataset}
+			margin={{ top: 5, right: 10, bottom: 5, left: 5 }}>
 			<CartesianGrid strokeDasharray="4 3" />
 			<XAxis dataKey="label" />
 			<YAxis />
@@ -87,13 +89,12 @@ const PlayerLineChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof ty
 				return <Line key={`line-${index}`} type="monotone" dataKey={key} stroke={scheme[index]} />
 			})}
 		</LineChart>
-	</div>
+	</ResponsiveContainer>
 }
 
 const ChartViewer = () => {
 	const { dataset } = useChartDataStore();
 	const { stats } = dataset;
-	const { width } = useWindowSize();
 	const maxItems = 10;
 	const [navigateChart, setNavigateChart] = useState({ prev: 0, section: 0, next: maxItems });
 	const sizedSample = stats.slice(navigateChart.prev, navigateChart.next);
@@ -106,9 +107,6 @@ const ChartViewer = () => {
 		});
 	}
 
-	if (!width) {
-		return <></>;
-	}
 	return (
 		<div className='m-4 flex flex-col'>
 			<div className='flex justify-between'>
@@ -116,9 +114,9 @@ const ChartViewer = () => {
 				<CursorNav arrow='right' nextIndex={!!stats[navigateChart.next]} handleClick={updateChart} />
 			</div>
 			{Object.keys(dataKeys).map((value: string, index) =>
-				<div key={index} >
+				<div key={index}>
 					<p>{value.charAt(0).toLocaleUpperCase() + value.slice(1)}</p>
-					<PlayerLineChart dataset={sizedSample} graphWidth={(width * (0.7 + width / 10000))} valueKey={value as keyof typeof dataKeys} />
+					<PlayerLineChart dataset={sizedSample} graphWidth={95} valueKey={value as keyof typeof dataKeys} />
 				</div>
 			)}
 		</div>

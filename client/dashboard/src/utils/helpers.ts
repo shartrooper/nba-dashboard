@@ -33,7 +33,6 @@ export const useRedirectionToRoot = () => {
   return clearSession;
 }
 
-
 interface Size {
   width?: number;
   height?: number;
@@ -44,8 +43,8 @@ export function useWindowSize(): Size {
   useEffect(() => {
     function handleResize() {
       setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: window.outerWidth,
+        height: window.outerHeight,
       });
     }
     window.addEventListener("resize", handleResize);

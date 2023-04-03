@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 import { SideBarContainer, SidebarProps, SideBarContent } from '@/features/misc/dashboard';
 import React from 'react';
-import { MockNavItem } from './components';
+import { MockNavItem, PlaceholderMain } from './components';
 
 const meta: Meta = {
   title: 'dashboard sidebar',
@@ -12,9 +12,11 @@ export default meta;
 
 const mockNavItems = ['Mock Item 1', 'Mock Item 2', 'Mock Item 3'];
 
+
+
 const Template: Story<SidebarProps> = (props) => {
   return (
-    <div className="flex h-full">
+    <div className="flex">
       <SideBarContainer {...props}>
         <SideBarContent>
           {mockNavItems.map((navItem, index) => (
@@ -22,7 +24,7 @@ const Template: Story<SidebarProps> = (props) => {
           ))}
         </SideBarContent>
       </SideBarContainer>
-      <div className="flex-1"></div>
+      <PlaceholderMain className='md:ml-48 max-h-screen flex-1'/>
     </div>
   );
 };
@@ -46,7 +48,7 @@ export const CloseableSidebar: Story<SidebarProps> = () => {
           ))}
         </SideBarContent>
       </SideBarContainer>
-      <div className="flex-1"></div>
+      <PlaceholderMain className='md:ml-48 max-h-screen flex-1' />
     </div>
   );
 };

@@ -7,7 +7,7 @@ type ContentLayoutProps = {
 export const ContentLayout = ({ children }: ContentLayoutProps) => {
   return (
     <div className="text-chalkboard sm:h-screen">
-      <div className="mx-auto px-4 sm:px-6 md:px-8 sm:h-full overflow-auto">{children}</div>
+      {children}
     </div>
   );
 };
