@@ -3,7 +3,7 @@ import { ParsedPlayer } from '../players/types';
 
 export const getPlayerStats = "playersStats";
 
-export const playerStatsQueryParams = ['$player_ids: [Int!]', '$start_date: String', '$end_date: String', '$seasons: [Int!]'];
+export const playerStatsQueryParams = ['$player_ids: [Int!]', '$start_date: String', '$end_date: String', '$seasons: [Int!]', '$page: Int'];
 
 const StatsQueryBody = `{ 
   ast

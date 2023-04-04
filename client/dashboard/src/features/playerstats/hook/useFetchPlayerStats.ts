@@ -12,7 +12,8 @@ export type RequestParams = {
 	id: number,
 	start_date?: string,
 	end_date?: string,
-	seasons?: number[]
+	seasons?: number[],
+	page?: number
 }
 
 export const parsedPlayerStatData = (data: unknown): ParsedPlayerStatsResponse | undefined => {

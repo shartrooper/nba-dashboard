@@ -68,9 +68,11 @@ function SelectorComponent({ registration, label }: SelectorComponentProps) {
   )
 }
 
-type SubmitDTOValues = DatePickerDTOValues & { seasons?: number[] }
+type SubmitDTOValues = DatePickerDTOValues & { seasons?: number[] };
 
-export const DateSeasonForm = ({ playerId, fetch }: { playerId: number, fetch: (dto: SubmitDTOValues & { id: number, playerIds: number[] }) => void }) => {
+export type FetchDTOValues = SubmitDTOValues & { id: number, playerIds: number[] };
+
+export const DateSeasonForm = ({ playerId, fetch }: { playerId: number, fetch: (dto: FetchDTOValues ) => void }) => {
 
   return (
     <div className="flex-col items-center">
@@ -82,7 +84,7 @@ export const DateSeasonForm = ({ playerId, fetch }: { playerId: number, fetch: (
           if (season) {
             parsedDto.seasons = [parseInt(season)];
           }
-          fetch({ ...parsedDto, id: playerId, playerIds: [playerId] })
+          fetch({ ...parsedDto, id: playerId, playerIds: [playerId] });
         }}
         schema={schema}
       >

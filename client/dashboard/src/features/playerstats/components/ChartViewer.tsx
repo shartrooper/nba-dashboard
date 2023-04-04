@@ -92,7 +92,7 @@ const PlayerLineChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof ty
 	</ResponsiveContainer>
 }
 
-const ChartViewer = () => {
+const ChartViewer = ({ loadMoreCallback }: { loadMoreCallback?: () => void }) => {
 	const { dataset } = useChartDataStore();
 	const { stats } = dataset;
 	const maxItems = 10;
@@ -112,6 +112,7 @@ const ChartViewer = () => {
 			<div className='flex justify-between'>
 				<CursorNav arrow='left' nextIndex={!!navigateChart.prev} handleClick={updateChart} />
 				<CursorNav arrow='right' nextIndex={!!stats[navigateChart.next]} handleClick={updateChart} />
+				{!stats[navigateChart.next] && <button onClick={loadMoreCallback}>More...</button>}
 			</div>
 			{Object.keys(dataKeys).map((value: string, index) =>
 				<div key={index}>
