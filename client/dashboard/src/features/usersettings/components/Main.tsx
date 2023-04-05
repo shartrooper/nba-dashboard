@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { Button } from "@/components/Elements/Button";
 import { Form, InputField } from "@/components/Form";
-import { ModalWrapper } from "@/components/Modal";
+import { ChildrenProps, ModalWrapper } from "@/components/Modal";
 import { useState } from "react";
 import useEditUser from '../hooks/useEditUser';
 import { SettingMutations } from '../types';
@@ -32,7 +32,7 @@ const SettingsContainer = () => {
   const { mutationFn: updatePassword, loading } = useEditUser(SettingMutations.ChangePassword);
   const id = useFetchUserInfo('id');
 
-  const ModalContent = ({ onClose }: { onClose: () => void }) => {
+  const ModalContent = ({ onClose, childElemRef }: ChildrenProps) => {
     const { mutationFn: deleteUser } = useEditUser(SettingMutations.DeleteUser);
 
     function handleDeleteUser() {
@@ -41,7 +41,7 @@ const SettingsContainer = () => {
     }
 
     return (<div className='flex justify-evenly mt-6'>
-      <Button onClick={handleDeleteUser} variant='danger'>Yes</Button>
+      <Button ref={childElemRef} onClick={handleDeleteUser} variant='danger'>Yes</Button>
       <Button onClick={onClose} variant='primary'>No</Button>
     </div>)
   }

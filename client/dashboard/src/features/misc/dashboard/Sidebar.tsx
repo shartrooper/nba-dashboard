@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, ReactNode, PropsWithChildren } from 'react';
+import React, { Dispatch, SetStateAction, ReactNode, PropsWithChildren, useRef } from 'react';
 import Hero from '@/assets/hero.png';
 import { Dialog, Transition } from '@headlessui/react';
 
@@ -23,6 +23,8 @@ export const SideBarContainer = ({
   toggleSidebar,
   children,
 }: PropsWithChildren<SidebarProps>) => {
+  // initial focusable element
+  const closeButtonRef =useRef(null);
   function closeModal() {
     toggleSidebar(false);
   }
@@ -39,6 +41,7 @@ export const SideBarContainer = ({
         show={sidebarOpened}
       >
         <Dialog
+          initialFocus={closeButtonRef}
           as="div"
           onClose={closeModal}
           className="fixed text-chalkboard inset-0 z-40 md:hidden w-full"
@@ -48,6 +51,7 @@ export const SideBarContainer = ({
           {/*The actual sidebar*/}
           <Dialog.Panel className="flex bg-midnight relative flex-col w-36 h-screen border-r border-chalkboard md:hidden">
             <button
+              ref={closeButtonRef}
               className="hover:ring-2 hover:ring-gray-300 flex absolute top-2 right-2 justify-center items-center w-6 h-6 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-600"
               type="button"
               onClick={closeModal}

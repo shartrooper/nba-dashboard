@@ -1,24 +1,32 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Dispatch, Fragment, SetStateAction } from 'react'
+import { Dispatch, Fragment, MutableRefObject, SetStateAction, useRef } from 'react'
 
 
-export type SidebarProps = {
+export type ChildrenProps = {
+  onClose: () => void,
+  childElemRef?: MutableRefObject<null>
+}
+
+
+export type ModalWrapperProps = {
   isOpen: boolean;
   toggle: Dispatch<SetStateAction<boolean>>;
   header: string;
-  Body: React.FunctionComponent<{ onClose: () => void }>;
+  Body: React.FunctionComponent<ChildrenProps>;
 };
 
-export function ModalWrapper({ isOpen, header, toggle, Body }: SidebarProps) {
+export function ModalWrapper({ isOpen, header, toggle, Body }: ModalWrapperProps) {
   function closeModal() {
     toggle(false)
   }
-  const ModalBodyComponent = () => <Body onClose={closeModal} />
+  //Parent's body component as initial Focusable element.
+  const childRef = useRef(null);
+  const ModalBodyComponent = () => <Body childElemRef={childRef} onClose={closeModal} />
 
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog initialFocus={childRef} as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
