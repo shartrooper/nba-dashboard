@@ -2,7 +2,17 @@ import { useSessionTokenStore } from '@/store';
 import { Notification } from '@/store/notifications'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-const buildMsgObject = (title: string, message: string, type: Notification['type']) => ({
+import { handleError } from './errorhandler';
+import { ApolloError } from '@apollo/client';
+
+type MessageObject = {
+  title: string,
+  message: string,
+  type: Notification['type']
+}
+
+
+const buildMsgObject = (title: string, message: string, type: Notification['type']): MessageObject => ({
   type,
   title,
   message,
@@ -13,13 +23,11 @@ export const getSuccessMsg = (title: string, message: string) => buildMsgObject(
 export const getInfoMsg = (title: string, message: string) => buildMsgObject(title, message, 'info');
 export const getWarningMsg = (title: string, message: string) => buildMsgObject(title, message, 'warning');
 
-
 export const arrayRange = (start: number, stop: number, step: number) =>
   Array.from(
     { length: (stop - start) / step + 1 },
     (_value, index) => start + index * step
   );
-
 
 export const useRedirectionToRoot = () => {
   const { removeToken } = useSessionTokenStore();
@@ -52,4 +60,15 @@ export function useWindowSize(): Size {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return windowSize;
+}
+
+export const handleErrorService = (dispatch: (obj: MessageObject) => void) => (error: ApolloError) => {
+  const errorResponses = handleError(error);
+  if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
+    dispatch(getInfoMsg('Expired Token', 'Please login again.'));
+    return;
+  }
+  errorResponses.forEach((item) => {
+    dispatch(getErrorMsg(`Error status ${item.statusCode}`, item.message));
+  });
 }

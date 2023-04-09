@@ -1,9 +1,8 @@
 import { useNotificationStore } from '@/store';
-import { handleError } from '@/utils';
-import { getErrorMsg, getInfoMsg } from '@/utils/helpers';
 import { useQuery } from '@apollo/client';
 import { GET_PLAYER } from '../api';
 import { GetPlayerPayload, ParsedPlayer } from '../types';
+import { handleErrorService } from '@/utils';
 
 
 export const parsedPlayerData = (data: unknown): ParsedPlayer | undefined => {
@@ -21,18 +20,10 @@ export const parsedPlayerData = (data: unknown): ParsedPlayer | undefined => {
 
 const useFetchPlayers = (id: number) => {
 	const { addNotification } = useNotificationStore();
+	const onError = handleErrorService(addNotification);
 	const { data, loading } = useQuery(GET_PLAYER, {
 		variables: { id },
-		onError: (error) => {
-			const errorResponses = handleError(error);
-			if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
-				addNotification(getInfoMsg('Expired Token', 'Please login again.'));
-				return;
-			}
-			errorResponses.forEach((item) => {
-				addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
-			});
-		},
+		onError
 	});
 	return { data: parsedPlayerData(data), loading };
 };

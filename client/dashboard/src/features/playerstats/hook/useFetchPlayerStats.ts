@@ -1,8 +1,7 @@
 import { parsedPlayerData } from '@/features/players/hook/useFetchPlayer';
 import { GetPlayerPayload, ParsedPlayer } from '@/features/players/types';
 import { useNotificationStore } from '@/store';
-import { handleError } from '@/utils';
-import { getErrorMsg, getInfoMsg } from '@/utils/helpers';
+import { handleErrorService } from '@/utils/helpers';
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { GET_PLAYER_PROFILE_STATS } from '../api';
@@ -39,19 +38,11 @@ export const parsedPlayerStatData = (data: unknown): ParsedPlayerStatsResponse |
 
 const useFetchPlayerStats = (params: RequestParams, cb: (data?: ParsedPlayerStatsResponse) => void) => {
 	const { addNotification } = useNotificationStore();
+	const onError = handleErrorService(addNotification);
 	const [state, toggle] = useState(false);
 	const { data, loading, fetchMore, refetch } = useQuery(GET_PLAYER_PROFILE_STATS, {
 		variables: { ...params, playerIds: [params.id] },
-		onError: (error) => {
-			const errorResponses = handleError(error);
-			if (errorResponses.length === 1 && errorResponses[0].statusCode === 401) {
-				addNotification(getInfoMsg('Expired Token', 'Please login again.'));
-				return;
-			}
-			errorResponses.forEach((item) => {
-				addNotification(getErrorMsg(`Error status ${item.statusCode}`, item.message));
-			});
-		},
+		onError,
 		onCompleted: data => {
 			toggle(false);
 			cb(parsedPlayerStatData(data));
