@@ -5,11 +5,20 @@ export type Metadata = {
 	per_page: number;
 }
 
+export type Team = {
+	id: number,
+	abbreviation: string
+	city: string,
+	conference: string,
+	division: string,
+	full_name: string,
+	name: string
+}
 
-export type Game = {
+export type Game<T> = {
 	id: number;
 	date: string;
-	// home_team: Team;
+	home_team: T;
 	home_team_score: number;
 	period: number;
 	postseason: boolean;
@@ -17,13 +26,15 @@ export type Game = {
 	status: string;
 	//NOTE: Is an empty string when game has not started or is complete.
 	time: string;
-	// visitor_team: Team;
+	visitor_team: T;
 	visitor_team_score: number;
 }
 
+type Included = 'id' | 'date' | 'season' | 'visitor_team_score' | 'home_team_score'
+
 type GameStats = Pick<
-	Game,
-	'id' | 'date' | 'season' | 'visitor_team_score' | 'home_team_score'
+	Game<Team>,
+	Included
 > & {
 	home_team_id: string;
 	visitor_team_id: string;

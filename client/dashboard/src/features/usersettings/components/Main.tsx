@@ -3,9 +3,9 @@ import { Button } from "@/components/Elements/Button";
 import { Form, InputField } from "@/components/Form";
 import { ChildrenProps, ModalWrapper } from "@/components/Modal";
 import { useState } from "react";
-import useEditUser from '../hooks/useEditUser';
+import useEditUser from '../hook/useEditUser';
 import { SettingMutations } from '../types';
-import useFetchUserInfo from '@/features/misc/hooks/useFetchUser';
+import useFetchUserInfo from '@/features/misc/hook/useFetchUser';
 
 
 const schema = z

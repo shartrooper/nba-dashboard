@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { Form, InputField } from '@/components/Form';
 import { Button } from '@/components/Elements/Button';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hook/useAuth';
 
 const schema = z.object({
   username: z.string().min(4, 'Required username equal or longer than 4 characters'),

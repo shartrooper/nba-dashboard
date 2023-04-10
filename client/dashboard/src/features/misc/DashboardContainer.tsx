@@ -8,7 +8,7 @@ import {
 import { Menu } from '@headlessui/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useFetchUserInfo from './hooks/useFetchUser';
+import useFetchUserInfo from './hook/useFetchUser';
 import { DashboardRoutes } from './routes';
 
 const menuRoutes: Links = [{ name: 'Account Settings', route: '../settings' }];
