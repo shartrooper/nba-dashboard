@@ -5,5 +5,5 @@ import { getGames, polledGamesQueryBody, gamesQueryParams } from '../types';
 const games = gqlQueryBuilder(getGames, polledGamesQueryBody, gamesQueryParams);
 
 export const POLL_GAMES = gql`
-	${queryArranger([games], gamesQueryParams)};
-`
+	${queryArranger([games], gamesQueryParams)}
+`;

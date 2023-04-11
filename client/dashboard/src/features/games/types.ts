@@ -21,10 +21,19 @@ export const polledGamesQueryBody = [
 	`records ${polledGameQueryBody}`,
 ];
 
-export type PollGameRecord = Game<Pick<Team, 'name'>>;
+type TeamName = Pick<Team, 'name'>;
+
+export type PollGameRecord = Game<TeamName>;
 
 export type GetPollGamesPayload = {
 	games: Omit<ResponsePayload<PollGameRecord, unknown>, 'meta'>
 };
 
-export const gamesQueryParams = ['$start_date: String', '$end_date: String', '$seasons: [Int!]', '$team_id: [Int!]', 'postseason: Boolean'];
+export const gamesQueryParams = ['$start_date: String', '$end_date: String', '$seasons: [Int!]', '$team_ids: [Int!]', '$postseason: Boolean'];
+
+export type ParsedGame = Pick<Game<TeamName>, 'id' | 'period' | 'time'| 'status'| 'season'> & {
+	homeTeam: TeamName,
+	visitorTeam: TeamName,
+	homeTeamScore: number,
+	visitorTeamScore: number,
+}

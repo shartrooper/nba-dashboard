@@ -12,7 +12,7 @@ import useFetchUserInfo from './hook/useFetchUser';
 import { DashboardRoutes } from './routes';
 
 const menuRoutes: Links = [{ name: 'Account Settings', route: '../settings' }];
-const sideBarRoutes: Links = [{ name: 'dashboard', route: '../' }];
+const sideBarRoutes: Links = [{ name: 'Dashboard', route: '../' }, { name: 'Players', route: '../players' }];
 
 const renderMenuItem = (key: string, route: string, name: string) => {
   return (
