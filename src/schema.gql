@@ -62,7 +62,7 @@ type Game {
   postseason: Boolean!
   season: Int!
   status: String!
-  time: String!
+  time: String
   visitor_team: Team
   visitor_team_score: Int!
 }

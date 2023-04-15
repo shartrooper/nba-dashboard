@@ -10,7 +10,7 @@ import {
 	LineChart,
 	ResponsiveContainer
 } from "recharts";
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useWindowSize } from '@/utils';
 
 const meta: Meta = {
