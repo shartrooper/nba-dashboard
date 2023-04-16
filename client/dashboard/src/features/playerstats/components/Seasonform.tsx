@@ -28,11 +28,6 @@ const schema = z
     message: "End date shouldnt be earlier than starting date",
     path: ['end_date'],
   })
-  .refine(dto => !dto.start_date || new Date(dto.start_date).getFullYear() === parseInt(dto.season),
-    {
-      message: 'Pick a starting date within the selected season year',
-      path: ['start_date']
-    })
   .refine(
     dto => !dto.start_date || isAValidSeason(dto.start_date, dto.season), {
     message: errorMsg,
@@ -51,7 +46,7 @@ type DatePickerDTOValues = {
 
 type SelectorComponentProps = Pick<InputFieldProps, 'registration'> & { label: string }
 
-const seasons = arrayRange(1979, new Date().getFullYear() - 1, 1).reverse();
+const seasons = arrayRange(1979, new Date().getFullYear(), 1).reverse();
 
 function SelectorComponent({ registration, label }: SelectorComponentProps) {
   return (
