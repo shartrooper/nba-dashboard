@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { handleError } from './errorhandler';
 import { ApolloError } from '@apollo/client';
+import dayjs, { Dayjs } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
 type MessageObject = {
   title: string,
@@ -71,4 +75,13 @@ export const handleErrorService = (dispatch: (obj: MessageObject) => void) => (e
   errorResponses.forEach((item) => {
     dispatch(getErrorMsg(`Error status ${item.statusCode}`, item.message));
   });
+}
+
+export const getWeekInterval = (date: Dayjs | string) => {
+  dayjs.extend(customParseFormat);
+  const day = dayjs(date).day();
+  return [
+    dayjs(date).subtract(day, 'day').format(DEFAULT_DATE_FORMAT),
+    dayjs(date).add(6 - day, 'day').format(DEFAULT_DATE_FORMAT)
+  ];
 }

@@ -10,9 +10,11 @@ export const queryFields = [
 	'period',
 	'home_team_score',
 	'visitor_team_score',
+	'date',
 	'time',
 	'status',
-	'season'
+	'season',
+	'postseason'
 ];
 
 const polledGameQueryBody = `{${queryFields.join(' ')}}`;
@@ -31,7 +33,7 @@ export type GetPollGamesPayload = {
 
 export const gamesQueryParams = ['$start_date: String', '$end_date: String', '$seasons: [Int!]', '$team_ids: [Int!]', '$postseason: Boolean'];
 
-export type ParsedGame = Pick<Game<TeamName>, 'id' | 'period' | 'time'| 'status'| 'season'> & {
+export type ParsedGame = Omit<Game<TeamName>, 'home_team' | 'visitor_team' | 'home_team_score' | 'visitor_team_score'> & {
 	homeTeam: TeamName,
 	visitorTeam: TeamName,
 	homeTeamScore: number,

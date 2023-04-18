@@ -44,6 +44,6 @@ const parsePollGamesResponse = (data: unknown): ParsedGame[] | undefined => {
 }
 
 export const usePollGames = (params: RequestParams) => {
-	const { data, loading } = useFetchGames(params, POLL_GAMES, { pollInterval: 8000 })
+	const { data, loading } = useFetchGames(params, POLL_GAMES, { pollInterval: 630000 })
 	return { data: parsePollGamesResponse(data), loading };
 }
