@@ -44,10 +44,10 @@ export const GamesBoardContainer = ({ games, currentSeason }: { games: ParsedGam
 	return (
 		<div className="w-full max-w-md px-2 py-16 sm:px-0 text-center">
 			<p>This week Season's {currentSeason} games</p>
-			<div className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-chalkboard">
-				<p>*Time expressed in UTC standard</p>
-				<p>*Data is updated every 10 minutes</p>
-			</div>
+			<ul className="mt-1 space-x-1 text-xs font-normal leading-4 text-chalkboard">
+				<li>* Time expressed in UTC standard</li>
+				<li>* Data is updated every 10 minutes</li>
+			</ul>
 			<Tab.Group>
 				<Tab.List className="flex space-x-1 rounded-xl bg-basketball p-1">
 					{Object.keys(categories).map((category) => (
@@ -72,7 +72,7 @@ export const GamesBoardContainer = ({ games, currentSeason }: { games: ParsedGam
 						<Tab.Panel
 							key={idx}
 							className={clsx(
-								'rounded-xl bg-white p-3',
+								'rounded-xl bg-white p-3 max-h-board overflow-auto',
 								'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
 							)}
 						>

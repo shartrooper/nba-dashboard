@@ -19,6 +19,9 @@ module.exports = {
         'chalkboard': '#fff3f5',
         'gravel': '#b8b8b8'
       },
+      maxHeight: {
+        'board': '32rem',
+      }
     },
   },
   plugins: [],

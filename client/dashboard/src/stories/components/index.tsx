@@ -1,4 +1,5 @@
 import { Menu } from "@headlessui/react";
+import { ReactNode } from "react";
 
 export const MockNavItem = ({ name }: { name: string }) => {
   return (
@@ -52,6 +53,16 @@ export const MockTopBarItemsComponent = () => (
   </>
 );
 
-export const PlaceholderMain = (props: { className?: string }) => <div className={`bg-basketball text-center overflow-auto ${props.className}`}>
-  {'PLACEHOLDER '.repeat(100).split(' ').map(str => <div>{str}</div>)}
+export const PlaceholderMain = ({ className, repeat = 100 }: { className?: string, repeat?: number }) => <div className={`bg-basketball text-center overflow-auto ${className}`}>
+  {'PLACEHOLDER '.repeat(repeat).split(' ').map(str => <div>{str}</div>)}
 </div>
+
+export const DashboardPlaceholder = ({ children }: { children: ReactNode }) => {
+  return <div className="relative flex">
+    <PlaceholderMain className='hidden md:block fixed w-48' />
+    <div className='md:ml-48 flex-auto'>
+      <PlaceholderMain className="flex" repeat={1} />
+      {children}
+    </div>
+  </div>
+}

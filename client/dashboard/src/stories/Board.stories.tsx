@@ -7,6 +7,7 @@ import { teamsLogosImageRoutes } from '@/utils';
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
 import utc from 'dayjs/plugin/utc';
+import { DashboardPlaceholder } from './components';
 const meta: Meta = {
 	title: 'Items Board',
 	parameters: {
@@ -16,7 +17,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story = () => {
+const GamesBoard = () => {
 	const games = regularSample;
 	dayjs.extend(calendar);
 	dayjs.extend(utc);
@@ -50,7 +51,7 @@ const Template: Story = () => {
 	});
 
 	return (
-		<div className="w-full max-w-md px-2 py-16 sm:px-0 text-center">
+		<div className="w-full max-w-md px-2 py-16 sm:px-0 text-center ml-4">
 			<p>Season {season} games</p>
 			<Tab.Group>
 				<Tab.List className="flex space-x-1 rounded-xl bg-basketball p-1">
@@ -76,7 +77,7 @@ const Template: Story = () => {
 						<Tab.Panel
 							key={idx}
 							className={clsx(
-								'rounded-xl bg-white p-3',
+								'rounded-xl bg-white p-3 max-h-board overflow-auto',
 								'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
 							)}
 						>
@@ -117,5 +118,7 @@ const Template: Story = () => {
 		</div>
 	)
 }
+
+const Template: Story = () => <DashboardPlaceholder><GamesBoard /></DashboardPlaceholder>
 
 export const Main = Template.bind({});
