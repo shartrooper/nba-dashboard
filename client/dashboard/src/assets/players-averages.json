@@ -1,0 +1,84 @@
+{
+	"firstPlayer": {
+		"id": 15,
+		"first_name": "Giannis",
+		"last_name": "Antetokounmpo",
+		"team": {
+			"full_name": "Milwaukee Bucks"
+		}
+	},
+	"secondPlayer": {
+		"id": 32,
+		"first_name": "Keita",
+		"last_name": "Bates-Diop",
+		"team": {
+			"full_name": "San Antonio Spurs"
+		}
+	},
+	"thirdPlayer": {
+		"id": 24,
+		"first_name": "Marvin",
+		"last_name": "Bagley III",
+		"team": {
+			"full_name": "Detroit Pistons"
+		}
+	},
+	"fourthPlayer": {
+		"id": 38,
+		"first_name": "Malik",
+		"last_name": "Beasley",
+		"team": {
+			"full_name": "Los Angeles Lakers"
+		}
+	},
+	"fifthPlayer": {
+		"id": 22,
+		"first_name": "Deandre",
+		"last_name": "Ayton",
+		"team": {
+			"full_name": "Phoenix Suns"
+		}
+	},
+	"sixthPlayer": {
+		"id": 28,
+		"first_name": "Mo",
+		"last_name": "Bamba",
+		"team": {
+			"full_name": "Los Angeles Lakers"
+		}
+	},
+	"seasonAverages": {
+		"data": [
+			{
+				"pts": 31.1,
+				"turnover": 3.9,
+				"player_id": 15
+			},
+			{
+				"pts": 17.96,
+				"turnover": 1.79,
+				"player_id": 22
+			},
+			{
+				"pts": 12,
+				"turnover": 1.1,
+				"player_id": 24
+			},
+			{
+				"pts": 6.59,
+				"turnover": 0.61,
+				"player_id": 28
+			},
+			{
+				"pts": 9.66,
+				"turnover": 0.84,
+				"player_id": 32
+			},
+			{
+				"pts": 12.56,
+				"turnover": 1.11,
+				"player_id": 38
+			}
+		]
+	}
+}

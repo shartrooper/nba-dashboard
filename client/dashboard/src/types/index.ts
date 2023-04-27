@@ -64,6 +64,9 @@ export type PlayerStats = {
 	turnover: number;
 }
 
+export type SeasonAverages = Omit<PlayerStats, 'game'> & { player_id: number, games_played: number }
+
+
 export type ResponsePayload<P, M> = {
 	records: P[],
 	meta: M

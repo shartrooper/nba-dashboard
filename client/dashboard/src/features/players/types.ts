@@ -3,7 +3,7 @@ import { Metadata, ParsedMetaData, ResponsePayload } from "@/types";
 export const getPlayers = 'players';
 export const getPlayer = 'player';
 
-export const queryFields = ['id','first_name','last_name','position','team {name}'];
+export const queryFields = ['id', 'first_name', 'last_name', 'team {name}', 'position'];
 
 const playerQueryBody = `{ ${queryFields.join(' ')} }`;
 

@@ -1,9 +1,9 @@
-import { gqlQueryBuilder, queryArranger } from '@/utils';
+import { gqlQueryBuilderWithParsedArgs, queryArranger } from '@/utils';
 import { gql } from '@apollo/client/core';
 
-const getUserQuery = gqlQueryBuilder('getMe', ['username']);
-const getIdQuery = gqlQueryBuilder('getMe', ['id']);
-const getAll = gqlQueryBuilder('getMe', ['username', 'id']);
+const getUserQuery = gqlQueryBuilderWithParsedArgs('getMe', ['username']);
+const getIdQuery = gqlQueryBuilderWithParsedArgs('getMe', ['id']);
+const getAll = gqlQueryBuilderWithParsedArgs('getMe', ['username', 'id']);
 
 
 export const GET_ID = gql`

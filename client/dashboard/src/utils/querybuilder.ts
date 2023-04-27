@@ -17,13 +17,17 @@ const chainParamArguments = (args: string[]): string => {
 const chainQueryArguments = (args: string[]): string => `(${args.join()})`;
 
 // Utility functions
-export const gqlQueryBuilder = (queryName: string, fields: string[], args?: string[]): string => {
-  const params = args ? chainParamArguments(args) : '';
+export const gqlQueryBuilder = (queryName: string, fields: string[], args?: string): string => {
   return `
-        ${queryName}${params}{
+        ${queryName}${args}{
             ${fields.join()}
         }
     `;
+};
+
+export const gqlQueryBuilderWithParsedArgs = (queryName: string, fields: string[], args?: string[]): string => {
+  const params = args ? chainParamArguments(args) : '';
+  return gqlQueryBuilder(queryName, fields, params);
 };
 
 export const queryArranger = (
