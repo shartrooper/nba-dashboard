@@ -1,13 +1,15 @@
 import { useSessionTokenStore } from '@/store';
-import { Notification } from '@/store/notifications'
+import { Notification, useNotificationStore } from '@/store/notifications'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { handleError } from './errorhandler';
-import { ApolloError } from '@apollo/client';
+import { ApolloError, DocumentNode, OperationVariables, QueryFunctionOptions, useQuery } from '@apollo/client';
 import dayjs, { Dayjs } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
+
+export const MAX_PLAYERS = 3092;
 
 type MessageObject = {
   title: string,
@@ -84,4 +86,19 @@ export const getWeekInterval = (date: Dayjs | string) => {
     dayjs(date).subtract(day, 'day').format(DEFAULT_DATE_FORMAT),
     dayjs(date).add(6 - day, 'day').format(DEFAULT_DATE_FORMAT)
   ];
+}
+
+export const useFetchService = (params: OperationVariables, query: DocumentNode, configOption?: QueryFunctionOptions) => {
+	const { addNotification } = useNotificationStore();
+	const onError = handleErrorService(addNotification);
+	const [state, toggle] = useState(false);
+	const { data, loading, fetchMore, refetch } = useQuery(query, {
+		variables: { ...params },
+		onError,
+		onCompleted: () => {
+			toggle(false);
+		},
+		...configOption
+	});
+	return { data, loading, fetchMore, refetch, loadingMore: { state, toggle } }
 }

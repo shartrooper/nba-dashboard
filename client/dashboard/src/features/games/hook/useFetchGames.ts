@@ -1,7 +1,4 @@
-import { useNotificationStore } from '@/store';
-import { handleErrorService } from '@/utils/helpers';
-import { DocumentNode, QueryFunctionOptions, useQuery } from '@apollo/client';
-import { useState } from 'react';
+import { useFetchService } from '@/utils/helpers';
 import { POLL_GAMES } from '../api';
 import { GetPollGamesPayload, ParsedGame } from '../types';
 
@@ -11,21 +8,6 @@ export type RequestParams = {
 	seasons?: number[],
 	team_ids?: number[],
 	postseason?: boolean,
-}
-
-const useFetchGames = (params: RequestParams, query: DocumentNode, configOption: QueryFunctionOptions) => {
-	const { addNotification } = useNotificationStore();
-	const onError = handleErrorService(addNotification);
-	const [state, toggle] = useState(false);
-	const { data, loading, fetchMore, refetch } = useQuery(query, {
-		variables: { ...params },
-		onError,
-		onCompleted: () => {
-			toggle(false);
-		},
-		...configOption
-	});
-	return { data, loading, fetchMore, refetch, loadingMore: { state, toggle } }
 }
 
 const parsePollGamesResponse = (data: unknown): ParsedGame[] | undefined => {
@@ -44,6 +26,6 @@ const parsePollGamesResponse = (data: unknown): ParsedGame[] | undefined => {
 }
 
 export const usePollGames = (params: RequestParams) => {
-	const { data, loading } = useFetchGames(params, POLL_GAMES, { pollInterval: 630000 })
+	const { data, loading } = useFetchService(params, POLL_GAMES, { pollInterval: 630000 })
 	return { data: parsePollGamesResponse(data), loading };
 }

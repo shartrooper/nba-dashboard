@@ -41,11 +41,11 @@ export const queryArranger = (
     }`;
 };
 
-export const mapIntoQueryFieldsArray = <T>(fields: { [key in keyof T]?: string }): string[] =>
+export const mapIntoValuesArray = <T, R extends number | string>(fields: { [key in keyof T]?: R }): R[] =>
   Object.entries(fields).reduce(
-    (acc: string[], current: [key: string, value: unknown]): string[] => {
+    (acc: R[], current: [key: string, value: unknown]): R[] => {
       const [, value] = current;
-      return [...acc, value as string];
+      return [...acc, value as R];
     },
     []
   );
