@@ -15,7 +15,6 @@ const seasonAverages = gqlQueryBuilderWithParsedArgs(getAverages, averagesQueryF
 
 const players = playersWithAliases(6);
 
-
 export const idKeys = arrayRange(1, 6, 1).map(num => `id${num}`);
 
 const playerParams = idKeys.map(identifier => `$${identifier}: Int!`);

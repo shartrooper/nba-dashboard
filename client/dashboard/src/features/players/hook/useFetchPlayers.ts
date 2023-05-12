@@ -11,7 +11,7 @@ export type RequestParams = {
 	limit?: number
 }
 
-const parsedPlayersData = (data: unknown): ParsedPlayersResponse | undefined => {
+export const parsedPlayersData = (data: unknown): ParsedPlayersResponse | undefined => {
 	const response = data as GetPlayersPayload;
 	if (!response?.players) {
 		return;

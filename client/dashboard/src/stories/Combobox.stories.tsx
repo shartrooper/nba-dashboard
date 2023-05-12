@@ -24,7 +24,7 @@ const parsedPlayers: Player[] = playerRecords.records.map(player => {
 	}
 });
 
-export const Template = () => {
+const PlayerComboBox = () => {
 	const [selected, setSelected] = useState<Player>();
 	const [query, setQuery] = useState('');
 	const [filteredPlayers, setFilteredPlayers] = useState<Player[]>();
@@ -89,11 +89,9 @@ export const Template = () => {
 
 	}
 
-
 	return (
-		<div className="fixed top-16 w-72">
 			<Combobox value={selected} onChange={setSelected}>
-				<div className="relative mt-1">
+				<div className="relative mt-1 mb-6">
 					<div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
 						<Combobox.Input
 							className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
@@ -114,12 +112,18 @@ export const Template = () => {
 						leaveTo="opacity-0"
 						afterLeave={() => setQuery('')}
 					>
-						<Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+						<Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
 							<Options showLoader={spinner} />
 						</Combobox.Options>
 					</Transition>
 				</div>
 			</Combobox>
-		</div>
 	)
+}
+
+export const Template = () => {
+	return <div className='w-1/4'>
+		<PlayerComboBox />
+		<PlayerComboBox />
+	</div>
 }
