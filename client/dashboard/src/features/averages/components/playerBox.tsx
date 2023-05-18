@@ -5,15 +5,18 @@ import { Fragment, useEffect, useState } from "react";
 import { ParsedAveragedPlayer } from "../types";
 
 type Props = {
-	initialPlayer: ParsedAveragedPlayer,
+	player: ParsedAveragedPlayer,
 	suggestions?: ParsedAveragedPlayer[],
 	loading?: boolean,
-	onInputChange: (query: string) => void
+	onInputChange: (query: string) => void,
+	onSelectorChange?: (selected: ParsedAveragedPlayer, index?: number) => void
+	itemIndex?: number
 }
 
-const PlayerComboBox = ({ suggestions, onInputChange, initialPlayer, loading = false }: Props) => {
-	const [selected, setSelected] = useState<ParsedAveragedPlayer>(initialPlayer);
+const PlayerComboBox = ({ suggestions, onInputChange, onSelectorChange, itemIndex, player, loading = false }: Props) => {
+	const [selected, setSelected] = useState<ParsedAveragedPlayer>(player);
 	const [query, setQuery] = useState<string>();
+
 	const Options = ({ showLoader }: { showLoader: boolean }) => {
 		if (showLoader) {
 			return <Spinner />
@@ -55,16 +58,21 @@ const PlayerComboBox = ({ suggestions, onInputChange, initialPlayer, loading = f
 
 	}
 
+	const handleSelection = (selectedPlayer: ParsedAveragedPlayer) => {
+		setSelected(selectedPlayer);
+		onSelectorChange && onSelectorChange(selectedPlayer, itemIndex);
+	}
+
 	useEffect(() => {
 		const delayPlayerQuery = setTimeout(() => {
 			query && onInputChange(query);
 		}, 800);
 		return () => clearTimeout(delayPlayerQuery)
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query])
 
 	return (
-		<Combobox value={selected} onChange={setSelected}>
+		<Combobox value={selected} onChange={handleSelection}>
 			<div className="relative mt-1 mb-6">
 				<div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
 					<Combobox.Input

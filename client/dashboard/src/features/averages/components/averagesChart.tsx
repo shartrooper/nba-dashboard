@@ -2,42 +2,58 @@ import { mapIntoValuesArray } from "@/utils";
 import useFetchPlayerAverages from "../hook/useFetchPlayersAverages"
 import useLazyFetchPlayers from "@/features/players/hook/useLazyFetchPlayers";
 import PlayerComboBox from "./playerBox";
+import { ParsedAveragedPlayer } from "../types";
+import { useState } from "react";
 
 type Tboundaries = string | number | symbol
 
 type Props<Tkeys extends Tboundaries> = {
 	season: number,
-	playerIds: Record<Tkeys, number>
+	initialPlayersIds: Record<Tkeys, number>
 }
 
-export function AveragesChartContainer<K extends Tboundaries>({ season, playerIds }: Props<K>) {
-	type PlayersIdsProps = typeof playerIds;
-	const { data, loading: playerAveragesLoader } = useFetchPlayerAverages<PlayersIdsProps>({
+export function AveragesChartContainer<K extends Tboundaries>({ season, initialPlayersIds }: Props<K>) {
+	type PlayersIdsProps = typeof initialPlayersIds;
+	const [playersIds, setPlayersIds] = useState<PlayersIdsProps>(initialPlayersIds);
+	const { data, loading: loadingPlayerAverages, refetch: refetchPlayersAverages } = useFetchPlayerAverages<PlayersIdsProps>({
 		season,
-		player_ids: mapIntoValuesArray<PlayersIdsProps, number>(playerIds),
-		...playerIds
+		player_ids: mapIntoValuesArray<PlayersIdsProps, number>(playersIds),
+		...playersIds
 	});
 
-	const [, loading, playerSuggestions, refetch] = useLazyFetchPlayers();
+	const [, loading, playerSuggestions, refetchPlayers] = useLazyFetchPlayers();
 
 	const onUpdatePlayerSuggestions = (query: string) => {
-		refetch({ search: query });
+		refetchPlayers({ search: query });
+	}
+
+	const onUpdatePlayerSelection = (selected: ParsedAveragedPlayer, index?: number) => {
+		//NOTE: index is never undefined in this case.
+		index = index as number | never;
+		const player_ids = mapIntoValuesArray<PlayersIdsProps, number>(playersIds);
+		player_ids[index] = selected.id;
+		const targetPlayer = Object.keys(playersIds)[index];
+		const updatedPlayerIds = { ...playersIds, [targetPlayer]: selected.id } as PlayersIdsProps;
+		setPlayersIds(updatedPlayerIds);
+		refetchPlayersAverages({ player_ids, ...updatedPlayerIds });
 	}
 
 	if (!data) {
-		return null;
+		return loadingPlayerAverages ? <p>Loading..</p> : null;
 	}
 
 	const { players } = data;
-	
+
 	return <div>
 		{
-			players.map(player =>
+			players.map((player, index) =>
 				<PlayerComboBox
-					initialPlayer={player}
+					player={player}
 					suggestions={playerSuggestions}
 					loading={loading}
 					onInputChange={onUpdatePlayerSuggestions}
+					onSelectorChange={onUpdatePlayerSelection}
+					itemIndex={index}
 				/>)
 		}
 	</div>

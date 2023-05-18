@@ -21,6 +21,6 @@ export const MainContainer = () => {
 
 	return <div className="flex justify-center">
 		<GamesBoardContainer games={data} currentSeason={season} />
-		<AveragesChartContainer<keyof typeof initialPlayerIdsValues.current> season={season} playerIds={initialPlayerIdsValues.current} />
+		<AveragesChartContainer<keyof typeof initialPlayerIdsValues.current> season={season} initialPlayersIds={initialPlayerIdsValues.current} />
 	</div>
 };
