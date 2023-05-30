@@ -12,6 +12,7 @@ export const averagesQueryFields = [
 		pts
 		games_played
 		player_id
+		turnover
 	}`
 ];
 
@@ -26,7 +27,7 @@ export const PLAYER_FRAGMENT = `
 	}
 `;
 
-type PlayerPoints = Pick<SeasonAverages, 'player_id' | 'games_played' | 'pts'>
+type PlayerPoints = Pick<SeasonAverages, 'player_id' | 'games_played' | 'pts' | 'turnover'>
 
 export type AveragesResponse = { data: PlayerPoints[] }
 

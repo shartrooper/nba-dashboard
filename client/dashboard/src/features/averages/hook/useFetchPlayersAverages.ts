@@ -20,7 +20,7 @@ const parsePlayerAveragesData = (response?: Record<string, AveragedPlayerRecord 
 	const parsedResponse = Object.keys(response).reduce((prev, current) => {
 		if ('data' in response[current]) {
 			const { data } = response[current] as AveragesResponse;
-			const seasonAverages = data.map(stat => ({ playerId: stat.player_id, gamesPlayed: stat.games_played, pts: stat.pts }))
+			const seasonAverages = data.map(stat => ({ playerId: stat.player_id, gamesPlayed: stat.games_played, pts: stat.pts, turnover: stat.turnover }))
 			return { ...prev, seasonAverages }
 		}
 		const playerData = response[current] as AveragedPlayerRecord;

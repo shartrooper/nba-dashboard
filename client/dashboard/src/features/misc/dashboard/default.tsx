@@ -19,7 +19,7 @@ export const MainContainer = () => {
 
 	const { season } = data[0];
 
-	return <div className="flex justify-center">
+	return <div className="flex justify-center gap-6">
 		<GamesBoardContainer games={data} currentSeason={season} />
 		<AveragesChartContainer<keyof typeof initialPlayerIdsValues.current> season={season} initialPlayersIds={initialPlayerIdsValues.current} />
 	</div>

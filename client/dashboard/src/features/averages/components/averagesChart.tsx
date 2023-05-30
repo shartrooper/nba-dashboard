@@ -4,6 +4,7 @@ import useLazyFetchPlayers from "@/features/players/hook/useLazyFetchPlayers";
 import PlayerComboBox from "./playerBox";
 import { ParsedAveragedPlayer } from "../types";
 import { useState } from "react";
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 type Tboundaries = string | number | symbol
 
@@ -42,9 +43,33 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 		return loadingPlayerAverages ? <p>Loading..</p> : null;
 	}
 
-	const { players } = data;
+	const { players, seasonAverages } = data;
+
+	const chartData: { name: string, pts: number, turnover: number, gamesPlayed: number }[] = seasonAverages.map(average => {
+		const { pts, turnover, gamesPlayed, playerId } = average;
+		const matchedPlayer = players.find(player => player.id === playerId) as ParsedAveragedPlayer | never;
+		const { firstName, lastName } = matchedPlayer;
+		const name = `${firstName} ${lastName}`;
+		return {
+			pts,
+			turnover,
+			gamesPlayed,
+			name
+		}
+	});
 
 	return <div>
+		<ResponsiveContainer height={250} width={'70%'}>
+			<BarChart data={chartData}>
+				<CartesianGrid strokeDasharray="6 6" />
+				<XAxis dataKey="name" />
+				<YAxis />
+				<Tooltip />
+				<Legend />
+				<Bar dataKey="pts" fill="#fb923c" />
+				<Bar dataKey="gamesPlayed" fill="#82ca9d" />
+			</BarChart>
+		</ResponsiveContainer>
 		{
 			players.map((player, index) =>
 				<PlayerComboBox
