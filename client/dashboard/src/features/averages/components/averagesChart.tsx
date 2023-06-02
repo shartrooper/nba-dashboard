@@ -5,6 +5,7 @@ import PlayerComboBox from "./playerBox";
 import { ParsedAveragedPlayer } from "../types";
 import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Spinner } from "@/components/Elements/Spinner";
 
 type Tboundaries = string | number | symbol
 
@@ -40,16 +41,24 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 	}
 
 	if (!data) {
-		return loadingPlayerAverages ? <p>Loading..</p> : null;
+		return loadingPlayerAverages ? <Spinner /> : null;
 	}
 
 	const { players, seasonAverages } = data;
 
-	const chartData: { name: string, pts: number, turnover: number, gamesPlayed: number }[] = seasonAverages.map(average => {
-		const { pts, turnover, gamesPlayed, playerId } = average;
-		const matchedPlayer = players.find(player => player.id === playerId) as ParsedAveragedPlayer | never;
-		const { firstName, lastName } = matchedPlayer;
-		const name = `${firstName} ${lastName}`;
+	const chartData: { name: string, pts: number, turnover: number, gamesPlayed: number }[] = players.map((player, index) => {
+		const { firstName, lastName } = player;
+		const name = `${index + 1} : ${firstName} ${lastName}`;
+		const matchedStats = seasonAverages.find(stat => stat.playerId === player.id);
+		if (!matchedStats) {
+			return {
+				pts: 0,
+				turnover: 0,
+				gamesPlayed: 0,
+				name
+			}
+		}
+		const { pts, turnover, gamesPlayed, } = matchedStats;
 		return {
 			pts,
 			turnover,
@@ -58,28 +67,37 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 		}
 	});
 
-	return <div>
-		<ResponsiveContainer height={250} width={'70%'}>
-			<BarChart data={chartData}>
-				<CartesianGrid strokeDasharray="6 6" />
+	return <div className="w-80 lg:grow lg:w-auto text-center">
+		<p>Current Season's players averages</p>
+		<ul className="mt-1 space-x-1 text-xs font-normal leading-4 text-chalkboard">
+			<li>* 6 randomly picked players are showcased</li>
+			<li>* You can input your desired player to update the chart</li>
+		</ul>
+		<ResponsiveContainer height={250} width={'100%'}>
+			<BarChart margin={{ left: -35 }} data={chartData}>
+				<CartesianGrid strokeDasharray="3 3" />
 				<XAxis dataKey="name" />
 				<YAxis />
-				<Tooltip />
+				<Tooltip labelClassName="text-midnight" />
 				<Legend />
 				<Bar dataKey="pts" fill="#fb923c" />
 				<Bar dataKey="gamesPlayed" fill="#82ca9d" />
+				<Bar dataKey="turnover" fill="#ff5734" />
 			</BarChart>
 		</ResponsiveContainer>
-		{
-			players.map((player, index) =>
-				<PlayerComboBox
-					player={player}
-					suggestions={playerSuggestions}
-					loading={loading}
-					onInputChange={onUpdatePlayerSuggestions}
-					onSelectorChange={onUpdatePlayerSelection}
-					itemIndex={index}
-				/>)
-		}
+		<div className="flex flex-col md:grid md:grid-cols-2 md:gap-4">
+			{
+				players.map((player, index) => <>
+					<PlayerComboBox
+						player={player}
+						suggestions={playerSuggestions}
+						loading={loading}
+						onInputChange={onUpdatePlayerSuggestions}
+						onSelectorChange={onUpdatePlayerSelection}
+						itemIndex={index}
+					/>
+				</>)
+			}
+		</div>
 	</div>
 }

@@ -50,8 +50,8 @@ const chartData: { name: string, pts: number, turnover: number }[] = Object.keys
 
 
 const PlayersAveragesBarChar = () =>
-	<ResponsiveContainer height={250} width={'70%'}>
-		<BarChart data={chartData}>
+	<ResponsiveContainer height={250} width={'100%'}>
+		<BarChart margin={{ left: -35 }} data={chartData}>
 			<CartesianGrid strokeDasharray="3 3" />
 			<XAxis dataKey="name" />
 			<YAxis />
