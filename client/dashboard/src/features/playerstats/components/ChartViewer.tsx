@@ -8,8 +8,10 @@ import {
 	Legend,
 	ResponsiveContainer
 } from "recharts";
-import { useState } from 'react';
 import { ChartData, useChartDataStore } from "@/store";
+import { Spinner } from "@/components/Elements/Spinner";
+import { objectKeys } from "@/utils";
+import { useNavigatorStore } from "@/store/navigator";
 
 const scheme = [
 	'#293462',
@@ -92,29 +94,27 @@ const PlayerLineChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof ty
 	</ResponsiveContainer>
 }
 
-const ChartViewer = ({ loadMoreCallback }: { loadMoreCallback?: () => void }) => {
+const ChartViewer = ({ loadMoreCallback, isLoading }: { isLoading: boolean, loadMoreCallback?: () => void }) => {
 	const { dataset } = useChartDataStore();
 	const { stats } = dataset;
-	const maxItems = 10;
-	const [navigateChart, setNavigateChart] = useState({ prev: 0, section: 0, next: maxItems });
+
+	const { navigate: navigateChart, update } = useNavigatorStore(state => state);
 	const sizedSample = stats.slice(navigateChart.prev, navigateChart.next);
-	const updateChart = (n: number) => {
-		const i = n + navigateChart.section;
-		setNavigateChart({
-			prev: i * maxItems,
-			section: i,
-			next: (i + 1) * maxItems
-		});
-	}
 
 	return (
 		<div className='m-4 flex flex-col'>
-			<div className='flex justify-between'>
-				<CursorNav arrow='left' nextIndex={!!navigateChart.prev} handleClick={updateChart} />
-				<CursorNav arrow='right' nextIndex={!!stats[navigateChart.next]} handleClick={updateChart} />
-				{!stats[navigateChart.next] && <button onClick={loadMoreCallback}>More...</button>}
-			</div>
-			{Object.keys(dataKeys).map((value: string, index) =>
+			{isLoading ?
+				<div className="flex justify-center" >
+					<Spinner />
+				</div>
+				:
+				<div className='flex justify-between'>
+					<CursorNav arrow='left' nextIndex={!!navigateChart.prev} handleClick={update} />
+					<CursorNav arrow='right' nextIndex={!!stats[navigateChart.next]} handleClick={update} />
+					{!stats[navigateChart.next] && !isLoading && <button onClick={loadMoreCallback}>More...</button>}
+				</div>
+			}
+			{objectKeys(dataKeys).map((value, index) =>
 				<div key={index}>
 					<p>{value.charAt(0).toLocaleUpperCase() + value.slice(1)}</p>
 					<PlayerLineChart dataset={sizedSample} graphWidth={95} valueKey={value as keyof typeof dataKeys} />

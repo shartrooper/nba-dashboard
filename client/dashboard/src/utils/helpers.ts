@@ -102,3 +102,7 @@ export const useFetchService = (params: OperationVariables, query: DocumentNode,
 	});
 	return { data, loading, fetchMore, refetch, loadingMore: { state, toggle } }
 }
+
+export const objectKeys = <Obj extends object>(obj: Obj): (keyof Obj)[] => {
+	return Object.keys(obj) as (keyof Obj)[];
+}

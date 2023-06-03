@@ -6,6 +6,7 @@ import { ParsedPlayerStatsResponse } from "../types"
 import ChartViewer from "./ChartViewer"
 import { DateSeasonForm, FetchDTOValues } from "./Seasonform"
 import { Spinner } from "@/components/Elements/Spinner"
+import { useNavigatorStore } from "@/store/navigator"
 
 
 export const Container = ({ id }: { id: number }) => {
@@ -16,7 +17,7 @@ export const Container = ({ id }: { id: number }) => {
 		addChunk({ stats, meta }, player.team.name);
 	}
 	const { data, refetch, fetchMore, loading, loadingMore } = useFetchPlayerStats({ id }, dispatchToChartDataStore);
-
+	const reset = useNavigatorStore(state => state.reset);
 	if (loading) return <Spinner size="lg" />
 
 	if (!data) return null;
@@ -33,6 +34,7 @@ export const Container = ({ id }: { id: number }) => {
 	}
 
 	const queryNewData = (dto: FetchDTOValues) => {
+		reset();
 		loadingMore.toggle(true);
 		refetch(dto);
 	}
@@ -42,8 +44,8 @@ export const Container = ({ id }: { id: number }) => {
 		<p>Position: {position}</p>
 		<img alt={`${team.name} logo`} src={teamsLogosImageRoutes[team.name]} className="w-14 h-14"></img>
 		<DropdownWrapper description="Season Input">
-			<DateSeasonForm fetch={queryNewData} playerId={id} />
+			<DateSeasonForm fetch={queryNewData} playerId={id} isLoading={loadingMore.state} />
 		</DropdownWrapper>
-		{!loadingMore.state ? <ChartViewer loadMoreCallback={loadMore} /> : <Spinner size="lg" />}
+		<ChartViewer loadMoreCallback={loadMore} isLoading={loadingMore.state} />
 	</>
 }

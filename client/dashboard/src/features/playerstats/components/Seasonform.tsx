@@ -67,7 +67,7 @@ type SubmitDTOValues = DatePickerDTOValues & { seasons?: number[] };
 
 export type FetchDTOValues = SubmitDTOValues & { id: number, playerIds: number[] };
 
-export const DateSeasonForm = ({ playerId, fetch }: { playerId: number, fetch: (dto: FetchDTOValues ) => void }) => {
+export const DateSeasonForm = ({ playerId, fetch, isLoading }: { isLoading: boolean, playerId: number, fetch: (dto: FetchDTOValues) => void }) => {
 
   return (
     <div className="flex-col items-center">
@@ -99,7 +99,7 @@ export const DateSeasonForm = ({ playerId, fetch }: { playerId: number, fetch: (
               error={formState.errors['end_date']}
             />
             <div className="flex justify-center center-items">
-              <Button size="sm" type="submit">
+              <Button size="sm" type="submit" isLoading={isLoading}>
                 Submit
               </Button>
             </div>
