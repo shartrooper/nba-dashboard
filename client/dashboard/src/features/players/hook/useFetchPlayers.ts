@@ -34,6 +34,7 @@ const useFetchPlayers = (params: RequestParams = { limit: 100 }) => {
 	const [state, toggle] = useState(false);
 	const { data, loading, fetchMore, refetch } = useQuery(GET_PLAYERS, {
 		variables: { ...params },
+		fetchPolicy:'network-only',
 		onError,
 		onCompleted: () => {
 			toggle(false);
