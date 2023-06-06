@@ -18,9 +18,8 @@ const notificationMsg: { [Property in keyof typeof query]: NotificationMsg } = {
 const useAuth = (operation: 'signIn' | 'signUp') => {
   const { addNotification } = useNotificationStore();
   const { setToken } = useSessionTokenStore();
-
   const selectedQuery = query[operation];
-  const [mutationFn, { data, loading }] = useMutation(selectedQuery, {
+  const [mutationFn, { data, loading, client }] = useMutation(selectedQuery, {
     onError: (error) => {
       const errorResponses = handleError(error);
       errorResponses.forEach((item) => {
@@ -28,13 +27,17 @@ const useAuth = (operation: 'signIn' | 'signUp') => {
       });
     },
     onCompleted: () => {
+      client.resetStore();
       addNotification(notificationMsg[operation]);
     },
   });
+
   const response = hasTokenPayload(data);
+
   const setAccessToken = (data: AuthQueriesResponse): void => {
     setToken(data[operation].access_token);
   };
+
   useEffect(() => {
     if (response) {
       setAccessToken(response);

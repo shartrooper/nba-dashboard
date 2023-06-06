@@ -60,7 +60,7 @@ const SettingsContainer = () => {
           <>
             <InputField
               type="password"
-              label="Old passowrd"
+              label="Old password"
               error={formState.errors['password']}
               registration={register('password')}
             />
