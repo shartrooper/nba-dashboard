@@ -29,7 +29,7 @@ const Input = ({ type = 'search', onChange, placeholder = "input text..." }: Inp
 		date: 'px-3'
 	}
 	return <div>
-		<label htmlFor="generic" className="block text-sm font-medium">Input {type}</label>
+		<label htmlFor="generic" className="block text-sm font-medium text-chalkboard">Input {type}</label>
 		<div className="relative mt-1 rounded-md shadow-sm text-midnight">
 			{icons[type] && <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
 				{icons[type]}

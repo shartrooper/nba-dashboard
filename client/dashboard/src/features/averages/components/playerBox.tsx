@@ -19,7 +19,7 @@ const PlayerComboBox = ({ suggestions, onInputChange, onSelectorChange, itemInde
 
 	const Options = ({ showLoader }: { showLoader: boolean }) => {
 		if (showLoader) {
-			return <Spinner />
+			return <Spinner variant="dark" />
 		}
 
 		return <>{!suggestions?.length ? (

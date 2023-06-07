@@ -4,6 +4,7 @@ import { InView } from "react-intersection-observer";
 import FeedCard from "./feedCard";
 import SearchInput from "@/components/search/searchInput";
 import { DropdownWrapper } from "@/components/Disclosure";
+import clsx from "clsx";
 
 export const FeedContainer = () => {
 	const { data, fetchMore, loading: onMountLoading, refetch, loadingMore } = useFetchPlayers();
@@ -23,7 +24,9 @@ export const FeedContainer = () => {
 	};
 
 	if (onMountLoading) {
-		return <Spinner size='lg' />
+		return <div className="grid place-items-center" >
+			<Spinner size="xl" />
+		</div>
 	}
 
 	const PlayersFeed = () => {

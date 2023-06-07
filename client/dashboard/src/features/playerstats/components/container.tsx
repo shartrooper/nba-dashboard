@@ -18,7 +18,11 @@ export const Container = ({ id }: { id: number }) => {
 	}
 	const { data, refetch, fetchMore, loading, loadingMore } = useFetchPlayerStats({ id }, dispatchToChartDataStore);
 	const reset = useNavigatorStore(state => state.reset);
-	if (loading) return <Spinner size="lg" />
+
+	if (loading) return <div className="grid place-items-center" >
+		<Spinner size="xl" />
+	</div>
+
 
 	if (!data) return null;
 

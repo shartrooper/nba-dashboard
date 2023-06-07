@@ -6,6 +6,7 @@ import { ParsedAveragedPlayer } from "../types";
 import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Spinner } from "@/components/Elements/Spinner";
+import clsx from "clsx";
 
 type Tboundaries = string | number | symbol
 
@@ -13,6 +14,8 @@ type Props<Tkeys extends Tboundaries> = {
 	season: number,
 	initialPlayersIds: Record<Tkeys, number>
 }
+
+const containerStyle = "w-80 lg:grow lg:w-auto text-center"
 
 export function AveragesChartContainer<K extends Tboundaries>({ season, initialPlayersIds }: Props<K>) {
 	type PlayersIdsProps = typeof initialPlayersIds;
@@ -41,7 +44,12 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 	}
 
 	if (!data) {
-		return loadingPlayerAverages ? <Spinner /> : null;
+		return loadingPlayerAverages ?
+			<div className={clsx(containerStyle, "grid place-items-center")} >
+				<Spinner size="lg" />
+				<span className="text-basketball-dim font-semibold" >Building chart...</span>
+			</div>
+			: null;
 	}
 
 	const { players, seasonAverages } = data;
@@ -67,7 +75,7 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 		}
 	});
 
-	return <div className="w-80 lg:grow lg:w-auto text-center">
+	return <div className={containerStyle}>
 		<p>Current Season's players averages</p>
 		<ul className="mt-1 space-x-1 text-xs font-normal leading-4 text-chalkboard">
 			<li>* 6 randomly picked players are showcased</li>
