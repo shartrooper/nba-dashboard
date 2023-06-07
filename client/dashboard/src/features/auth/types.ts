@@ -1,23 +1,30 @@
 export type UserInput = {
-    username: string;
-    password: string;
-}
+  username: string;
+  password: string;
+};
 
 // Type annotations for graphql queries
 export enum AuthMutations {
-    SignIn = 'signIn',
-    SignUp = 'signUp'
+  SignIn = 'signIn',
+  SignUp = 'signUp',
 }
 
 export enum AuthQueryFields {
-    AccessToken = 'access_token'
+  AccessToken = 'access_token',
 }
 
 export const authBodyParams = {
-    [AuthMutations.SignIn]: ['$userInput: UserInput!'],
-    [AuthMutations.SignUp]: ['$createUserInput: UserInput!']
-}
+  [AuthMutations.SignIn]: ['$userInput: UserInput!'],
+  [AuthMutations.SignUp]: ['$createUserInput: UserInput!'],
+};
 
 export type AuthQueriesResponse = {
-    [key: string]: { [AuthQueryFields.AccessToken]: string}
-}
+  [key: string]: { [AuthQueryFields.AccessToken]: string };
+};
+
+export const hasTokenPayload = (data: unknown): AuthQueriesResponse | false => {
+  if (typeof data !== 'object') {
+    return false;
+  }
+  return data as AuthQueriesResponse;
+};

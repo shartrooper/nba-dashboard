@@ -40,6 +40,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const setSpinnerVariant = variant === 'primary' ? 'light' : 'primary';
+
     return (
       <button
         ref={ref}
@@ -52,7 +54,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        {isLoading && <Spinner size="sm" className="text-current" />}
+        {isLoading && <Spinner size="sm" variant={setSpinnerVariant} className="text-current" />}
         {!isLoading && startIcon}
         <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
       </button>

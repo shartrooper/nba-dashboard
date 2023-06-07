@@ -21,7 +21,7 @@ export class Game {
   season: number;
   @Field()
   status: string;
-  @Field()
+  @Field({ nullable: true })
   time: string;
   @Field(() => Team, { nullable: true })
   visitor_team: Team;

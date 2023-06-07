@@ -1,0 +1,234 @@
+{
+	"meta": {
+		"next_page": 3,
+		"per_page": 25,
+		"total_count": 5130
+	},
+	"records": [
+		{
+			"id": 498,
+			"first_name": "John",
+			"last_name": "Salley",
+			"position": "",
+			"team": {
+				"name": "Pistons"
+			}
+		},
+		{
+			"id": 499,
+			"first_name": "Dan",
+			"last_name": "Schayes",
+			"position": "",
+			"team": {
+				"name": "Bucks"
+			}
+		},
+		{
+			"id": 500,
+			"first_name": "Mark",
+			"last_name": "Eaton",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			}
+		},
+		{
+			"id": 501,
+			"first_name": "Kevin",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Suns"
+			}
+		},
+		{
+			"id": 502,
+			"first_name": "Danny",
+			"last_name": "Ainge",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			}
+		},
+		{
+			"id": 503,
+			"first_name": "Kenny",
+			"last_name": "Smith",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			}
+		},
+		{
+			"id": 504,
+			"first_name": "Randy",
+			"last_name": "Breuer",
+			"position": "",
+			"team": {
+				"name": "Timberwolves"
+			}
+		},
+		{
+			"id": 505,
+			"first_name": "Herb",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Mavericks"
+			}
+		},
+		{
+			"id": 506,
+			"first_name": "Joe",
+			"last_name": "Wolf",
+			"position": "",
+			"team": {
+				"name": "Nuggets"
+			}
+		},
+		{
+			"id": 507,
+			"first_name": "Steve",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			}
+		},
+		{
+			"id": 508,
+			"first_name": "Glen",
+			"last_name": "Rice",
+			"position": "",
+			"team": {
+				"name": "Heat"
+			}
+		},
+		{
+			"id": 509,
+			"first_name": "Greg",
+			"last_name": "Foster",
+			"position": "",
+			"team": {
+				"name": "Wizards"
+			}
+		},
+		{
+			"id": 510,
+			"first_name": "Larry",
+			"last_name": "Nance",
+			"position": "",
+			"team": {
+				"name": "Cavaliers"
+			}
+		},
+		{
+			"id": 511,
+			"first_name": "Duane",
+			"last_name": "Ferrell",
+			"position": "",
+			"team": {
+				"name": "Hawks"
+			}
+		},
+		{
+			"id": 512,
+			"first_name": "Nick",
+			"last_name": "Anderson",
+			"position": "",
+			"team": {
+				"name": "Magic"
+			}
+		},
+		{
+			"id": 513,
+			"first_name": "Joe",
+			"last_name": "Dumars",
+			"position": "",
+			"team": {
+				"name": "Pistons"
+			}
+		},
+		{
+			"id": 514,
+			"first_name": "Jay",
+			"last_name": "Humphries",
+			"position": "",
+			"team": {
+				"name": "Bucks"
+			}
+		},
+		{
+			"id": 515,
+			"first_name": "Darrell",
+			"last_name": "Griffith",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			}
+		},
+		{
+			"id": 516,
+			"first_name": "Dan",
+			"last_name": "Majerle",
+			"position": "",
+			"team": {
+				"name": "Suns"
+			}
+		},
+		{
+			"id": 517,
+			"first_name": "Tom",
+			"last_name": "Chambers",
+			"position": "",
+			"team": {
+				"name": "Suns"
+			}
+		},
+		{
+			"id": 518,
+			"first_name": "Alaa",
+			"last_name": "Abdelnaby",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			}
+		},
+		{
+			"id": 519,
+			"first_name": "Adrian",
+			"last_name": "Caldwell",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			}
+		},
+		{
+			"id": 520,
+			"first_name": "Vernon",
+			"last_name": "Maxwell",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			}
+		},
+		{
+			"id": 521,
+			"first_name": "Doug",
+			"last_name": "West",
+			"position": "",
+			"team": {
+				"name": "Timberwolves"
+			}
+		},
+		{
+			"id": 522,
+			"first_name": "Tony",
+			"last_name": "Campbell",
+			"position": "",
+			"team": {
+				"name": "Timberwolves"
+			}
+		}
+	]
+}

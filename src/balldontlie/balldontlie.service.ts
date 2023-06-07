@@ -8,6 +8,7 @@ import {
   PlayerStats,
   SeasonAveragesPayload,
   Team,
+  teams,
 } from './dto';
 
 type ParamValue = string | number | number[] | boolean;
@@ -89,6 +90,18 @@ export class BalldontlieService {
     );
   }
 
+  private clearNullRecords<R>(records: { [key in keyof R]: any }[]) {
+    return records.filter((record) => {
+      for (const [, value] of Object.entries(record)) {
+        const hasValue = value ?? false;
+        if (typeof hasValue === 'boolean') {
+          return hasValue;
+        }
+      }
+      return true;
+    });
+  }
+
   async getAllPlayers(args?: ParamObject): Promise<GetManyPayload<Player>> {
     this.params = this.checkArgs(args);
     try {
@@ -163,10 +176,17 @@ export class BalldontlieService {
 
       const serializedPlayerInStats = stats.data.map((stat) => ({
         ...stat,
+        game: {
+          ...stat.game,
+          home_team_id: teams[stat.game.home_team_id],
+          visitor_team_id: teams[stat.game.visitor_team_id],
+        },
         player: this.serializePlayerRecord(stat.player),
       }));
-
-      return { data: serializedPlayerInStats, meta: stats.meta };
+      return {
+        data: this.clearNullRecords<PlayerStats>(serializedPlayerInStats),
+        meta: stats.meta,
+      };
     } catch (error) {
       throw new Error(error);
     }

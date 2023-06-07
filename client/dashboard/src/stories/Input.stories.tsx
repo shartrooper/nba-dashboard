@@ -1,8 +1,19 @@
-import { InputField, InputFieldProps } from '@/components/Form';
+import Input, { InputProps } from '@/components/Input/generic';
+import { Meta, Story } from '@storybook/react';
+const meta: Meta = {
+	title: 'Components/GenericInput',
+	component: Input,
+	parameters: {
+		controls: { expanded: true },
+	},
+};
 
-export default {
-    title: "Input",
-    component: InputField
-}
+export default meta;
 
-export const Template = (args: InputFieldProps) => <div className="flex items-center justify-center"><InputField {...args} /></div>
+const Template: Story<InputProps> = (args) => <Input {...args} />
+
+export const DatePicker = Template.bind({});
+export const Search = Template.bind({});
+
+DatePicker.args = { type: 'date', onChange: (e) => alert(e.target.value)  };
+Search.args = { type: 'search' }

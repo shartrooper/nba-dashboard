@@ -15,6 +15,7 @@ import { TeamsModule } from './teams/teams.module';
 import { GamesModule } from './games/games.module';
 import { StatsModule } from './stats/stats.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { UserService } from './user/user.service';
 
 @Module({
   imports: [
@@ -39,6 +40,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
     GamesModule,
     StatsModule,
   ],
-  providers: [UserResolver],
+  providers: [UserResolver, UserService],
 })
 export class AppModule {}

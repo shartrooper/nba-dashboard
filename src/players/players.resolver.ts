@@ -11,8 +11,8 @@ export class PlayersResolver {
 
   @Query(() => PlayersPayload, { name: 'players' })
   async getPlayers(
-    @Args('page', { type: () => Int, nullable: true }) page?: number,
-    @Args('per_page', { type: () => Int, nullable: true }) per_page?: number,
+    @Args('offset', { type: () => Int, nullable: true }) page?: number,
+    @Args('limit', { type: () => Int, nullable: true }) per_page?: number,
     @Args('search', { type: () => String, nullable: true }) search?: string,
   ) {
     return this.playersService.findAll({ page, per_page, search });

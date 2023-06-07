@@ -62,7 +62,7 @@ type Game {
   postseason: Boolean!
   season: Int!
   status: String!
-  time: String!
+  time: String
   visitor_team: Team
   visitor_team_score: Int!
 }
@@ -70,6 +70,16 @@ type Game {
 type GamesPayload {
   meta: GQLPayloadMetadata
   records: [Game!]!
+}
+
+type GameStats {
+  id: Int!
+  date: String
+  home_team_score: Int!
+  season: Int!
+  visitor_team_score: Int!
+  home_team_id: String!
+  visitor_team_id: String!
 }
 
 type PlayerStats {
@@ -86,7 +96,7 @@ type PlayerStats {
   ft_pct: Float
   fta: Float
   ftm: Float
-  game: Game!
+  game: GameStats!
   min: String
   oreb: Float
   pf: Float
@@ -134,7 +144,7 @@ type SeasonsAvgPayload {
 
 type Query {
   getMe: MyUserPayload!
-  players(page: Int, per_page: Int, search: String): PlayersPayload!
+  players(offset: Int, limit: Int, search: String): PlayersPayload!
   player(id: Int!): Player!
   teams(page: Int, per_page: Int): TeamsPayload!
   team(id: Int!): Team!
@@ -145,6 +155,8 @@ type Query {
 }
 
 type Mutation {
+  changePassword(id: ID!, password: String!, newPassword: String!): MyUserPayload!
+  deleteUser(id: ID!): MyUserPayload!
   signUp(createUserInput: UserInput!): AccessToken!
   signIn(userInput: UserInput!): AccessToken!
 }

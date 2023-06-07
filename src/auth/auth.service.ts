@@ -48,7 +48,7 @@ export class AuthService {
       select: { ...userDataPayload, hash: true },
     });
 
-    if (!user) throw new ForbiddenException('Credentials incorrect!.');
+    if (!user) throw new ForbiddenException('Incorrect credentials!.');
 
     const pwMatches = await argon.verify(user.hash, userInput.password);
 
@@ -66,7 +66,7 @@ export class AuthService {
     const secret = this.config.get('JWT_SECRET');
 
     const accessToken = await this.jwt.signAsync(payload, {
-      expiresIn: '20m',
+      expiresIn: '45m',
       secret,
     });
 

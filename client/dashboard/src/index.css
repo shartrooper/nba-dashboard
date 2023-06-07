@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #1e293b;
 }
 
 code {
@@ -19,5 +20,8 @@ code {
 @layer components {
   a {
     @apply text-basketball hover:text-basketball-dim;
+  }
+  a.nav-link{
+    @apply text-chalkboard
   }
 }

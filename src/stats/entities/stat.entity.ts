@@ -5,11 +5,26 @@ import {
   ObjectType,
   OmitType,
   PartialType,
+  PickType,
 } from '@nestjs/graphql';
 import { BasePayload } from '../../balldontlie/dto';
 import { Game } from '../../games/entities';
 import { Player } from '../../players/entities';
 import { Team } from '../../teams/entities';
+
+@ObjectType()
+class GameStats extends PickType(Game, [
+  'id',
+  'date',
+  'season',
+  'visitor_team_score',
+  'home_team_score',
+] as const) {
+  @Field()
+  home_team_id: string;
+  @Field()
+  visitor_team_id: string;
+}
 
 @ObjectType()
 export class PlayerStats {
@@ -39,8 +54,8 @@ export class PlayerStats {
   fta: number;
   @Field(() => Float, { nullable: true })
   ftm: number;
-  @Field(() => Game)
-  game: Game;
+  @Field(() => GameStats)
+  game: GameStats;
   @Field({ nullable: true })
   min: string;
   @Field(() => Float, { nullable: true })

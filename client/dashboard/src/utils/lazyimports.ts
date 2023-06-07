@@ -11,5 +11,4 @@ export function lazyImport<
   });
 }
 
-// Usage
-// const { Dashboard } = lazyImport(() => import("./Dashboard"), "Dashboard");
+// USAGE: const { Dashboard } = lazyImport(() => import("./Dashboard"), "Dashboard");

@@ -4,9 +4,9 @@ import { RegisterForm } from '../components/RegisterForm';
 
 export const Register = () => {
   return (
-      <Landing>
-        <RegisterForm onSuccess={() => null} />
-        <ToLoginPage />
-      </Landing>
+    <Landing>
+      <RegisterForm onSuccess={() => null} />
+      <ToLoginPage />
+    </Landing>
   );
 };
