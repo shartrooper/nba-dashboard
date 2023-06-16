@@ -3,7 +3,7 @@ import useFetchPlayerAverages from "../hook/useFetchPlayersAverages"
 import useLazyFetchPlayers from "@/features/players/hook/useLazyFetchPlayers";
 import PlayerComboBox from "./playerBox";
 import { ParsedAveragedPlayer } from "../types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Spinner } from "@/components/Elements/Spinner";
 import clsx from "clsx";
@@ -26,7 +26,7 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 		...playersIds
 	});
 
-	const [, loading, playerSuggestions, refetchPlayers] = useLazyFetchPlayers();
+	const [getPlayers, loading, playerSuggestions, refetchPlayers] = useLazyFetchPlayers();
 
 	const onUpdatePlayerSuggestions = (query: string) => {
 		refetchPlayers({ search: query });
@@ -42,6 +42,9 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 		setPlayersIds(updatedPlayerIds);
 		refetchPlayersAverages({ player_ids, ...updatedPlayerIds });
 	}
+
+	useEffect(() => { getPlayers() }, [getPlayers]);
+
 
 	if (!data) {
 		return loadingPlayerAverages ?
