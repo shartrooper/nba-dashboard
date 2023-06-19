@@ -12,9 +12,9 @@ export const MainContainer = () => {
 	const [start_date, end_date] = getWeekInterval(dayjs());
 	const { data } = usePollGames({ start_date, end_date });
 	const initialPlayerIdsValues = useRef(getRandomPlayerIds());
-	
-	if (!data) {
-		return null;
+
+	if (!data?.length) {
+		return <div>No games status on this week.</div>;
 	}
 
 	const { season } = data[0];

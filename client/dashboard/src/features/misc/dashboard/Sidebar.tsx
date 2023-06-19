@@ -10,8 +10,8 @@ export type SidebarProps = {
 export const SideBarContent = ({ children }: { children?: ReactNode }) => {
   return (
     <>
-      <div className="pt-4 mb-10 ml-4 flex items-center justify-start">
-        <img alt="NBA hero logo" src={Hero} className="w-10 h-16"></img>
+      <div className="pt-4 mb-10 flex items-center justify-center">
+        <img alt="NBA hero logo" src={Hero} className="w-18 h-20 md:h-24"></img>
       </div>
       <div className="overflow-y-auto flex-1">{children}</div>
     </>
@@ -49,7 +49,7 @@ export const SideBarContainer = ({
           {/* The backdrop*/}
           <div className="fixed inset-0 bg-white/30" aria-hidden="true" />
           {/*The actual sidebar*/}
-          <Dialog.Panel className="flex bg-midnight relative flex-col w-36 h-screen border-r border-chalkboard md:hidden">
+          <Dialog.Panel className="flex bg-evening relative flex-col w-36 h-screen border-r border-chalkboard md:hidden">
             <button
               ref={closeButtonRef}
               className="hover:ring-2 hover:ring-gray-300 flex absolute top-2 right-2 justify-center items-center w-6 h-6 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-600"
@@ -71,7 +71,7 @@ export const SideBarContainer = ({
           </Dialog.Panel>
         </Dialog>
       </Transition>
-      <div className="fixed hidden md:flex flex-col w-48 h-screen border-r border-chalkboard">
+      <div className="fixed hidden md:flex flex-col w-48 h-screen border-r border-chalkboard bg-evening">
         {children}
       </div>
     </>

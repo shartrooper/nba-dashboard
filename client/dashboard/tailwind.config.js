@@ -14,6 +14,7 @@ module.exports = {
     extend: {
       colors: {
         'midnight': '#1e293b',
+        'evening':'#2f405d',
         'basketball': '#ea580c',
         'basketball-dim': '#fb923c',
         'chalkboard': '#fff3f5',
