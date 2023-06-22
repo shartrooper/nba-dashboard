@@ -5,6 +5,8 @@ import { publicRoutes } from './public';
 import { Notifications } from '@/components/Notifications';
 import { useSessionTokenStore } from '@/store';
 import { setAuthToken } from '@/lib/apollo';
+import { createPortal } from 'react-dom';
+import ScreenLoader from '@/components/Loader';
 
 export const AppRoutes = () => {
   const { token } = useSessionTokenStore();
@@ -17,6 +19,7 @@ export const AppRoutes = () => {
     <>
       <ContentLayout>{elem}</ContentLayout>
       <Notifications />
+      {createPortal(<ScreenLoader />, document.body)}
     </>
   );
 };

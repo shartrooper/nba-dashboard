@@ -1,16 +1,11 @@
 import { Tab } from "@headlessui/react";
-import dayjs from "dayjs";
-import calendar from "dayjs/plugin/calendar";
-import utc from "dayjs/plugin/utc";
 import { ParsedGame } from "../types";
 import clsx from "clsx";
 import { useState } from "react";
-import { teamsLogosImageRoutes } from "@/utils";
+import { parseDate, teamsLogosImageRoutes } from "@/utils";
 
 
-export const GamesBoardContainer = ({ games, currentSeason }: { games: ParsedGame[], currentSeason: number }) => {
-	dayjs.extend(calendar);
-	dayjs.extend(utc);
+export const GamesBoardContainer = ({ games, boardTitle }: { games: ParsedGame[], boardTitle: string }) => {
 
 	const mapSamples = (game: ParsedGame) => {
 		const {
@@ -42,14 +37,14 @@ export const GamesBoardContainer = ({ games, currentSeason }: { games: ParsedGam
 	});
 
 	return (
-		<div className="w-full max-w-md px-2 py-16 sm:px-0 text-center">
-			<p>This week Season's {currentSeason} games</p>
+		<div className="w-full max-w-md px-2 py-16 sm:px-0 self-center text-center">
+			<p className="text-lg">{boardTitle}</p>
 			<ul className="mt-1 space-x-1 text-xs font-normal leading-4 text-chalkboard">
 				<li>* Time expressed in UTC standard</li>
 				<li>* Data is updated every 10 minutes</li>
 			</ul>
 			<Tab.Group>
-				<Tab.List className="flex space-x-1 rounded-xl bg-basketball p-1">
+				<Tab.List className="flex mt-4 space-x-1 rounded-xl bg-basketball p-1">
 					{Object.keys(categories).map((category) => (
 						<Tab
 							key={category}
@@ -84,7 +79,7 @@ export const GamesBoardContainer = ({ games, currentSeason }: { games: ParsedGam
 									>
 										<div className='flex justify-start w-full font-normal leading-4'>
 											<p>
-												{dayjs(post.date).utc().format("D MMM")}
+												{parseDate.dayAndMonth(post.date)}
 											</p>
 										</div>
 										<h3 className="flex text-sm font-medium leading-5 text-center">
@@ -99,7 +94,7 @@ export const GamesBoardContainer = ({ games, currentSeason }: { games: ParsedGam
 											</div>
 										</h3>
 										<ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-											<li>{dayjs(post.status).isValid() ? dayjs(post.status).utc().calendar() : post.status}</li>
+											<li>{parseDate.validate(post.status) ? parseDate.calendar(post.status) : post.status}</li>
 											<li>&middot;</li>
 											<li>Period {post.period}</li>
 										</ul>

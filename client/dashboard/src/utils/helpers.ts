@@ -6,6 +6,8 @@ import { handleError } from './errorhandler';
 import { ApolloError, DocumentNode, OperationVariables, QueryFunctionOptions, useQuery } from '@apollo/client';
 import dayjs, { Dayjs } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import calendar from "dayjs/plugin/calendar";
+import utc from "dayjs/plugin/utc";
 
 const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -16,7 +18,6 @@ type MessageObject = {
   message: string,
   type: Notification['type']
 }
-
 
 const buildMsgObject = (title: string, message: string, type: Notification['type']): MessageObject => ({
   type,
@@ -89,20 +90,35 @@ export const getWeekInterval = (date: Dayjs | string) => {
 }
 
 export const useFetchService = (params: OperationVariables, query: DocumentNode, configOption?: QueryFunctionOptions) => {
-	const { addNotification } = useNotificationStore();
-	const onError = handleErrorService(addNotification);
-	const [state, toggle] = useState(false);
-	const { data, loading, fetchMore, refetch } = useQuery(query, {
-		variables: { ...params },
-		onError,
-		onCompleted: () => {
-			toggle(false);
-		},
-		...configOption
-	});
-	return { data, loading, fetchMore, refetch, loadingMore: { state, toggle } }
+  const { addNotification } = useNotificationStore();
+  const onError = handleErrorService(addNotification);
+  const [state, toggle] = useState(false);
+  const { data, loading, fetchMore, refetch } = useQuery(query, {
+    variables: { ...params },
+    onError,
+    onCompleted: () => {
+      toggle(false);
+    },
+    ...configOption
+  });
+  return { data, loading, fetchMore, refetch, loadingMore: { state, toggle } }
 }
 
 export const objectKeys = <Obj extends object>(obj: Obj): (keyof Obj)[] => {
-	return Object.keys(obj) as (keyof Obj)[];
+  return Object.keys(obj) as (keyof Obj)[];
 }
+
+const dateTime = () => {
+  dayjs.extend(calendar);
+  dayjs.extend(utc);
+
+  return {
+    today: dayjs(),
+    dayAndMonth: (date: string | Dayjs) => dayjs(date).utc().format("D MMM"),
+    validate: (date: string) => dayjs(date).isValid(),
+    calendar: (date: string | Dayjs) => dayjs(date).utc().calendar()
+  }
+}
+
+
+export const parseDate = dateTime();

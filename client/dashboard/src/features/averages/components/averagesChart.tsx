@@ -15,7 +15,7 @@ type Props<Tkeys extends Tboundaries> = {
 	initialPlayersIds: Record<Tkeys, number>
 }
 
-const containerStyle = "w-80 lg:grow lg:w-auto text-center"
+const containerStyle = "text-center"
 
 export function AveragesChartContainer<K extends Tboundaries>({ season, initialPlayersIds }: Props<K>) {
 	type PlayersIdsProps = typeof initialPlayersIds;
