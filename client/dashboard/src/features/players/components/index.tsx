@@ -3,9 +3,15 @@ import useFetchPlayers from "../hook/useFetchPlayers"
 import { InView } from "react-intersection-observer";
 import FeedCard from "./feedCard";
 import SearchInput from "@/components/search/searchInput";
+import { useScreenLoaderStore } from "@/store";
+import { useEffect } from "react";
 
 export const FeedContainer = () => {
 	const { data, fetchMore, loading: onMountLoading, refetch, loadingMore } = useFetchPlayers();
+	const { toggle } = useScreenLoaderStore(state => state);
+
+	useEffect(() => toggle(onMountLoading), [onMountLoading, toggle]);
+
 	const loadMore = () => {
 		if (!data) return;
 		const { meta } = data;
@@ -21,11 +27,6 @@ export const FeedContainer = () => {
 		loadingMore.toggle(true);
 	};
 
-	if (onMountLoading) {
-		return <div className="grid place-items-center" >
-			<Spinner size="xl" />
-		</div>
-	}
 
 	const PlayersFeed = () => {
 		if (!data?.players) {

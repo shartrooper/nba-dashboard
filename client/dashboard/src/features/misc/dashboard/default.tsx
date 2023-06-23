@@ -1,12 +1,12 @@
-import { Spinner } from "@/components/Elements/Spinner";
 import Input from "@/components/Input/generic";
 import { idKeys } from "@/features/averages/api";
 import { AveragesChartContainer } from "@/features/averages/components";
 import { GamesBoardContainer } from "@/features/games/components";
 import { usePollGames } from "@/features/games/hook/useFetchGames";
+import { useScreenLoaderStore } from "@/store";
 import { MAX_PLAYERS, getWeekInterval, parseDate } from "@/utils";
 import { TicketIcon } from "@heroicons/react/20/solid";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const getRandomPlayerIds = () => idKeys.reduce((ids, param) => ({ ...ids, [param]: Math.floor(Math.random() * MAX_PLAYERS) }), {});
 
@@ -15,14 +15,17 @@ export const MainContainer = () => {
 	const [start_date, end_date] = weekInterval;
 	const { data, loading } = usePollGames({ start_date, end_date });
 	const initialPlayerIdsValues = useRef(getRandomPlayerIds());
-
+	const { toggle } = useScreenLoaderStore(state => state);
 	const handleWeekChange = ({ target: { value } }: { target: { value?: string } }) => {
 		value && setWeekInterval(getWeekInterval(value));
 	};
+
+	useEffect(() => toggle(loading), [loading, toggle]);
+
 	const DashboardContent: React.FC = () => {
 		if (!data?.length) {
 			return <div className="text-center grid place-items-center mt-6" >
-				{loading ? <Spinner size="lg" /> : <><TicketIcon className="h-8 w-8" />There aren't any games scheduled for this week.</>}
+				<><TicketIcon className="h-8 w-8" />There aren't any games scheduled for this week.</>
 			</div>;
 		}
 		const { season } = data[0];
