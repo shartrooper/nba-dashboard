@@ -25,8 +25,8 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 		player_ids: mapIntoValuesArray<PlayersIdsProps, number>(playersIds),
 		...playersIds
 	});
-
 	const [getPlayers, loading, playerSuggestions, refetchPlayers] = useLazyFetchPlayers();
+	const [selectedPlayer, setSelectedPlayer] = useState<{ player: ParsedAveragedPlayer, pos: number }>();
 
 	const onUpdatePlayerSuggestions = (query: string) => {
 		refetchPlayers({ search: query });
@@ -45,7 +45,6 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 
 	useEffect(() => { getPlayers() }, [getPlayers]);
 
-
 	if (!data) {
 		return loadingPlayerAverages ?
 			<div className={clsx(containerStyle, "grid place-items-center")} >
@@ -59,7 +58,7 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 
 	const chartData: { name: string, pts: number, turnover: number, gamesPlayed: number }[] = players.map((player, index) => {
 		const { firstName, lastName } = player;
-		const name = `${index + 1} : ${firstName} ${lastName}`;
+		const name = `${index} ${firstName} ${lastName}`;
 		const matchedStats = seasonAverages.find(stat => stat.playerId === player.id);
 		if (!matchedStats) {
 			return {
@@ -85,7 +84,23 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 			<li>* You can input your desired player to update the chart</li>
 		</ul>
 		<ResponsiveContainer height={250} width={'100%'}>
-			<BarChart margin={{ left: -35 }} data={chartData}>
+			<BarChart
+				onClick={target => {
+					const label = target.activeLabel as string;
+					const [index, labelFirstName, labelLastName] = label.split(' ');
+
+					const foundPlayer: ParsedAveragedPlayer = players.find(player => {
+						const { firstName, lastName } = player;
+						return labelFirstName === firstName && labelLastName === lastName
+					}) as ParsedAveragedPlayer | never;
+
+					setSelectedPlayer({
+						player: foundPlayer, pos: parseInt(index)
+					})
+				}}
+				margin={{ left: -35 }}
+				data={chartData}
+			>
 				<CartesianGrid strokeDasharray="3 3" />
 				<XAxis dataKey="name" />
 				<YAxis />
@@ -97,18 +112,14 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 			</BarChart>
 		</ResponsiveContainer>
 		<div className="flex flex-col md:grid md:grid-cols-2 md:gap-4">
-			{
-				players.map((player, index) => <>
-					<PlayerComboBox
-						player={player}
-						suggestions={playerSuggestions}
-						loading={loading}
-						onInputChange={onUpdatePlayerSuggestions}
-						onSelectorChange={onUpdatePlayerSelection}
-						itemIndex={index}
-					/>
-				</>)
-			}
+			<PlayerComboBox
+				player={selectedPlayer?.player ?? players[0]}
+				suggestions={playerSuggestions}
+				loading={loading}
+				onInputChange={onUpdatePlayerSuggestions}
+				onSelectorChange={onUpdatePlayerSelection}
+				itemIndex={selectedPlayer?.pos ?? 0}
+			/>
 		</div>
 	</div>
 }

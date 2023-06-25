@@ -31,17 +31,18 @@ type Sample = Record<string, SamplePlayer | SeasonAverages>
 
 const sample = playersAverageData as Sample;
 
-const chartData: { name: string, pts: number, turnover: number }[] = Object.keys(playersAverageData).slice(0, -1).map(key => {
+const chartData: { name: string, pts: number, turnover: number }[] = Object.keys(playersAverageData).slice(0, -1).map((key, index) => {
 	const { first_name, last_name, id } = sample[key] as SamplePlayer;
-	const name = `${first_name} ${last_name}`;
+	const name = `${index}:${first_name} ${last_name}`;
 	const playerAverages = sample['seasonAverages'] as SeasonAverages;
 
 	const playerStats = playerAverages.data.find(stat => stat.player_id === id);
 
 	if (!playerStats) return { name, pts: 0, turnover: 0 }
 
-	const {pts, turnover} = playerStats;
+	const { pts, turnover } = playerStats;
 	return {
+		id,
 		name,
 		pts,
 		turnover
@@ -51,7 +52,9 @@ const chartData: { name: string, pts: number, turnover: number }[] = Object.keys
 
 const PlayersAveragesBarChar = () =>
 	<ResponsiveContainer height={250} width={'100%'}>
-		<BarChart margin={{ left: -35 }} data={chartData}>
+		<BarChart onClick={(nextState) => {
+			console.log(nextState);
+		}} margin={{ left: -35 }} data={chartData}>
 			<CartesianGrid strokeDasharray="3 3" />
 			<XAxis dataKey="name" />
 			<YAxis />

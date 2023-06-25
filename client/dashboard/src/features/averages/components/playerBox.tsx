@@ -17,6 +17,8 @@ const PlayerComboBox = ({ suggestions, onInputChange, onSelectorChange, itemInde
 	const [selected, setSelected] = useState<ParsedAveragedPlayer>(player);
 	const [query, setQuery] = useState<string>();
 
+	useEffect(() => setSelected(player), [player]);
+
 	const Options = ({ showLoader }: { showLoader: boolean }) => {
 		if (showLoader) {
 			return <Spinner variant="dark" />
