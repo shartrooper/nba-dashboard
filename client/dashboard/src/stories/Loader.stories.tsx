@@ -17,9 +17,9 @@ const MockScreenLoader = () => {
 	const { toggle } = useScreenLoaderStore(state => state);
 
 	const handleClick = () => {
-		toggle(true);
+		toggle(true, "main");
 		setTimeout(() => {
-			toggle(false);
+			toggle(false, "main");
 		}, 2000);
 	}
 
