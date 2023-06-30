@@ -5,8 +5,7 @@ import PlayerComboBox from "./playerBox";
 import { ParsedAveragedPlayer } from "../types";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { Spinner } from "@/components/Elements/Spinner";
-import clsx from "clsx";
+import { chartLoaderSlice } from "@/store";
 
 type Tboundaries = string | number | symbol
 
@@ -19,6 +18,7 @@ const containerStyle = "text-center"
 
 export function AveragesChartContainer<K extends Tboundaries>({ season, initialPlayersIds }: Props<K>) {
 	type PlayersIdsProps = typeof initialPlayersIds;
+	const { toggle } = chartLoaderSlice(state => state);
 	const [playersIds, setPlayersIds] = useState<PlayersIdsProps>(initialPlayersIds);
 	const { data, loading: loadingPlayerAverages, refetch: refetchPlayersAverages } = useFetchPlayerAverages<PlayersIdsProps>({
 		season,
@@ -43,15 +43,12 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 		refetchPlayersAverages({ player_ids, ...updatedPlayerIds });
 	}
 
+	useEffect(() => { toggle(loadingPlayerAverages) }, [loadingPlayerAverages, toggle]);
+
 	useEffect(() => { getPlayers() }, [getPlayers]);
 
 	if (!data) {
-		return loadingPlayerAverages ?
-			<div className={clsx(containerStyle, "grid place-items-center")} >
-				<Spinner size="lg" />
-				<span className="text-basketball-dim font-semibold" >Building chart...</span>
-			</div>
-			: null;
+		return null;
 	}
 
 	const { players, seasonAverages } = data;

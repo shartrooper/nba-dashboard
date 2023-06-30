@@ -3,6 +3,7 @@ import { PropsWithChildren } from "react";
 
 export const TransitionWrapper: React.FC<PropsWithChildren<{ isShowing: boolean }>> = ({ isShowing, children }) => {
 	return <Transition
+		appear
 		show={isShowing}
 		enter="transition-opacity duration-100"
 		enterFrom="opacity-0"

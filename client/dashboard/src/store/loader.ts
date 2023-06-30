@@ -2,19 +2,30 @@ import create from 'zustand';
 
 export const loaders = ['main', 'chart'] as const;
 
-type LoadersUnion = typeof loaders[number];
+export type LoadersUnion = typeof loaders[number];
 
-type IsShowing = { [key in LoadersUnion]: boolean };
+type Loaders = {
+	[key in LoadersUnion]: boolean;
+}
 
-const initializeLoaders = loaders.reduce((acc, key) => ({ ...acc, [key]: false }), {} as IsShowing);
+interface ScreenLoaderStore extends Loaders {
+	toggle: (show: boolean) => void;
+}
 
-export const useScreenLoaderStore = create<{ isShowing: IsShowing, toggle: (show: boolean, loaderKey: LoadersUnion) => void }>(set => ({
-	isShowing: initializeLoaders,
-	toggle: (show: boolean, loaderKey: LoadersUnion) => set(state => {
+export const screenLoaderSlice = create<Omit<ScreenLoaderStore, 'chart'>>(set => ({
+	[loaders[0]]: false,
+	toggle: (show: boolean) => set(() => {
 		return {
-			isShowing: {
-				...state.isShowing, [loaderKey]: show
-			}
+			main: show
+		}
+	})
+}));
+
+export const chartLoaderSlice = create<Omit<ScreenLoaderStore, 'main'>>(set => ({
+	[loaders[1]]: false,
+	toggle: (show: boolean) => set(() => {
+		return {
+			chart: show
 		}
 	})
 }));

@@ -1,9 +1,10 @@
 import Input from "@/components/Input/generic";
 import { idKeys } from "@/features/averages/api";
 import { AveragesChartContainer } from "@/features/averages/components";
+import ChartLoader from "@/features/averages/components/chartLoader";
 import { GamesBoardContainer } from "@/features/games/components";
 import { usePollGames } from "@/features/games/hook/useFetchGames";
-import { useScreenLoaderStore } from "@/store";
+import { screenLoaderSlice } from "@/store";
 import { MAX_PLAYERS, getWeekInterval, parseDate } from "@/utils";
 import { TicketIcon } from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
@@ -15,7 +16,7 @@ export const MainContainer = () => {
 	const [start_date, end_date] = weekInterval;
 	const { data, loading } = usePollGames({ start_date, end_date });
 	const initialPlayerIdsValues = useRef(getRandomPlayerIds());
-	const { toggle } = useScreenLoaderStore(state => state);
+	const { toggle } = screenLoaderSlice(state => state);
 	const handleWeekChange = ({ target: { value } }: { target: { value?: string } }) => {
 		value && setWeekInterval(getWeekInterval(value));
 	};
@@ -31,7 +32,10 @@ export const MainContainer = () => {
 		const { season } = data[0];
 		return <>
 			<GamesBoardContainer games={data} boardTitle={`Season ${data[0].season} games, from ${parseDate.dayAndMonth(start_date)} to ${parseDate.dayAndMonth(end_date)}`} />
-			<AveragesChartContainer<keyof typeof initialPlayerIdsValues.current> season={season} initialPlayersIds={initialPlayerIdsValues.current} />
+			<div className="relative">
+				<ChartLoader />
+				<AveragesChartContainer<keyof typeof initialPlayerIdsValues.current> season={season} initialPlayersIds={initialPlayerIdsValues.current} />
+			</div>
 		</>
 	}
 

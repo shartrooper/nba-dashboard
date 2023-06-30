@@ -3,16 +3,14 @@ import useFetchPlayers from "../hook/useFetchPlayers"
 import { InView } from "react-intersection-observer";
 import FeedCard from "./feedCard";
 import SearchInput from "@/components/search/searchInput";
-import { loaders, useScreenLoaderStore } from "@/store";
+import { screenLoaderSlice } from "@/store";
 import { useEffect } from "react";
-
-const [MAIN] = loaders;
 
 export const FeedContainer = () => {
 	const { data, fetchMore, loading: onMountLoading, refetch, loadingMore } = useFetchPlayers();
-	const { toggle } = useScreenLoaderStore(state => state);
+	const { toggle } = screenLoaderSlice(state => state);
 
-	useEffect(() => toggle(onMountLoading, MAIN), [onMountLoading, toggle]);
+	useEffect(() => toggle(onMountLoading), [onMountLoading, toggle]);
 
 	const loadMore = () => {
 		if (!data) return;

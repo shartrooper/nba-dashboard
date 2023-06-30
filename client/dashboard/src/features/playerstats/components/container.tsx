@@ -1,5 +1,5 @@
 import { DropdownWrapper } from "@/components/Disclosure"
-import { loaders, useChartDataStore, useScreenLoaderStore } from "@/store"
+import { useChartDataStore, screenLoaderSlice } from "@/store"
 import { teamsLogosImageRoutes } from "@/utils"
 import useFetchPlayerStats from "../hook/useFetchPlayerStats"
 import { ParsedPlayerStatsResponse } from "../types"
@@ -8,11 +8,9 @@ import { DateSeasonForm, FetchDTOValues } from "./Seasonform"
 import { useNavigatorStore } from "@/store/navigator"
 import { useEffect } from "react"
 
-const [MAIN] = loaders;
-
 export const Container = ({ id }: { id: number }) => {
 	const { addChunk } = useChartDataStore();
-	const { toggle } = useScreenLoaderStore(state => state);
+	const { toggle } = screenLoaderSlice(state => state);
 	const dispatchToChartDataStore = (chunk?: ParsedPlayerStatsResponse) => {
 		if (!chunk) return;
 		const { player, stats, meta } = chunk;
@@ -21,7 +19,7 @@ export const Container = ({ id }: { id: number }) => {
 	const { data, refetch, fetchMore, loading, loadingMore } = useFetchPlayerStats({ id }, dispatchToChartDataStore);
 	const reset = useNavigatorStore(state => state.reset);
 
-	useEffect(() => toggle(loading, MAIN), [loading, toggle]);
+	useEffect(() => toggle(loading), [loading, toggle]);
 
 	if (!data) return null;
 

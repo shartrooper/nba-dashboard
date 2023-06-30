@@ -1,6 +1,7 @@
 import { Button } from "@/components/Elements/Button";
-import ScreenLoader from "@/components/Loader";
-import { useScreenLoaderStore } from "@/store";
+import { Spinner } from "@/components/Elements/Spinner";
+import ScreenLoader, { TransitionWrapper } from "@/components/Loader";
+import { LoadersUnion, screenLoaderSlice, chartLoaderSlice } from "@/store";
 import { Meta, Story } from "@storybook/react";
 
 const meta: Meta = {
@@ -12,26 +13,48 @@ const meta: Meta = {
 
 export default meta;
 
+type Prop = { loaderType: LoadersUnion }
 
-const MockScreenLoader = () => {
-	const { toggle } = useScreenLoaderStore(state => state);
 
-	const handleClick = () => {
-		toggle(true, "main");
+
+const MockChartLoader = () => {
+	const { chart } = chartLoaderSlice(state => state);
+	return <TransitionWrapper isShowing={chart}
+	>
+		<div className="absolute inset-0 h-screen grid place-items-center bg-evening" >
+			<Spinner size="xl" /> LoadingChart
+		</div>
+	</TransitionWrapper>
+}
+
+
+const MockScreenLoader: React.FC<Prop> = ({ loaderType }) => {
+	const { toggle: toggleMain } = screenLoaderSlice(state => state);
+	const { toggle: toggleChart } = chartLoaderSlice(state => state);
+
+	const handleClick = (loaderFn: typeof toggleMain) => {
+		loaderFn(true);
 		setTimeout(() => {
-			toggle(false, "main");
+			loaderFn(false);
 		}, 2000);
 	}
 
 	return <>
-		<Button onClick={handleClick} >
-			Toggle Loader
+		<Button onClick={() => handleClick(loaderType === 'main' ? toggleMain : toggleChart)} >
+			Toggle Loader {loaderType}
 		</Button>
-		<ScreenLoader />
+		{loaderType === 'main' && <ScreenLoader />}
+		{loaderType === 'chart' && <MockChartLoader />}
 	</>
 }
 
 
-const Template: Story = () => <MockScreenLoader />
+const Template: Story<Prop> = (args) => <MockScreenLoader {...args} />
 
-export const Main = Template.bind({});
+export const MainLoader = Template.bind({});
+
+MainLoader.args = { loaderType: "main" };
+
+export const ChartLoader = Template.bind({});
+
+ChartLoader.args = { loaderType: "chart" }
