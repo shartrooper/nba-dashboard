@@ -11,15 +11,15 @@ type Tboundaries = string | number | symbol
 
 type Props<Tkeys extends Tboundaries> = {
 	season: number,
-	initialPlayersIds: Record<Tkeys, number>
+	playersIds: Record<Tkeys, number>
+	setPlayersIds: (playerIds: Record<Tkeys, number>) => void
 }
 
 const containerStyle = "text-center"
 
-export function AveragesChartContainer<K extends Tboundaries>({ season, initialPlayersIds }: Props<K>) {
-	type PlayersIdsProps = typeof initialPlayersIds;
+export function AveragesChartContainer<K extends Tboundaries>({ season, playersIds, setPlayersIds }: Props<K>) {
+	type PlayersIdsProps = typeof playersIds;
 	const { toggle } = chartLoaderSlice(state => state);
-	const [playersIds, setPlayersIds] = useState<PlayersIdsProps>(initialPlayersIds);
 	const { data, loading: loadingPlayerAverages, refetch: refetchPlayersAverages } = useFetchPlayerAverages<PlayersIdsProps>({
 		season,
 		player_ids: mapIntoValuesArray<PlayersIdsProps, number>(playersIds),
@@ -131,16 +131,14 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 			</BarChart>
 		</ResponsiveContainer>
 		<div className="flex flex-col md:flex-row md:justify-center md:gap-4 mt-4 mb-16">
-			<div className="md:max-w-lg" >
-				<PlayerComboBox
-					player={selectedPlayer?.player ?? players[0]}
-					suggestions={playerSuggestions}
-					loading={loading}
-					onInputChange={onUpdatePlayerSuggestions}
-					onSelectorChange={onUpdatePlayerSelection}
-					itemIndex={selectedPlayer?.pos ?? 0}
-				/>
-			</div>
+			<PlayerComboBox
+				player={selectedPlayer?.player ?? players[0]}
+				suggestions={playerSuggestions}
+				loading={loading}
+				onInputChange={onUpdatePlayerSuggestions}
+				onSelectorChange={onUpdatePlayerSelection}
+				itemIndex={selectedPlayer?.pos ?? 0}
+			/>
 			<div>
 				{selectedPlayer ? <>
 					<div>

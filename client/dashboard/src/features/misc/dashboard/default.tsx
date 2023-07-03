@@ -7,7 +7,7 @@ import { usePollGames } from "@/features/games/hook/useFetchGames";
 import { screenLoaderSlice } from "@/store";
 import { MAX_PLAYERS, getWeekInterval, parseDate } from "@/utils";
 import { TicketIcon } from "@heroicons/react/20/solid";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const getRandomPlayerIds = () => idKeys.reduce((ids, param) => ({ ...ids, [param]: Math.floor(Math.random() * MAX_PLAYERS) }), {});
 
@@ -15,7 +15,7 @@ export const MainContainer = () => {
 	const [weekInterval, setWeekInterval] = useState<string[]>(getWeekInterval(parseDate.today));
 	const [start_date, end_date] = weekInterval;
 	const { data, loading } = usePollGames({ start_date, end_date });
-	const initialPlayerIdsValues = useRef(getRandomPlayerIds());
+	const [playersIds, setPlayersIds] = useState(getRandomPlayerIds());
 	const { toggle } = screenLoaderSlice(state => state);
 	const handleWeekChange = ({ target: { value } }: { target: { value?: string } }) => {
 		value && setWeekInterval(getWeekInterval(value));
@@ -23,6 +23,9 @@ export const MainContainer = () => {
 
 	useEffect(() => toggle(loading), [loading, toggle]);
 
+	const handlePlayersChange = (updatePlayersIds: Record<keyof typeof setPlayersIds, number>) => {
+		setPlayersIds(updatePlayersIds);
+	}
 	const DashboardContent: React.FC = () => {
 		if (!data?.length) {
 			return <div className="text-center grid place-items-center mt-6" >
@@ -34,7 +37,7 @@ export const MainContainer = () => {
 			<GamesBoardContainer games={data} boardTitle={`Season ${data[0].season} games, from ${parseDate.dayAndMonth(start_date)} to ${parseDate.dayAndMonth(end_date)}`} />
 			<div className="relative">
 				<ChartLoader />
-				<AveragesChartContainer<keyof typeof initialPlayerIdsValues.current> season={season} initialPlayersIds={initialPlayerIdsValues.current} />
+				<AveragesChartContainer<keyof typeof playersIds> season={season} playersIds={playersIds} setPlayersIds={handlePlayersChange} />
 			</div>
 		</>
 	}
