@@ -1,4 +1,4 @@
-import { mapIntoValuesArray } from "@/utils";
+import { mapIntoValuesArray, teamsLogosImageRoutes } from "@/utils";
 import useFetchPlayerAverages from "../hook/useFetchPlayersAverages"
 import useLazyFetchPlayers from "@/features/players/hook/useLazyFetchPlayers";
 import PlayerComboBox from "./playerBox";
@@ -52,7 +52,7 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 	}
 
 	const { players, seasonAverages } = data;
-
+	const selectedPlayerStats = seasonAverages.find(player => player.playerId === selectedPlayer?.player?.id);
 	const chartData: { name: string, pts: number, turnover: number, gamesPlayed: number }[] = players.map((player, index) => {
 		const { firstName, lastName } = player;
 		const name = `${index} ${firstName} ${lastName}`;
@@ -76,7 +76,7 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 
 	return <div className={containerStyle}>
 		<p>Current Season's players averages</p>
-		<ul className="mt-1 space-x-1 text-xs font-normal leading-4 text-chalkboard">
+		<ul className="mt-1 space-x-1 text-xs font-normal leading-4 text-chalkboard mb-8">
 			<li>* 6 randomly picked players are showcased</li>
 			<li>* You can input your desired player to update the chart</li>
 		</ul>
@@ -101,14 +101,14 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 				<CartesianGrid strokeDasharray="3 3" />
 				<XAxis dataKey="name" />
 				<YAxis />
-				<Tooltip labelClassName="text-midnight" />
+				<Tooltip labelClassName="text-midnight" cursor={{ fill: "#2f405d", opacity: "80%" }} />
 				<Legend />
-				<Bar dataKey="pts" fill="#fb923c" />
-				<Bar dataKey="gamesPlayed" fill="#82ca9d" />
-				<Bar dataKey="turnover" fill="#ff5734" />
+				<Bar dataKey="pts" fill="#e19f41" />
+				<Bar dataKey="gamesPlayed" fill="#038bbb" />
+				<Bar dataKey="turnover" fill="#010d23" />
 			</BarChart>
 		</ResponsiveContainer>
-		<div className="flex flex-col md:grid md:grid-cols-2 md:gap-4">
+		<div className="flex flex-col md:grid md:grid-cols-2 md:gap-4 mb-16">
 			<PlayerComboBox
 				player={selectedPlayer?.player ?? players[0]}
 				suggestions={playerSuggestions}
@@ -117,6 +117,27 @@ export function AveragesChartContainer<K extends Tboundaries>({ season, initialP
 				onSelectorChange={onUpdatePlayerSelection}
 				itemIndex={selectedPlayer?.pos ?? 0}
 			/>
+			<div>
+				{selectedPlayer ? <>
+					<div>
+						<span className="text-ellipsis" >{selectedPlayer?.player.firstName} {selectedPlayer?.player.lastName}</span>
+						<img alt='team logo' src={teamsLogosImageRoutes[selectedPlayer?.player.team.name ?? '']} className="w-14 h-14 inline-block"></img>
+					</div>
+					<p>
+						Points : {selectedPlayerStats?.pts ?? "N/A"}
+					</p>
+					<p>
+						Games Played : {selectedPlayerStats?.gamesPlayed ?? "N/A"}
+					</p>
+					<p>
+						Turnover : {selectedPlayerStats?.turnover ?? "N/A"}
+					</p>
+				</> :
+					<div className="text-center">
+						Click over a player's chart data to show details
+					</div>
+				}
+			</div>
 		</div>
 	</div>
 }

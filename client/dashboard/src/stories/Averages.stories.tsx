@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react';
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import playersAverageData from '@/assets/players-averages.json';
+import { useState } from 'react';
 
 const meta: Meta = {
 	title: 'Season Averages',
@@ -50,20 +51,32 @@ const chartData: { name: string, pts: number, turnover: number }[] = Object.keys
 });
 
 
-const PlayersAveragesBarChar = () =>
-	<ResponsiveContainer height={250} width={'100%'}>
+const PlayersAveragesBarChar = () => {
+	const [activeIndex, setActiveIndex] = useState<number>();
+
+	const mapBarCells = (activeColor: (idx: number) => string, keyword: string) => chartData.map((entry, index) => {
+		return <Cell key={`${keyword}-${index}`} fill={activeColor(index)} />
+	})
+
+	const activeColor = (color1: string, color2: string) => (index: number) => `${activeIndex === index ? color1 : color2}`;
+
+	return <ResponsiveContainer height={250} width={'100%'}>
 		<BarChart onClick={(nextState) => {
-			console.log(nextState);
+			setActiveIndex(nextState.activeTooltipIndex)
 		}} margin={{ left: -35 }} data={chartData}>
-			<CartesianGrid strokeDasharray="3 3" />
-			<XAxis dataKey="name" />
-			<YAxis />
-			<Tooltip />
-			<Legend />
-			<Bar dataKey="pts" fill="#fb923c" />
-			<Bar dataKey="turnover" fill="#82ca9d" />
+			<CartesianGrid cursor="pointer" strokeDasharray="3 3" />
+			<XAxis dataKey="name" stroke="#b8b8b8" />
+			<YAxis stroke="#b8b8b8" />
+			<Tooltip wrapperClassName='text-basketball' cursor={{ fill: "#2f405d", opacity: "80%" }} />
+			<Bar dataKey="pts">
+				{mapBarCells(activeColor("#36c7fc", "#038bbb"), "pts")}
+			</Bar>
+			<Bar dataKey="turnover">
+				{mapBarCells(activeColor("#eec791", "#e19f41"), "turnover")}
+			</Bar>
 		</BarChart>
 	</ResponsiveContainer>
+}
 
 const Template: Story = () => <PlayersAveragesBarChar />
 
