@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { Bar, BarChart, CartesianGrid, Cell, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import playersAverageData from '@/assets/players-averages.json';
 import { useState } from 'react';
 
@@ -67,12 +67,17 @@ const PlayersAveragesBarChar = () => {
 			<CartesianGrid cursor="pointer" strokeDasharray="3 3" />
 			<XAxis dataKey="name" stroke="#b8b8b8" />
 			<YAxis stroke="#b8b8b8" />
-			<Tooltip wrapperClassName='text-basketball' cursor={{ fill: "#2f405d", opacity: "80%" }} />
-			<Bar dataKey="pts">
+			<Tooltip
+				cursor={{ fill: "#2f405d", opacity: "80%" }}
+				wrapperStyle={{ opacity: "90%" }}
+			/>
+			<Bar dataKey="pts" cursor="pointer">
 				{mapBarCells(activeColor("#36c7fc", "#038bbb"), "pts")}
+				<LabelList dataKey="pts" position="top" />
 			</Bar>
-			<Bar dataKey="turnover">
+			<Bar dataKey="turnover" cursor="pointer">
 				{mapBarCells(activeColor("#eec791", "#e19f41"), "turnover")}
+				<LabelList dataKey="turnover" position="top" />
 			</Bar>
 		</BarChart>
 	</ResponsiveContainer>
