@@ -3,11 +3,15 @@ import useFetchPlayers from "../hook/useFetchPlayers"
 import { InView } from "react-intersection-observer";
 import FeedCard from "./feedCard";
 import SearchInput from "@/components/search/searchInput";
-import { DropdownWrapper } from "@/components/Disclosure";
-import clsx from "clsx";
+import { screenLoaderSlice } from "@/store";
+import { useEffect } from "react";
 
 export const FeedContainer = () => {
 	const { data, fetchMore, loading: onMountLoading, refetch, loadingMore } = useFetchPlayers();
+	const { toggle } = screenLoaderSlice(state => state);
+
+	useEffect(() => toggle(onMountLoading), [onMountLoading, toggle]);
+
 	const loadMore = () => {
 		if (!data) return;
 		const { meta } = data;
@@ -23,11 +27,6 @@ export const FeedContainer = () => {
 		loadingMore.toggle(true);
 	};
 
-	if (onMountLoading) {
-		return <div className="grid place-items-center" >
-			<Spinner size="xl" />
-		</div>
-	}
 
 	const PlayersFeed = () => {
 		if (!data?.players) {
@@ -44,13 +43,9 @@ export const FeedContainer = () => {
 
 	return <>
 		<p>NBA Players Feed</p>
-		<div className="fixed m-4" >
-			<DropdownWrapper description="Search player">
-				<div className="flex flex-wrap gap-4">
-					<SearchInput cb={searchPlayer} placeholder="Input player name..." />
-					{loadingMore.state && <Spinner size="md" className="text-current" />}
-				</div>
-			</DropdownWrapper>
+		<div className="flex flex-wrap gap-4">
+			<SearchInput cb={searchPlayer} placeholder="Input player name..." />
+			{loadingMore.state && <Spinner size="md" className="mt-6" />}
 		</div>
 		<PlayersFeed />
 	</>

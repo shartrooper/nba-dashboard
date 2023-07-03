@@ -12,8 +12,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
     <Suspense
       fallback={
         <ContentLayout>
-          <div className="grid place-items-center" >
-            <Spinner size="xl" />
+          <div className="h-screen grid place-items-center" >
+            <Spinner size="lg" />
           </div>
         </ContentLayout>
       }

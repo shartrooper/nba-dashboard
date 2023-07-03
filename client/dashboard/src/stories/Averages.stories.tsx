@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react';
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import playersAverageData from '@/assets/players-averages.json';
+import { useState } from 'react';
 
 const meta: Meta = {
 	title: 'Season Averages',
@@ -31,17 +32,18 @@ type Sample = Record<string, SamplePlayer | SeasonAverages>
 
 const sample = playersAverageData as Sample;
 
-const chartData: { name: string, pts: number, turnover: number }[] = Object.keys(playersAverageData).slice(0, -1).map(key => {
+const chartData: { name: string, pts: number, turnover: number }[] = Object.keys(playersAverageData).slice(0, -1).map((key, index) => {
 	const { first_name, last_name, id } = sample[key] as SamplePlayer;
-	const name = `${first_name} ${last_name}`;
+	const name = `${index}:${first_name} ${last_name}`;
 	const playerAverages = sample['seasonAverages'] as SeasonAverages;
 
 	const playerStats = playerAverages.data.find(stat => stat.player_id === id);
 
 	if (!playerStats) return { name, pts: 0, turnover: 0 }
 
-	const {pts, turnover} = playerStats;
+	const { pts, turnover } = playerStats;
 	return {
+		id,
 		name,
 		pts,
 		turnover
@@ -49,18 +51,37 @@ const chartData: { name: string, pts: number, turnover: number }[] = Object.keys
 });
 
 
-const PlayersAveragesBarChar = () =>
-	<ResponsiveContainer height={250} width={'100%'}>
-		<BarChart margin={{ left: -35 }} data={chartData}>
-			<CartesianGrid strokeDasharray="3 3" />
-			<XAxis dataKey="name" />
-			<YAxis />
-			<Tooltip />
-			<Legend />
-			<Bar dataKey="pts" fill="#fb923c" />
-			<Bar dataKey="turnover" fill="#82ca9d" />
+const PlayersAveragesBarChar = () => {
+	const [activeIndex, setActiveIndex] = useState<number>();
+
+	const mapBarCells = (activeColor: (idx: number) => string, keyword: string) => chartData.map((entry, index) => {
+		return <Cell key={`${keyword}-${index}`} fill={activeColor(index)} />
+	})
+
+	const activeColor = (color1: string, color2: string) => (index: number) => `${activeIndex === index ? color1 : color2}`;
+
+	return <ResponsiveContainer height={250} width={'100%'}>
+		<BarChart onClick={(nextState) => {
+			setActiveIndex(nextState.activeTooltipIndex)
+		}} margin={{ left: -35 }} data={chartData}>
+			<CartesianGrid cursor="pointer" strokeDasharray="3 3" />
+			<XAxis dataKey="name" stroke="#b8b8b8" />
+			<YAxis stroke="#b8b8b8" />
+			<Tooltip
+				cursor={{ fill: "#2f405d", opacity: "80%" }}
+				wrapperStyle={{ opacity: "90%" }}
+			/>
+			<Bar dataKey="pts" cursor="pointer">
+				{mapBarCells(activeColor("#36c7fc", "#038bbb"), "pts")}
+				<LabelList dataKey="pts" position="top" />
+			</Bar>
+			<Bar dataKey="turnover" cursor="pointer">
+				{mapBarCells(activeColor("#eec791", "#e19f41"), "turnover")}
+				<LabelList dataKey="turnover" position="top" />
+			</Bar>
 		</BarChart>
 	</ResponsiveContainer>
+}
 
 const Template: Story = () => <PlayersAveragesBarChar />
 

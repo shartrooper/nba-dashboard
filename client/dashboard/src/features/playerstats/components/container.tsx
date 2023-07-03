@@ -1,16 +1,16 @@
 import { DropdownWrapper } from "@/components/Disclosure"
-import { useChartDataStore } from "@/store"
+import { useChartDataStore, screenLoaderSlice } from "@/store"
 import { teamsLogosImageRoutes } from "@/utils"
 import useFetchPlayerStats from "../hook/useFetchPlayerStats"
 import { ParsedPlayerStatsResponse } from "../types"
 import ChartViewer from "./ChartViewer"
 import { DateSeasonForm, FetchDTOValues } from "./Seasonform"
-import { Spinner } from "@/components/Elements/Spinner"
 import { useNavigatorStore } from "@/store/navigator"
-
+import { useEffect } from "react"
 
 export const Container = ({ id }: { id: number }) => {
 	const { addChunk } = useChartDataStore();
+	const { toggle } = screenLoaderSlice(state => state);
 	const dispatchToChartDataStore = (chunk?: ParsedPlayerStatsResponse) => {
 		if (!chunk) return;
 		const { player, stats, meta } = chunk;
@@ -19,10 +19,7 @@ export const Container = ({ id }: { id: number }) => {
 	const { data, refetch, fetchMore, loading, loadingMore } = useFetchPlayerStats({ id }, dispatchToChartDataStore);
 	const reset = useNavigatorStore(state => state.reset);
 
-	if (loading) return <div className="grid place-items-center" >
-		<Spinner size="xl" />
-	</div>
-
+	useEffect(() => toggle(loading), [loading, toggle]);
 
 	if (!data) return null;
 
