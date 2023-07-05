@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Container } from "./Container";
+import { Container } from "./container";
 
 export const PlayerStatsWrapper = () => {
 	const { playerId } = useParams();
