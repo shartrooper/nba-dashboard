@@ -8,8 +8,19 @@ const meta: Meta = {
 
 export default meta;
 
-export const Template: Story<ButtonProps> = (args) => (
-  <div className="flex items-center justify-center">
-    <Button {...args}>TEST</Button>
+const Template: Story<ButtonProps> = (args) => (
+  <div className="flex items-center justify-center mt-6">
+    <Button {...args}>Test</Button>
   </div>
 );
+
+
+export const LargeButton = Template.bind({});
+
+export const MediumButton = Template.bind({});
+
+export const SmallButton = Template.bind({});
+
+LargeButton.args = { size: "lg" };
+MediumButton.args = { size: "md" };
+SmallButton.args = {size: "sm"}

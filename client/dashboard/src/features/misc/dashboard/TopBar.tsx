@@ -1,9 +1,10 @@
-import { Menu, Transition } from '@headlessui/react';
+import { Menu } from '@headlessui/react';
 import Avatar from '@/assets/avataricon.png';
 import { PropsWithChildren } from 'react';
 import { useNotificationStore } from '@/store';
 import { NotificationMsg } from '@/components/Notifications';
 import { useRedirectionToRoot } from '@/utils';
+import { MenuWrapper } from '@/components/Menu';
 
 export type TopBarProps = {
   handleClick: () => void;
@@ -47,25 +48,18 @@ export const TopBarContainer = ({
           />
         </svg>
       </div>
-
-      <Menu as="div" className="relative">
-        <Menu.Button className="rounded-full inline-flex justify-center items-center hover:bg-basketball p-2">
-          {userName}
-          <img className="ml-1 inline w-10 h-10 rounded-full" src={Avatar} alt="avatar img"></img>
-        </Menu.Button>
-        <Transition
-          enter-active-class="transition duration-100 ease-out transform"
-          enter-from-class="opacity-0 scale-90"
-          enter-to-class="opacity-100 scale-100"
-          leave-active-class="transition duration-100 ease-in transform"
-          leave-from-class="opacity-100 scale-100"
-          leave-to-class="opacity-0 scale-90"
-        >
-          <Menu.Items className="overflow-hidden absolute 
-            right-0 bg-midnight
-            mt-2 w-48 rounded-md border 
-            border-chalkboard shadow-lg 
-            origin-top-right focus:outline-none">
+      <MenuWrapper
+        classes={{
+          menu: "rounded-full"
+        }}
+        menuButton={
+          <>
+            {userName}
+            <img className="ml-1 inline w-10 h-10 rounded-full" src={Avatar} alt="avatar img"></img>
+          </>
+        }
+        items={
+          <>
             {children}
             <Menu.Item>
               {({ active }) => (
@@ -77,9 +71,9 @@ export const TopBarContainer = ({
                 </div>
               )}
             </Menu.Item>
-          </Menu.Items>
-        </Transition>
-      </Menu>
+          </>
+        }
+      />
     </div>
   );
 };
