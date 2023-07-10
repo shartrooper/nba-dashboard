@@ -21,12 +21,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "../Elements/Button"
 import { useState } from "react"
 import Input from "../Input/generic"
 import { Menu } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/20/solid"
 import { MenuWrapper } from "../Menu"
+import { DataTablePagination } from "./data-table-pagination"
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center my-4">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -70,6 +70,9 @@ export function DataTable<TData, TValue>({
         />
         <div className="ml-auto flex flex-col">
           <MenuWrapper
+            classes={{
+              menu: "rounded mt-6"
+            }}
             menuButton={
               <>
                 Columns
@@ -152,20 +155,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
+        <DataTablePagination table={table} />
       </div>
     </>
   )

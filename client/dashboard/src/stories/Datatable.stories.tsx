@@ -112,7 +112,6 @@ type Payment = {
 	email: string
 }
 
-
 const Template: Story<DataTableProps<Payment, typeof columns>> = (props) => <DataTable {...props} />
 
 export const PaymentsTable = Template.bind({});

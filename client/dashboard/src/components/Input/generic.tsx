@@ -32,7 +32,7 @@ const Input = (props: InputProps) => {
 				placeholder={placeholder}
 				id="generic-form"
 				name="generic"
-				className={clsx(padding[type], "block rounded-md border-gray-300 py-2 focus:outline-none focus:ring focus:ring-basketball sm:text-sm")}
+				className={clsx(padding[type], "block w-40 sm:w-max rounded-md border-gray-300 py-2 focus:outline-none focus:ring focus:ring-basketball sm:text-sm")}
 				{...props}
 			/>
 		</div>
