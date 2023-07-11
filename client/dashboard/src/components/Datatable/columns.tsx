@@ -1,47 +1,86 @@
-import { ColumnDef } from "@tanstack/react-table"
+import { Column, ColumnDef } from "@tanstack/react-table"
 import { Button } from "../Elements/Button"
 import { ArrowsUpDownIcon } from "@heroicons/react/20/solid"
+import { FullPlayerRecord, SeasonAverages } from "@/types"
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+export interface PlayerAvgData extends Omit<FullPlayerRecord, 'id' | 'team' | 'first_name' | 'last_name'>, Omit<SeasonAverages, 'player_id'> {
+  teamname: string,
+  fullname: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+const columnTitle: Record<string, string> = {
+  teamname: "team",
+  games_played: "played"
+};
+
+const SortingButton = ({ handleClick, title }: { handleClick: () => void, title: string }) => <Button
+  variant="outline"
+  size="xs"
+  onClick={handleClick}
+>
+  <div className="flex items-center gap-1">
+    <p>
+      {columnTitle[title] ?? title}
+    </p>
+    <ArrowsUpDownIcon className="h-4 w-4" />
+  </div>
+</Button>
+
+const accessorKeys = [
+  "teamname",
+  "ast",
+  "blk",
+  "dreb",
+  "fg3_pct",
+  "fg3a",
+  "fg3m",
+  "fg_pct",
+  "fga",
+  "fgm",
+  "ft_pct",
+  "fta",
+  "ftm",
+  "games_played",
+  "min",
+  "oreb",
+  "pf",
+  "pts",
+  "reb",
+  "stl",
+  "turnover"
+]
+
+const sortableColumns = accessorKeys.map((key) => {
+  return {
+    accessorKey: key,
+    header: ({ column }: { column: Column<PlayerAvgData, unknown> }) => {
+      return (
+        <SortingButton title={key} handleClick={() => column.toggleSorting(column.getIsSorted() === "asc")} />
+      )
+    },
+  }
+})
+
+export const columns: ColumnDef<PlayerAvgData>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
+    accessorKey: "fullname",
     header: ({ column }) => {
       return (
-        <Button
-          variant="outline"
-          size="xs"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowsUpDownIcon className="inline ml-2 h-4 w-4" />
-        </Button>
+        <SortingButton title="name" handleClick={() => column.toggleSorting(column.getIsSorted() === "asc")} />
       )
     },
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
+    accessorKey: "position",
+    header: "pos."
   },
+  {
+    accessorKey: "height",
+    header: "ht"
+  },
+  {
+    accessorKey: "weight",
+    header: "wt"
+  },
+  ...sortableColumns
 ]

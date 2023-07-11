@@ -62,10 +62,10 @@ export function DataTable<TData, TValue>({
     <>
       <div className="flex items-center my-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter names..."
+          value={(table.getColumn("fullname")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("fullname")?.setFilterValue(event.target.value)
           }
         />
         <div className="ml-auto flex flex-col">

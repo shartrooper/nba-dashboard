@@ -1,6 +1,21 @@
 import { DataTable, DataTableProps } from "@/components/Datatable";
-import { columns } from "@/components/Datatable/columns";
+import { PlayerAvgData, columns } from "@/components/Datatable/columns";
 import { Meta, Story } from "@storybook/react";
+import averagesSample from "@/assets/dump/averages-sample.json";
+import playerDump from "@/assets/dump/sample1.json";
+import playerDump2 from "@/assets/dump/sample2.json";
+import playerDump3 from "@/assets/dump/sample3.json";
+import playerDump4 from "@/assets/dump/sample4.json";
+import playerDump5 from "@/assets/dump/sample5.json";
+import { FullPlayerRecord } from "@/types";
+
+const playersDataDump = [
+	...playerDump.records,
+	...playerDump2.records,
+	...playerDump3.records,
+	...playerDump4.records,
+	...playerDump5.records
+]
 
 const meta: Meta = {
 	title: 'Datatable',
@@ -11,109 +26,26 @@ const meta: Meta = {
 
 export default meta;
 
+const data: PlayerAvgData[] = averagesSample.map((averageInfo) => {
+	const player = playersDataDump.find(player => player.id === averageInfo.player_id) as FullPlayerRecord;
+	const { first_name, last_name, team, ...restPlayerData } = player;
+	const { player_id, ...rest } = averageInfo;
+	const fullname = `${first_name} ${last_name}`;
+	const teamname = team.name;
 
-const data: Payment[] = [
-	{
-		id: "m5gr84i9",
-		amount: 316,
-		status: "success",
-		email: "ken99@yahoo.com",
-	},
-	{
-		id: "3u1reuv4",
-		amount: 242,
-		status: "success",
-		email: "Abe45@gmail.com",
-	},
-	{
-		id: "derv1ws0",
-		amount: 837,
-		status: "processing",
-		email: "Monserrat44@gmail.com",
-	},
-	{
-		id: "5kma53ae",
-		amount: 874,
-		status: "success",
-		email: "Silas22@gmail.com",
-	},
-	{
-		id: "bhqecj4p",
-		amount: 721,
-		status: "failed",
-		email: "carmella@hotmail.com",
-	},
-	{
-		id: "m5gr84i9",
-		amount: 316,
-		status: "success",
-		email: "ken99@yahoo.com",
-	},
-	{
-		id: "3u1reuv4",
-		amount: 242,
-		status: "success",
-		email: "Abe45@gmail.com",
-	},
-	{
-		id: "derv1ws0",
-		amount: 837,
-		status: "processing",
-		email: "Monserrat44@gmail.com",
-	},
-	{
-		id: "5kma53ae",
-		amount: 874,
-		status: "success",
-		email: "Silas22@gmail.com",
-	},
-	{
-		id: "bhqecj4p",
-		amount: 721,
-		status: "failed",
-		email: "carmella@hotmail.com",
-	},
-	{
-		id: "m5gr84i9",
-		amount: 316,
-		status: "success",
-		email: "ken99@yahoo.com",
-	},
-	{
-		id: "3u1reuv4",
-		amount: 242,
-		status: "success",
-		email: "Abe45@gmail.com",
-	},
-	{
-		id: "derv1ws0",
-		amount: 837,
-		status: "processing",
-		email: "Monserrat44@gmail.com",
-	},
-	{
-		id: "5kma53ae",
-		amount: 874,
-		status: "success",
-		email: "Silas22@gmail.com",
-	},
-	{
-		id: "bhqecj4p",
-		amount: 721,
-		status: "failed",
-		email: "carmella@hotmail.com",
-	},
-]
+	return {
+		fullname,
+		teamname,
+		...restPlayerData,
+		...rest
+	}
+});
 
-type Payment = {
-	id: string
-	amount: number
-	status: "pending" | "processing" | "success" | "failed"
-	email: string
+const Template: Story<DataTableProps<PlayerAvgData, typeof columns>> = (props) => <DataTable {...props} />
+
+export const PlayersTable = Template.bind({});
+
+PlayersTable.args = {
+	data,
+	columns
 }
-
-const Template: Story<DataTableProps<Payment, typeof columns>> = (props) => <DataTable {...props} />
-
-export const PaymentsTable = Template.bind({});
-
-PaymentsTable.args = { data, columns };

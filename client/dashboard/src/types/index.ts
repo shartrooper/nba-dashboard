@@ -40,6 +40,16 @@ type GameStats = Pick<
 	visitor_team_id: string;
 };
 
+export type FullPlayerRecord = {
+	id: number,
+	first_name: string,
+	last_name: string,
+	position: string,
+	team: { name: string },
+	height: string | null,
+	weight: string | null
+};
+
 export type PlayerStats = {
 	id: number;
 	ast: number;
@@ -65,7 +75,6 @@ export type PlayerStats = {
 }
 
 export type SeasonAverages = Omit<PlayerStats, 'game'> & { player_id: number, games_played: number }
-
 
 export type ResponsePayload<P, M> = {
 	records: P[],

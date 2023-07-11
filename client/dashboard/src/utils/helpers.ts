@@ -13,6 +13,8 @@ const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
 export const MAX_PLAYERS = 3092;
 
+export const COMMON_NAMES = ['smith', 'williams', 'johnson', 'davis', 'jones', 'brown', 'jackson'];
+
 type MessageObject = {
   title: string,
   message: string,
