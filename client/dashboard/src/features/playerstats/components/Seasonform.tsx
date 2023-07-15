@@ -1,6 +1,6 @@
 import { Button } from "@/components/Elements/Button";
-import { Form, InputField, InputFieldProps } from "@/components/Form";
-import { arrayRange } from "@/utils";
+import { Form, InputField } from "@/components/Form";
+import { SeasonSelector } from "@/components/Input/seasonSelector";
 import { z } from "zod";
 
 const dateValidation = (dto: DatePickerDTOValues): boolean => {
@@ -44,25 +44,6 @@ type DatePickerDTOValues = {
   end_date?: string;
 };
 
-type SelectorComponentProps = Pick<InputFieldProps, 'registration'> & { label: string }
-
-const seasons = arrayRange(1979, new Date().getFullYear(), 1).reverse();
-
-function SelectorComponent({ registration, label }: SelectorComponentProps) {
-  return (
-    <div>
-      <label className='block text-sm font-medium text-chalkboard mb-1'>
-        {label}
-      </label>
-      <select className="text-midnight px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" {...registration} >
-        {seasons.map(year =>
-          <option key={year} value={year} >{year}</option>
-        )}
-      </select>
-    </div>
-  )
-}
-
 type SubmitDTOValues = DatePickerDTOValues & { seasons?: number[] };
 
 export type FetchDTOValues = SubmitDTOValues & { id: number, playerIds: number[] };
@@ -85,7 +66,7 @@ export const DateSeasonForm = ({ playerId, fetch, isLoading }: { isLoading: bool
       >
         {({ register, formState }) => (
           <>
-            <SelectorComponent label="Season's year" registration={register('season')} />
+            <SeasonSelector label="Season's year" registration={register('season')} />
             <InputField
               type="date"
               label="Starting date"

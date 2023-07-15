@@ -1,4 +1,4 @@
-import { Metadata, ParsedMetaData, PlayerStats, ResponsePayload } from '@/types/index';
+import { FullPlayerRecord, Metadata, ParsedMetaData, PlayerStats, ResponsePayload } from '@/types/index';
 import { ParsedPlayer } from '../players/types';
 
 export const getPlayerStats = "playersStats";
@@ -49,4 +49,9 @@ export type ParsedPlayerStatsResponse = {
 	player: ParsedPlayer,
 	stats: StatsRecord[],
 	meta: ParsedMetaData
+}
+
+export type ParsedFullPlayerRecord = Omit<FullPlayerRecord, "first_name" | "last_name"> & {
+	firstName: string,
+	lastName: string
 }

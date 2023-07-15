@@ -3,18 +3,19 @@ import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Fragment, useEffect, useState } from "react";
 import { ParsedAveragedPlayer } from "../types";
+import { ParsedFullPlayerRecord } from "@/features/playerstats/types";
 
-type Props = {
-	player: ParsedAveragedPlayer,
-	suggestions?: ParsedAveragedPlayer[],
+type Props <Tplayer>= {
+	player: Tplayer,
+	suggestions?: Tplayer[],
 	loading?: boolean,
 	onInputChange: (query: string) => void,
-	onSelectorChange?: (selected: ParsedAveragedPlayer, index?: number) => void
+	onSelectorChange?: (selected: Tplayer, index?: number) => void
 	itemIndex?: number
 }
 
-const PlayerComboBox = ({ suggestions, onInputChange, onSelectorChange, itemIndex, player, loading = false }: Props) => {
-	const [selected, setSelected] = useState<ParsedAveragedPlayer>(player);
+function PlayerComboBox <Tplayer extends ParsedAveragedPlayer | ParsedFullPlayerRecord >({ suggestions, onInputChange, onSelectorChange, itemIndex, player, loading = false }: Props<Tplayer>) {
+	const [selected, setSelected] = useState<Tplayer>(player);
 	const [query, setQuery] = useState<string>();
 
 	useEffect(() => setSelected(player), [player]);
@@ -60,7 +61,7 @@ const PlayerComboBox = ({ suggestions, onInputChange, onSelectorChange, itemInde
 
 	}
 
-	const handleSelection = (selectedPlayer: ParsedAveragedPlayer) => {
+	const handleSelection = (selectedPlayer: Tplayer) => {
 		setSelected(selectedPlayer);
 		onSelectorChange && onSelectorChange(selectedPlayer, itemIndex);
 	}
@@ -79,7 +80,7 @@ const PlayerComboBox = ({ suggestions, onInputChange, onSelectorChange, itemInde
 				<div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
 					<Combobox.Input
 						className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-						displayValue={(player: ParsedAveragedPlayer) => `${player.firstName} ${player.lastName}`}
+						displayValue={(player: Tplayer) => `${player.firstName} ${player.lastName}`}
 						onChange={(event) => setQuery(event.target.value)}
 					/>
 					<Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

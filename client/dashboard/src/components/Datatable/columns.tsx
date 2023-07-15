@@ -3,9 +3,12 @@ import { Button } from "../Elements/Button"
 import { ArrowsUpDownIcon } from "@heroicons/react/20/solid"
 import { FullPlayerRecord, SeasonAverages } from "@/types"
 
-export interface PlayerAvgData extends Omit<FullPlayerRecord, 'id' | 'team' | 'first_name' | 'last_name'>, Omit<SeasonAverages, 'player_id'> {
-  teamname: string,
-  fullname: string
+export interface ParsedFullPlayer extends Omit<FullPlayerRecord, 'team' | 'first_name' | 'last_name'> {
+  fullname: string,
+  teamname: string
+}
+
+export interface PlayerAvgData extends ParsedFullPlayer, Omit<SeasonAverages, 'player_id'> {
 }
 
 const columnTitle: Record<string, string> = {
