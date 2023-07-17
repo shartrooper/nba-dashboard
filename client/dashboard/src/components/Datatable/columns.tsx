@@ -51,7 +51,7 @@ const accessorKeys = [
   "reb",
   "stl",
   "turnover"
-]
+];
 
 const sortableColumns = accessorKeys.map((key) => {
   return {

@@ -2,15 +2,28 @@ import { DropdownWrapper } from "@/components/Disclosure";
 import { AveragesListBuild } from "./averagesListBuild";
 import { ParsedFullPlayer } from "@/components/Datatable/columns";
 import { ParsedFullPlayerRecord } from "@/features/playerstats/types";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFullFetchPlayers from "../hook/useFullFetchPlayerst";
+import { COMMON_NAMES, parseDate } from "@/utils";
+import useLazyFetchSeasonAverages from "../hook/useLazyFetchSeasonAverages";
 
 export const AveragesTableContainer = () => {
-	const [searchterm, setSearchTerm] = useState<string>();
-	const [seasonYear, setSeasonYear] = useState<string>();
+	const [searchterm, setSearchTerm] = useState<string>(COMMON_NAMES[Math.round(Math.random() * COMMON_NAMES.length)]);
+	const [seasonYear, setSeasonYear] = useState<string>(parseDate.lastSeason.toString());
 	const [playersList, setPlayersList] = useState<ParsedFullPlayer[]>([]);
+	const [getAverages, loadingAvgs, averages] = useLazyFetchSeasonAverages();
+	const isTableInitialized = useRef(false);
 	const searchParams = { search: searchterm };
 	const { players: suggestions, loading } = useFullFetchPlayers(searchParams);
+
+	useEffect(() => {
+		if (!isTableInitialized.current && suggestions) {
+			const playersId = suggestions.map(player => player.id);
+			getAverages({ variables: { player_ids: playersId, season: parseInt(seasonYear) } });
+			isTableInitialized.current = true;
+		}
+	}, [getAverages, seasonYear, suggestions]);
+
 
 	function updateSearchTerm(query: string) {
 		setSearchTerm(query);

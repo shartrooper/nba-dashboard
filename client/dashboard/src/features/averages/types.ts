@@ -8,7 +8,6 @@ const playerQueryFields = queryFields.slice(0, -1);
 export const playerQueryArgs = (id: number) => `id: $id${id}`
 export const seasonAveragesParams = ['$season: Int!', '$player_ids: [Int!]'];
 
-
 const averageFields = {
 	player_id: "player_id",
 	games_played: "games_played",
@@ -48,11 +47,6 @@ export const seasonAveragesQueryFields = [
 	`data {
 		${objectKeys(averageFields).reduce((str, field) => `${str}${field} `, '')}
 	}`
-];
-
-export const averageStatsParams = [
-	"$playerIds: [Int!]",
-	"$season: Int!"
 ];
 
 export const PLAYER_FRAGMENT = `

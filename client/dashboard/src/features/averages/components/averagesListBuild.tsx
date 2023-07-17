@@ -2,10 +2,12 @@ import { SeasonSelector } from "@/components/Input/seasonSelector"
 import PlayerComboBox from "./playerBox"
 import { ParsedFullPlayerRecord } from "@/features/playerstats/types"
 import { ParsedFullPlayer } from "@/components/Datatable/columns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { teamsLogosImageRoutes } from "@/utils";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/components/Elements/Button";
+import { screenLoaderSlice } from "@/store";
+import DefaultAvatar from '@/assets/avataricon.png';
 
 type Props = {
 	suggestions?: ParsedFullPlayerRecord[];
@@ -29,13 +31,22 @@ export const AveragesListBuild: React.FC<Props> = ({
 	submit
 }) => {
 	const [selectedPlayer, setSelectedPlayer] = useState<ParsedFullPlayerRecord>();
-
+	const { toggle } = screenLoaderSlice(state => state);
 	const handlePlayerChange = (selected: ParsedFullPlayerRecord) => {
 		setSelectedPlayer(selected);
 		addPlayerToList(selected);
 	}
 
 	const centerItemStyle = "grid place-items-center"
+
+	useEffect(() => {
+		//initialization of input select
+		if (!selectedPlayer && suggestions) {
+			setSelectedPlayer(suggestions[0]);
+			toggle(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [suggestions]);
 
 	return <>
 		<div className="flex gap-4 items-center">
@@ -57,7 +68,7 @@ export const AveragesListBuild: React.FC<Props> = ({
 						{player.fullname}
 					</p>
 					<div className={centerItemStyle}>
-						<img alt={`${player.teamname} logo`} src={teamsLogosImageRoutes[player.teamname]} className="w-14 h-14" />
+						<img alt={`${player.teamname} logo`} src={teamsLogosImageRoutes[player.teamname] ?? DefaultAvatar} className="w-14 h-14" />
 					</div>
 					<div className="grid place-items-center justify-items-end">
 						<XMarkIcon className="w-6 h-6 cursor-pointer" onClick={() => removePlayerFromList(player.id)} />
