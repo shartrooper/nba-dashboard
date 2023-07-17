@@ -1,9 +1,9 @@
 import { seasonAveragesQueryFields } from "../../types";
-import { GET_SIX_PLAYERS_AVERAGES, playersDocContent } from "../index";
+import { GET_SIX_PLAYERS_AVERAGES, playersAvgDocContent } from "../index";
 
 test('GET_SIX_PLAYERS_AVERAGES should be a valid string', () => {
 	//expect(playersDocContent).toBe(null);
-	expect(playersDocContent.length).toBeGreaterThan(0);
+	expect(playersAvgDocContent.length).toBeGreaterThan(0);
 	expect(GET_SIX_PLAYERS_AVERAGES).toBeTruthy();
 });
 

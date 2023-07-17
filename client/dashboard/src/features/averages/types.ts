@@ -33,7 +33,6 @@ const averageFields = {
 	turnover: "turnover"
 }
 
-
 const { pts, games_played, player_id, turnover } = averageFields;
 
 export const averagesQueryFields = [
@@ -77,3 +76,7 @@ export type ParsedAveragedPlayer = Omit<AveragedPlayerRecord, 'first_name' | 'la
 	firstName: string,
 	lastName: string
 }
+
+export const fullPlayersQueryBody = [
+	`records {${[...queryFields, 'weight', 'height'].join(' ')}}`,
+];

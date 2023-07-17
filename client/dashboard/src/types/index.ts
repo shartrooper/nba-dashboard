@@ -76,10 +76,13 @@ export type PlayerStats = {
 
 export type SeasonAverages = Omit<PlayerStats, 'game'> & { player_id: number, games_played: number }
 
-export type ResponsePayload<P, M> = {
-	records: P[],
-	meta: M
+export type Records<P> = {
+	records: P[]
 }
+
+export type ResponsePayload<P, M> = {
+	meta: M
+} & Records<P>
 
 export type ParsedMetaData = {
 	nextPage: number | null,

@@ -8,7 +8,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/components/Elements/Button";
 
 type Props = {
-	suggestions: ParsedFullPlayerRecord[];
+	suggestions?: ParsedFullPlayerRecord[];
 	selectedPlayersList: ParsedFullPlayer[];
 	onUpdatePlayerSuggestions: (query: string) => void;
 	addPlayerToList: (selected: ParsedFullPlayerRecord) => void;
@@ -28,7 +28,7 @@ export const AveragesListBuild: React.FC<Props> = ({
 	selectedPlayersList,
 	submit
 }) => {
-	const [selectedPlayer, setSelectedPlayer] = useState<ParsedFullPlayerRecord>(suggestions[0]);
+	const [selectedPlayer, setSelectedPlayer] = useState<ParsedFullPlayerRecord>();
 
 	const handlePlayerChange = (selected: ParsedFullPlayerRecord) => {
 		setSelectedPlayer(selected);

@@ -11,11 +11,14 @@ import { Link, useLocation } from 'react-router-dom';
 import useFetchUserInfo from './hook/useFetchUser';
 import { DashboardRoutes } from './routes';
 import clsx from 'clsx';
-import { PresentationChartBarIcon, UserGroupIcon } from '@heroicons/react/20/solid';
+import { PresentationChartBarIcon, TableCellsIcon, UserGroupIcon } from '@heroicons/react/20/solid';
 
 const menuRoutes: Links = [{ name: 'Account Settings', route: '../settings' }];
-const sideBarRoutes: Links = [{ name: 'Dashboard', route: '../', icon: <PresentationChartBarIcon  className='w-6 h-6'/> },
-{ name: 'Players', route: '../players', icon: <UserGroupIcon className='w-6 h-6' /> }];
+const sideBarRoutes: Links = [
+  { name: 'Dashboard', route: '../', icon: <PresentationChartBarIcon className='w-6 h-6' /> },
+  { name: 'Players', route: '../players', icon: <UserGroupIcon className='w-6 h-6' /> },
+  { name: 'Averages', route: '../averages', icon: <TableCellsIcon className='w-6 h-6' /> }
+];
 
 const renderMenuItem = (key: string, route: string, name: string) => {
   return (
