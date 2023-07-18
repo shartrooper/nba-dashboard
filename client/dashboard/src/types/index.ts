@@ -74,7 +74,7 @@ export type PlayerStats = {
 	turnover: number;
 }
 
-export type SeasonAverages = Omit<PlayerStats, 'game'> & { player_id: number, games_played: number }
+export type SeasonAverages = Omit<PlayerStats, 'game' | 'id'> & { player_id: number, games_played: number }
 
 export type Records<P> = {
 	records: P[]

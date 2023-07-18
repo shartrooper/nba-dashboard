@@ -19,7 +19,7 @@ const useLazyFetchSeasonAverages = (params?: RequestParams) => {
 		}
 	)
 
-	return [getAverages, loading, data?.seasonAverages.data as SeasonAverages, refetch] as const;
+	return [getAverages, loading, data?.seasonAverages.data as SeasonAverages[] | undefined, refetch] as const;
 }
 
 export default useLazyFetchSeasonAverages;

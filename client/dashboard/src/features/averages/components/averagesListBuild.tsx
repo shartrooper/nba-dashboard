@@ -18,6 +18,7 @@ type Props = {
 	onLoadSuggestions: boolean;
 	handleSeasonSelection: (season: string) => void;
 	submit?: () => void;
+	onLoadSubmittedPlayers?: boolean;
 }
 
 export const AveragesListBuild: React.FC<Props> = ({
@@ -28,7 +29,8 @@ export const AveragesListBuild: React.FC<Props> = ({
 	onLoadSuggestions,
 	handleSeasonSelection,
 	selectedPlayersList,
-	submit
+	submit,
+	onLoadSubmittedPlayers
 }) => {
 	const [selectedPlayer, setSelectedPlayer] = useState<ParsedFullPlayerRecord>();
 	const { toggle } = screenLoaderSlice(state => state);
@@ -77,7 +79,7 @@ export const AveragesListBuild: React.FC<Props> = ({
 			)}
 		</div>
 		<div className={centerItemStyle}>
-			<Button className="my-4" onClick={submit}>Submit </Button>
+			<Button className="my-4" onClick={submit} isLoading={onLoadSubmittedPlayers} >Submit </Button>
 		</div>
 	</>
 }

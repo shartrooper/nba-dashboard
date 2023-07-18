@@ -45,7 +45,8 @@ function PlayerComboBox<Tplayer extends ParsedAveragedPlayer | ParsedFullPlayerR
 
 	}
 
-	const handleSelection = (selectedPlayer: Tplayer) => {
+	const handleSelection = (selectedPlayer: Tplayer | null) => {
+		if (!selectedPlayer) return;
 		setSelected(selectedPlayer);
 		onSelectorChange && onSelectorChange(selectedPlayer, itemIndex);
 	}
