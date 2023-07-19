@@ -2,7 +2,7 @@ import { GET_SIX_PLAYERS_AVERAGES } from '../api';
 import { useFetchService } from '@/utils';
 import { AveragedPlayerRecord, AveragesResponse, ParsedAveragedPlayer, ParsedAverages } from '../types';
 
-type RequestParams = {
+export type RequestParams = {
 	season: number,
 	player_ids: number[]
 }

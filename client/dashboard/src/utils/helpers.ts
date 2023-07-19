@@ -13,6 +13,8 @@ const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
 export const MAX_PLAYERS = 3092;
 
+export const COMMON_NAMES = ['smith', 'williams', 'johnson', 'davis', 'jones', 'brown', 'jackson'];
+
 type MessageObject = {
   title: string,
   message: string,
@@ -112,11 +114,18 @@ const dateTime = () => {
   dayjs.extend(calendar);
   dayjs.extend(utc);
 
+  const getLastSeason = () => {
+    //NOTE: Regular seasons span from October to April's next year. Playoff extends to June.
+    const currentMonth = dayjs().month();
+    return currentMonth > 9 ? dayjs().year() : dayjs().year() - 1
+  }
+
   return {
     today: dayjs(),
+    calendar: (date: string | Dayjs) => dayjs(date).utc().calendar(),
     dayAndMonth: (date: string | Dayjs) => dayjs(date).utc().format("D MMM"),
+    lastSeason: getLastSeason(),
     validate: (date: string) => dayjs(date).isValid(),
-    calendar: (date: string | Dayjs) => dayjs(date).utc().calendar()
   }
 }
 

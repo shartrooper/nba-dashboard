@@ -1,0 +1,1032 @@
+{
+	"meta": {
+		"next_page": null,
+		"per_page": 100,
+		"total_count": 93
+	},
+	"records": [
+		{
+			"id": 505,
+			"first_name": "Herb",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Mavericks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 557,
+			"first_name": "Buck",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 732,
+			"first_name": "Walt",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 742,
+			"first_name": "Corey",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Bulls"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 762,
+			"first_name": "Lorenzo",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Hornets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 855,
+			"first_name": "Aaron",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 910,
+			"first_name": "Monty",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Knicks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 938,
+			"first_name": "Eric",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Celtics"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 990,
+			"first_name": "Corliss",
+			"last_name": "Williamson",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1013,
+			"first_name": "Jerome",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Pistons"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1100,
+			"first_name": "Alvin",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1126,
+			"first_name": "Travis",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Hornets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1145,
+			"first_name": "Brandon",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1161,
+			"first_name": "Jason",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1173,
+			"first_name": "Shammond",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1415,
+			"first_name": "Frank",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Knicks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1425,
+			"first_name": "Jay",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Bulls"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1486,
+			"first_name": "Mo",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1601,
+			"first_name": "Deron",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1694,
+			"first_name": "Shelden",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1701,
+			"first_name": "Marcus",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1728,
+			"first_name": "Shawne",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Pacers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1731,
+			"first_name": "Justin",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1744,
+			"first_name": "Sean",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1785,
+			"first_name": "Marcus",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1828,
+			"first_name": "Jawad",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Cavaliers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1858,
+			"first_name": "Terrence",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1870,
+			"first_name": "Reggie",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1908,
+			"first_name": "Elliot",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1941,
+			"first_name": "Derrick",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Timberwolves"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1956,
+			"first_name": "Jordan",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2197,
+			"first_name": "Matt",
+			"last_name": "Williams Jr.",
+			"position": "",
+			"team": {
+				"name": "Heat"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2237,
+			"first_name": "Freeman",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Clippers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2302,
+			"first_name": "Ray",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Knicks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2303,
+			"first_name": "Sly",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Knicks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2316,
+			"first_name": "Don",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2344,
+			"first_name": "John",
+			"last_name": "Williamson",
+			"position": "",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2431,
+			"first_name": "Gus",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2586,
+			"first_name": "Samuel",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2630,
+			"first_name": "Rob",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Nuggets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2637,
+			"first_name": "Rickey",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2668,
+			"first_name": "Kevin",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2701,
+			"first_name": "Guy",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Wizards"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2731,
+			"first_name": "Pete",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Nuggets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2847,
+			"first_name": "Mike",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2866,
+			"first_name": "Hot",
+			"last_name": "Rod,Williams",
+			"position": "",
+			"team": {
+				"name": "Cavaliers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2885,
+			"first_name": "Kenny",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Pacers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2887,
+			"first_name": "Micheal",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Pacers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2932,
+			"first_name": "Scott",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Bulls"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2939,
+			"first_name": "Jayson",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "76ers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2983,
+			"first_name": "Reggie",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 3074,
+			"first_name": "John",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Wizards"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 477,
+			"first_name": "Alan",
+			"last_name": "Williams",
+			"position": "F-C",
+			"team": {
+				"name": "Nets"
+			},
+			"height": "6'8\".",
+			"weight": "265lb."
+		},
+		{
+			"id": 483,
+			"first_name": "Troy",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Kings"
+			},
+			"height": "6'7\".",
+			"weight": "218lb."
+		},
+		{
+			"id": 666440,
+			"first_name": "Kavell",
+			"last_name": "Bigby-Williams",
+			"position": "C",
+			"team": {
+				"name": "Pelicans"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 478,
+			"first_name": "C.J.",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Nets"
+			},
+			"height": "6'5\".",
+			"weight": "226lb."
+		},
+		{
+			"id": 17553949,
+			"first_name": "Tim",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 4196907,
+			"first_name": "Latavious",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Pelicans"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 17895910,
+			"first_name": "Kenny",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Hornets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 479,
+			"first_name": "Johnathan",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Kings"
+			},
+			"height": "6'9\".",
+			"weight": "228lb."
+		},
+		{
+			"id": 666963,
+			"first_name": "Nigel",
+			"last_name": "Williams-Goss",
+			"position": "G",
+			"team": {
+				"name": "Jazz"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 17896005,
+			"first_name": "Emmitt",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 481,
+			"first_name": "Lou",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": "6'1\".",
+			"weight": "175lb."
+		},
+		{
+			"id": 482,
+			"first_name": "Marvin",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Bucks"
+			},
+			"height": "6'9\".",
+			"weight": "237lb."
+		},
+		{
+			"id": 38017723,
+			"first_name": "Alondes",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 24489167,
+			"first_name": "Brandon",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46390782,
+			"first_name": "Ward",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Pistons"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46396097,
+			"first_name": "Bob",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Lakers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46405383,
+			"first_name": "Cliff",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Pistons"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46405955,
+			"first_name": "Milt",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Knicks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46405439,
+			"first_name": "Willie",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46406983,
+			"first_name": "Eric",
+			"last_name": "McWilliams",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 476,
+			"first_name": "Robert",
+			"last_name": "Williams III",
+			"position": "C-F",
+			"team": {
+				"name": "Celtics"
+			},
+			"height": "6'10\".",
+			"weight": "240lb."
+		},
+		{
+			"id": 46404359,
+			"first_name": "Bernie",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46404372,
+			"first_name": "Ron",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46405409,
+			"first_name": "Nate",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46404348,
+			"first_name": "Sam",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Bucks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46409557,
+			"first_name": "Chuck",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Clippers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 17896027,
+			"first_name": "Ziaire",
+			"last_name": "Williams",
+			"position": "G-F",
+			"team": {
+				"name": "Grizzlies"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 480,
+			"first_name": "Kenrich",
+			"last_name": "Williams",
+			"position": "G-F",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": "6'7\".",
+			"weight": "210lb."
+		},
+		{
+			"id": 666969,
+			"first_name": "Zion",
+			"last_name": "Williamson",
+			"position": "F",
+			"team": {
+				"name": "Pelicans"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 38017698,
+			"first_name": "Mark",
+			"last_name": "Williams",
+			"position": "C",
+			"team": {
+				"name": "Hornets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 38017703,
+			"first_name": "Jalen",
+			"last_name": "Williams",
+			"position": "G-F",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46408527,
+			"first_name": "Earl",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Suns"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 86,
+			"first_name": "Michael",
+			"last_name": "Carter-Williams",
+			"position": "G",
+			"team": {
+				"name": "Magic"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 3547248,
+			"first_name": "Patrick",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Bulls"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46410091,
+			"first_name": "Chuckie",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Cavaliers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46403311,
+			"first_name": "Arthur",
+			"last_name": "Williams",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 666965,
+			"first_name": "Grant",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Celtics"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 38017706,
+			"first_name": "Jaylin",
+			"last_name": "Williams",
+			"position": "F",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 38017731,
+			"first_name": "Vince",
+			"last_name": "Williams Jr.",
+			"position": "G",
+			"team": {
+				"name": "Grizzlies"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 47738533,
+			"first_name": "Jeenathan",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 43516144,
+			"first_name": "Donovan",
+			"last_name": "Williams",
+			"position": "G",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": null,
+			"weight": null
+		}
+	]
+}

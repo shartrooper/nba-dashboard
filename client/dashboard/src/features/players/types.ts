@@ -1,4 +1,4 @@
-import { Metadata, ParsedMetaData, ResponsePayload } from "@/types";
+import { FullPlayerRecord, Metadata, ParsedMetaData, ResponsePayload } from "@/types";
 
 export const getPlayers = 'players';
 export const getPlayer = 'player';
@@ -18,13 +18,7 @@ export const playersQueryParams = [
 	'$search: String', '$offset: Int', '$limit: Int'
 ];
 
-export type PlayerRecord = {
-	id: number,
-	first_name: string,
-	last_name: string,
-	position: string,
-	team: { name: string }
-};
+export type PlayerRecord = Omit<FullPlayerRecord, 'height' | 'weight'>;
 
 export type GetPlayerPayload = {
 	player: PlayerRecord

@@ -36,7 +36,7 @@ export const MainContainer = () => {
 		return <>
 			<GamesBoardContainer games={data} boardTitle={`Season ${data[0].season} games, from ${parseDate.dayAndMonth(start_date)} to ${parseDate.dayAndMonth(end_date)}`} />
 			<div className="relative">
-				<ChartLoader />
+				<ChartLoader loaderText="Building chart..."/>
 				<AveragesChartContainer<keyof typeof playersIds> season={season} playersIds={playersIds} setPlayersIds={handlePlayersChange} />
 			</div>
 		</>

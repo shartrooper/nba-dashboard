@@ -1,0 +1,812 @@
+{
+	"meta": {
+		"next_page": null,
+		"per_page": 100,
+		"total_count": 73
+	},
+	"records": [
+		{
+			"id": 241,
+			"first_name": "Amir",
+			"last_name": "Johnson",
+			"position": "C-F",
+			"team": {
+				"name": "76ers"
+			},
+			"height": "6'9\".",
+			"weight": "240lb."
+		},
+		{
+			"id": 501,
+			"first_name": "Kevin",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Suns"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 507,
+			"first_name": "Steve",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 561,
+			"first_name": "Avery",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Nuggets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 610,
+			"first_name": "Vinnie",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Pistons"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 671,
+			"first_name": "Larry",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Hornets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 763,
+			"first_name": "Dave",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 768,
+			"first_name": "Frank",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Suns"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 842,
+			"first_name": "Ervin",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1002,
+			"first_name": "Darryl",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Cavaliers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1121,
+			"first_name": "Anthony",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1261,
+			"first_name": "DeMarco",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Knicks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1276,
+			"first_name": "DerMarr",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1454,
+			"first_name": "Ken",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Heat"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1506,
+			"first_name": "Linton",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Bulls"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1685,
+			"first_name": "Alexander",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Grizzlies"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1833,
+			"first_name": "Trey",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Cavaliers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1878,
+			"first_name": "Armon",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1916,
+			"first_name": "Chris",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1924,
+			"first_name": "JaJuan",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Celtics"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1948,
+			"first_name": "Carldell",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Pelicans"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1949,
+			"first_name": "Ivan",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 1995,
+			"first_name": "Orlando",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Pacers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2021,
+			"first_name": "Darius",
+			"last_name": "Johnson-Odom",
+			"position": "",
+			"team": {
+				"name": "Lakers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2024,
+			"first_name": "Chris",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Grizzlies"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2094,
+			"first_name": "Nick",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2185,
+			"first_name": "Brice",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Clippers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2199,
+			"first_name": "Dakari",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2233,
+			"first_name": "Omari",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Grizzlies"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2288,
+			"first_name": "Eddie",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2334,
+			"first_name": "Clemon",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Pacers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2337,
+			"first_name": "Mickey",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Pacers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2342,
+			"first_name": "George",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2392,
+			"first_name": "Marques",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Bucks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2424,
+			"first_name": "Ollie",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Bulls"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2429,
+			"first_name": "Dennis",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2433,
+			"first_name": "John",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Thunder"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2455,
+			"first_name": "George",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Nuggets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2493,
+			"first_name": "Lynbert",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2500,
+			"first_name": "Reggie",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2532,
+			"first_name": "Lee",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2612,
+			"first_name": "Clay",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Lakers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2730,
+			"first_name": "Ken",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2764,
+			"first_name": "Steffond",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Clippers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2792,
+			"first_name": "Kannard",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Cavaliers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2838,
+			"first_name": "Eric",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Jazz"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2872,
+			"first_name": "Eddie",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Suns"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 2994,
+			"first_name": "Magic",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Lakers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 3036,
+			"first_name": "Buck",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Rockets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 245,
+			"first_name": "Wesley",
+			"last_name": "Johnson",
+			"position": "F-G",
+			"team": {
+				"name": "Wizards"
+			},
+			"height": "6'7\".",
+			"weight": "215lb."
+		},
+		{
+			"id": 1364,
+			"first_name": "Joe",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Celtics"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 17895913,
+			"first_name": "Kaleb",
+			"last_name": "Johnson",
+			"position": "G",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 50815,
+			"first_name": "BJ",
+			"last_name": "Johnson",
+			"position": "F",
+			"team": {
+				"name": "Magic"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 244,
+			"first_name": "Tyler",
+			"last_name": "Johnson",
+			"position": "G",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": "6'4\".",
+			"weight": "190lb."
+		},
+		{
+			"id": 240,
+			"first_name": "Alize",
+			"last_name": "Johnson",
+			"position": "F",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": "6'9\".",
+			"weight": "212lb."
+		},
+		{
+			"id": 17896020,
+			"first_name": "David",
+			"last_name": "Johnson",
+			"position": "G",
+			"team": {
+				"name": "Raptors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46390197,
+			"first_name": "Harold",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Detroit Falcons"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 243,
+			"first_name": "Stanley",
+			"last_name": "Johnson",
+			"position": "F",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": "6'7\".",
+			"weight": "245lb."
+		},
+		{
+			"id": 46391350,
+			"first_name": "David",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Pistons"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46390768,
+			"first_name": "Arnie",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Kings"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46405399,
+			"first_name": "George",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Wizards"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46400733,
+			"first_name": "Gus",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Wizards"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46406964,
+			"first_name": "Charlie",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46404333,
+			"first_name": "Rich",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Celtics"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46398680,
+			"first_name": "Ron",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Lakers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 242,
+			"first_name": "James",
+			"last_name": "Johnson",
+			"position": "F",
+			"team": {
+				"name": "Pacers"
+			},
+			"height": "6'8\".",
+			"weight": "240lb."
+		},
+		{
+			"id": 666682,
+			"first_name": "Keldon",
+			"last_name": "Johnson",
+			"position": "F",
+			"team": {
+				"name": "Spurs"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46397646,
+			"first_name": "Andy",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Warriors"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 666679,
+			"first_name": "Cameron",
+			"last_name": "Johnson",
+			"position": "F",
+			"team": {
+				"name": "Nets"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 17896040,
+			"first_name": "Jalen",
+			"last_name": "Johnson",
+			"position": "F",
+			"team": {
+				"name": "Hawks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 17896041,
+			"first_name": "Keon",
+			"last_name": "Johnson",
+			"position": "G",
+			"team": {
+				"name": "Trail Blazers"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46403275,
+			"first_name": "Neil",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Knicks"
+			},
+			"height": null,
+			"weight": null
+		},
+		{
+			"id": 46411085,
+			"first_name": "Larry",
+			"last_name": "Johnson",
+			"position": "",
+			"team": {
+				"name": "Clippers"
+			},
+			"height": null,
+			"weight": null
+		}
+	]
+}

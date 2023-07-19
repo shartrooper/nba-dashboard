@@ -1,6 +1,6 @@
-import { getPlayer } from "@/features/players/types";
+import { getPlayer, getPlayers, playersQueryParams } from "@/features/players/types";
 import { arrayRange, gqlQueryBuilder, gqlQueryBuilderWithParsedArgs, queryArranger } from "@/utils";
-import { averagesQueryFields, fragmentName, getAverages, playerQueryArgs, seasonAveragesParams } from "../types";
+import { averagesQueryFields, fragmentName, fullPlayersQueryBody, getAverages, playerQueryArgs, seasonAveragesParams, seasonAveragesQueryFields } from "../types";
 import { gql } from "@apollo/client";
 import { PLAYER_FRAGMENT } from "../types";
 
@@ -11,7 +11,11 @@ const playersWithAliases = (totalQueries: number) => {
 	})
 };
 
+const completeSeasonAverages = gqlQueryBuilderWithParsedArgs(getAverages, seasonAveragesQueryFields, seasonAveragesParams);
+
 const seasonAverages = gqlQueryBuilderWithParsedArgs(getAverages, averagesQueryFields, seasonAveragesParams);
+
+const fullPlayersData = gqlQueryBuilderWithParsedArgs(getPlayers, fullPlayersQueryBody, playersQueryParams);
 
 const players = playersWithAliases(6);
 
@@ -19,9 +23,17 @@ export const idKeys = arrayRange(1, 6, 1).map(num => `id${num}`);
 
 const playerParams = idKeys.map(identifier => `$${identifier}: Int!`);
 
-export const playersDocContent = `
+export const playersAvgDocContent = `
 	${queryArranger([...players, seasonAverages], [...playerParams, ...seasonAveragesParams])}
 	${PLAYER_FRAGMENT}
 `;
 
-export const GET_SIX_PLAYERS_AVERAGES = gql`${playersDocContent}`;
+export const SEASON_AVERAGES = gql`
+	${queryArranger([completeSeasonAverages], seasonAveragesParams)}
+` 
+
+export const GET_PLAYERS_FULL = gql`
+  ${queryArranger([fullPlayersData], playersQueryParams)}
+`;
+
+export const GET_SIX_PLAYERS_AVERAGES = gql`${playersAvgDocContent}`;

@@ -6,19 +6,17 @@ const icons: { [key: string]: JSX.Element } = {
 	search: <MagnifyingGlassCircleIcon className="w-6 h-6" />,
 }
 
-enum InputTypes {
-	search = 'text',
-	date = 'date'
+const InputTypes = {
+	search: 'text',
+	date: 'date'
+} as const;
+
+export interface InputProps extends React.ComponentProps<"input"> {
+	type?: keyof typeof InputTypes,
 }
 
-export type InputProps = {
-	type?: 'search' | 'date',
-	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-	placeholder?: string
-}
-
-const Input = ({ type = 'search', onChange, placeholder = "input text..." }: InputProps) => {
-	const props = { onChange, placeholder };
+const Input = (props: InputProps) => {
+	const { type = 'search', placeholder = 'Input text...' } = props;
 	const padding = {
 		search: 'pl-7 pr-12',
 		date: 'px-3'
@@ -31,9 +29,10 @@ const Input = ({ type = 'search', onChange, placeholder = "input text..." }: Inp
 			</div>}
 			<input
 				type={InputTypes[type]}
+				placeholder={placeholder}
 				id="generic-form"
 				name="generic"
-				className={clsx(padding[type], "block rounded-md border-gray-300 py-2 focus:outline-none focus:ring focus:ring-basketball sm:text-sm")}
+				className={clsx(padding[type], "block w-40 sm:w-max rounded-md border-gray-300 py-2 focus:outline-none focus:ring focus:ring-basketball sm:text-sm")}
 				{...props}
 			/>
 		</div>

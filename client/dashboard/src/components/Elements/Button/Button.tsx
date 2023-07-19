@@ -4,15 +4,17 @@ import * as React from 'react';
 import { Spinner } from '@/components/Elements/Spinner';
 
 const variants = {
-  primary: 'bg-basketball-dim text-white hover:bg-gray-50:text-blue-600',
-  inverse: 'bg-white text-blue-600 hover:bg-blue-600:text-white',
-  danger: 'bg-red-600 text-white hover:bg-red-50:text-red-600',
+  primary: 'bg-basketball-dim text-white hover:bg-gray-50 hover:text-blue-600',
+  inverse: 'bg-white text-blue-600 hover:bg-blue-600 hover:text-white',
+  danger: 'bg-red-600 text-white hover:bg-red-50 hover:text-red-600',
+  outline: 'hover:bg-basketball-dim hover:text-chalkboard'
 };
 
 const sizes = {
   sm: 'py-2 px-4 text-sm',
   md: 'py-2 px-6 text-md',
   lg: 'py-3 px-8 text-lg',
+  xs: 'py-1 px-4'
 };
 
 type IconProps =
