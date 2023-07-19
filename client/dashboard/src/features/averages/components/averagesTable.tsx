@@ -7,12 +7,15 @@ import useFullFetchPlayers from "../hook/useFullFetchPlayerst";
 import { COMMON_NAMES, parseDate } from "@/utils";
 import useLazyFetchSeasonAverages from "../hook/useLazyFetchSeasonAverages";
 import { DataTable } from "@/components/Datatable";
+import ChartLoader from "./chartLoader";
+import { chartLoaderSlice } from "@/store";
 
 export const AveragesTableContainer = () => {
 	const [searchterm, setSearchTerm] = useState<string>(COMMON_NAMES[Math.round(Math.random() * COMMON_NAMES.length)]);
 	const [seasonYear, setSeasonYear] = useState<string>(parseDate.lastSeason.toString());
 	const [playersList, setPlayersList] = useState<ParsedFullPlayer[]>([]);
 	const [getAverages, loadingAvgs, averages, refetch] = useLazyFetchSeasonAverages();
+	const { toggle } = chartLoaderSlice(state => state);
 	const isTableInitialized = useRef(false);
 	const searchParams = { search: searchterm };
 	const { players: suggestions, loading } = useFullFetchPlayers(searchParams);
@@ -25,6 +28,7 @@ export const AveragesTableContainer = () => {
 		}
 	}, [getAverages, seasonYear, suggestions]);
 
+	useEffect(() => { toggle(loadingAvgs) }, [loadingAvgs, toggle]);
 
 	function updateSearchTerm(query: string) {
 		setSearchTerm(query);
@@ -91,6 +95,9 @@ export const AveragesTableContainer = () => {
 				onLoadSubmittedPlayers={loadingAvgs}
 			/>
 		</DropdownWrapper>
-		{!loadingAvgs ? <DataTable data={datatableContent} columns={columns} /> : <p>LOADING...</p>}
+		<div className="relative max-w-[385px] sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto">
+			<ChartLoader />
+			{!loadingAvgs && <DataTable data={datatableContent} columns={columns} />}
+		</div>
 	</div>
 }
