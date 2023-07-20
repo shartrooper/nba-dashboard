@@ -8,7 +8,8 @@ import {
 	Legend,
 	Line,
 	LineChart,
-	ResponsiveContainer
+	ResponsiveContainer,
+	Label
 } from "recharts";
 import { useMemo, useState } from 'react';
 import { useWindowSize } from '@/utils';
@@ -91,9 +92,9 @@ const PlayerAreaChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof ty
 	return <div className='bg-zinc-50 overflow-auto'>
 		<ResponsiveContainer height={300} width={graphWidth}>
 			<LineChart data={dataset}
-				margin={{ top: 5, right: 30, bottom: 5 }}>
+				margin={{ top: 5, right: 30, bottom: 30 }}>
 				<CartesianGrid strokeDasharray="4 3" />
-				<XAxis dataKey="label" />
+				<XAxis dataKey="label"  angle={30}/>
 				<YAxis />
 				<Tooltip labelClassName='text-midnight' />
 				<Legend align='left' />
@@ -115,7 +116,7 @@ const Template: Story = () => {
 		const date = new Date(stat["game.date"]).toISOString().split('T')[0];
 		return {
 			...stat,
-			label: `vs.${opponent}(${date})`
+			label: `vs.${opponent}(${date}) ${stat.min}`
 		}
 	}), [sizedSample]);
 	const updateChart = (n: number) => {

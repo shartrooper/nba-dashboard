@@ -18,7 +18,7 @@ export const useChartDataStore = create<ChartDataStore>((set) => ({
 			const parsedDate = new Date(date).toISOString().split('T')[0];
 			return {
 				...stat,
-				label: `vs.${opponent}(${parsedDate})`
+				label: `vs.${opponent}(${parsedDate}) ${stat.min}`
 			}
 		});
 		set(() => ({

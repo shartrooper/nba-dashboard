@@ -7,13 +7,15 @@ export type InputFieldProps = FieldWrapperPassThroughProps & {
   type?: 'text' | 'email' | 'password' | 'date';
   className?: string;
   registration: Partial<UseFormRegisterReturn>;
+  focusable?: boolean;
 };
 
 export const InputField = (props: InputFieldProps) => {
-  const { type = 'text', label, className, registration, error } = props;
+  const { type = 'text', label, className, registration, error, focusable } = props;
   return (
     <FieldWrapper label={label} error={error}>
       <input
+        autoFocus={focusable}
         type={type}
         placeholder={`Input a ${type}`}
         className={clsx(

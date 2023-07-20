@@ -29,6 +29,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
         {({ register, formState }) => (
           <>
             <InputField
+              focusable
               type="text"
               label="Username"
               error={formState.errors['username']}

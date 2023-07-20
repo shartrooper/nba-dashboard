@@ -82,12 +82,12 @@ const PlayerLineChart = ({ valueKey, dataset, graphWidth }: { valueKey: keyof ty
 		height={400}
 		width={`${graphWidth}%`} >
 		<LineChart data={dataset}
-			margin={{ top: 5, right: 10, bottom: 5, left: 5 }}>
+			margin={{ top: 5, right: 10, bottom: 50, left: 5 }}>
 			<CartesianGrid strokeDasharray="4 3" />
-			<XAxis dataKey="label" stroke="#b8b8b8" />
+			<XAxis dataKey="label" stroke="#b8b8b8" angle={30}/>
 			<YAxis stroke="#b8b8b8" />
 			<Tooltip labelClassName='text-midnight' />
-			<Legend align='left' />
+			<Legend  verticalAlign="top" align='center' />
 			{dataKeys[valueKey].map((key, index) => {
 				return <Line key={`line-${index}`} type="monotone" dataKey={key} stroke={scheme[index]} />
 			})}
